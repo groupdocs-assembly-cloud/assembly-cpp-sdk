@@ -1,0 +1,5 @@
+build/*
+CppBuild-cppcheck-build-dir/*
+install/*
+.gitignore
+*/servercreds.json
