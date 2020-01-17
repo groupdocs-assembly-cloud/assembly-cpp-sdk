@@ -33,7 +33,9 @@
 
 namespace groupdocs {
 namespace assembly {
-namespace model {
+namespace cloud {
+namespace api {
+namespace models {
 
 class PostAssembleDocumentRequest{
     public: 
@@ -67,6 +69,8 @@ class PostAssembleDocumentRequest{
         boost::optional<utility::string_t> m_destFileName;
 };
 
+}
+}
 }
 }
 }

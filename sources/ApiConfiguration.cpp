@@ -26,6 +26,7 @@
 
 namespace groupdocs {
 namespace assembly {
+namespace cloud {
 namespace api {
 
 void ApiConfiguration::setAppKey( utility::string_t appKey){
@@ -46,12 +47,7 @@ utility::string_t ApiConfiguration::getAppSid() const{
 
 utility::string_t ApiConfiguration::getApiVersion() const
 {
-	return m_ApiVersion;
-}
-
-void ApiConfiguration::setApiVersion( utility::string_t apiVersion)
-{
-	m_ApiVersion = std::move(apiVersion);
+	return utility::conversions::to_string_t("v1.0");
 }
 
 bool ApiConfiguration::isDebugMode() const {
@@ -112,6 +108,7 @@ void ApiConfiguration::setApiKey( const utility::string_t& prefix, const utility
     m_ApiKeys[prefix] = apiKey;
 }
 
+}
 }
 }
 }

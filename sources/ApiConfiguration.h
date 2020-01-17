@@ -22,8 +22,8 @@
 *  SOFTWARE.
 * </summary> 
 -------------------------------------------------------------------------------------------------------------------- **/
-#ifndef _ApiConfiguration_H_
-#define _ApiConfiguration_H_
+#ifndef GROUPDOCS_ASSEMBLY_CLOUD_API_ApiConfiguration_H_
+#define GROUPDOCS_ASSEMBLY_CLOUD_API_ApiConfiguration_H_
 
 
 
@@ -34,6 +34,7 @@
 #include <cpprest/http_client.h>
 namespace groupdocs {
 namespace assembly {
+namespace cloud {
 namespace api {
 
 class  ApiConfiguration
@@ -62,7 +63,6 @@ public:
     void setAppSid( utility::string_t apiSid );
 
     utility::string_t getApiVersion() const;
-	void setApiVersion( utility::string_t apiVersion);
 
     bool isDebugMode() const;
     void setDebugMode(bool debug);
@@ -75,7 +75,6 @@ protected:
 
     utility::string_t m_AppKey;
     utility::string_t m_AppSid;
-	utility::string_t m_ApiVersion;
 
     web::http::client::http_client_config m_HttpConfig;
     utility::string_t m_UserAgent;
@@ -84,4 +83,5 @@ protected:
 }
 }
 }
-#endif /* _ApiConfiguration_H_ */
+}
+#endif /* GROUPDOCS_ASSEMBLY_CLOUD_API_ApiConfiguration_H_ */

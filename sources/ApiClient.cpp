@@ -28,9 +28,10 @@
 
 namespace groupdocs {
 namespace assembly {
+namespace cloud {
 namespace api {
 
-using namespace groupdocs::assembly::model;
+using namespace groupdocs::assembly::cloud::api::models;
 
 ApiClient::ApiClient(std::shared_ptr<ApiConfiguration> configuration )
     : m_Configuration(configuration)
@@ -42,6 +43,15 @@ pplx::task<void> ApiClient::requestToken()
     if (m_Configuration == nullptr)
             throw "Configuration must be set before calling an api methods";
 
+	if(m_Configuration->getAppSid().empty())
+		throw "Configuration parameter AppSid must be set before calling an api methods";
+
+	if (m_Configuration->getAppKey().empty())
+		throw "Configuration parameter AppKey must be set before calling an api methods";
+
+	if (m_Configuration->getBaseUrl().empty())
+		throw "Configuration parameter BaseUrl must be set before calling an api methods";
+
     std::map<utility::string_t, utility::string_t> queryParams, headerParams;
 
     std::map<utility::string_t, utility::string_t> formParams = {
@@ -50,13 +60,17 @@ pplx::task<void> ApiClient::requestToken()
         {_XPLATSTR("client_secret"), m_Configuration->getAppKey()}
     };
 
-    return callApi(getTokenUrl(), _XPLATSTR("POST"), queryParams,nullptr, headerParams, formParams, {}, 
+    return callApi(getTokenUrl(), _XPLATSTR("POST"), queryParams, nullptr, headerParams, formParams, {}, 
 		_XPLATSTR("application/x-www-form-urlencoded")).then([=](web::http::http_response response) {
 		
 		if (response.status_code() >= 400)
-			throw ApiException(response.status_code()
-				, _XPLATSTR("error requesting token: ") + response.reason_phrase()
-				, std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
+		{
+			auto code = response.status_code();
+			auto reason = response.reason_phrase();
+			auto message = response.extract_string().get();
+
+			throw ApiException(code, _XPLATSTR("error requesting token: ") + reason + _XPLATSTR("\n") + message);
+		}
 
 		return response.extract_json();
     }).then([this](web::json::value val) {
@@ -65,7 +79,7 @@ pplx::task<void> ApiClient::requestToken()
 }
 
 utility::string_t ApiClient::getTokenUrl() const {
-	return m_Configuration->getBaseUrl() + _XPLATSTR("/oauth2/token");            
+	return m_Configuration->getBaseUrl() + _XPLATSTR("/connect/token");            
 }
 
 void ApiClient::setAccessToken(utility::string_t token){
@@ -169,7 +183,7 @@ pplx::task<web::http::http_response> ApiClient::callApi(
         }
 		else
         {
-            request.set_body(concurrency::streams::bytestream::open_istream(std::move(bodyString)), length, _XPLATSTR("multipart/form-data;"));
+            request.set_body(concurrency::streams::bytestream::open_istream(std::move(bodyString)), length);
         }
     }
     else
@@ -213,7 +227,7 @@ pplx::task<web::http::http_response> ApiClient::callApi(
 
                 if (!formParams.empty())
                 {
-                    request.set_body(formData.query(), contentType);
+                    request.set_body(formData.query(), contentType == _XPLATSTR("multipart/form-data") ? _XPLATSTR("application/x-www-form-urlencoded") : contentType);
                 }
             }
         }
@@ -248,9 +262,13 @@ pplx::task<web::http::http_response> ApiClient::callApi(
     });
 }
 
-				utility::string_t ApiClient::copyDataFromStream(const Concurrency::streams::istream& stream) const
+void ApiClient::logDataFromStream(const Concurrency::streams::istream& stream) const
 {
-    if (!stream.is_valid()) return _XPLATSTR("EMPTY");
+	if (!stream.is_valid())
+	{
+		ucout << _XPLATSTR("EMPTY");
+		return;
+	}
 
     auto bodyStreamBuf = stream.streambuf();
     const size_t streamSize = bodyStreamBuf.size();
@@ -270,10 +288,8 @@ pplx::task<web::http::http_response> ApiClient::callApi(
         bodyStreamBuf.acquire(ptr, size);
     }
 
-    auto result = utility::conversions::to_string_t(buffer);
-
-    ucout << result << _XPLATSTR('\n');
-    return result;
+	for (int i = 0; i < buffer.size(); i++)
+		ucout << buffer[i];
 }
 
 
@@ -285,7 +301,8 @@ void ApiClient::logRequest(web::http::http_request request) const
     ucout << request.method() << _XPLATSTR(": ") << request.request_uri().to_string() << _XPLATSTR('\n');
 
     // body
-    ucout << copyDataFromStream(request.body()) << _XPLATSTR('\n');
+	logDataFromStream(request.body());
+    ucout << _XPLATSTR('\n');
 }
 
 void ApiClient::logResponse(web::http::http_response response) const
@@ -296,9 +313,11 @@ void ApiClient::logResponse(web::http::http_response response) const
     ucout << _XPLATSTR("Response ") << response.status_code() << _XPLATSTR(": ") << response.reason_phrase() << _XPLATSTR('\n');
 
     // body
-    ucout << copyDataFromStream(response.body()) << _XPLATSTR('\n');
+	logDataFromStream(response.body());
+    ucout << _XPLATSTR('\n');
 }
 
+}
 }
 }
 }

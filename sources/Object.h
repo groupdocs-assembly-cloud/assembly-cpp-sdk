@@ -1,6 +1,5 @@
-
 /** --------------------------------------------------------------------------------------------------------------------
-* <copyright company="GroupDocs" file="LoadSaveOptionsData.h">
+* <copyright company="GroupDocs" file="Object.h">
 *   Copyright (c) 2019 GroupDocs.Assembly for Cloud
 * </copyright>
 * <summary>
@@ -24,13 +23,14 @@
 * </summary> 
 -------------------------------------------------------------------------------------------------------------------- **/
 
-#ifndef GROUPDOCS_ASSEMBLY_CLOUD_API_MODELS_LoadSaveOptionsData_H_
-#define GROUPDOCS_ASSEMBLY_CLOUD_API_MODELS_LoadSaveOptionsData_H_
+#ifndef GROUPDOCS_ASSEMBLY_CLOUD_API_MODELS_Object_H_
+#define GROUPDOCS_ASSEMBLY_CLOUD_API_MODELS_Object_H_
 
 
-#include "../ModelBase.h"
+#include "ModelBase.h"
 
 #include <cpprest/details/basic_types.h>
+#include <cpprest/json.h>
 
 namespace groupdocs {
 namespace assembly {
@@ -38,19 +38,11 @@ namespace cloud {
 namespace api {
 namespace models {
 
-/// <summary>
-/// Save options data which is using for specifying additional save options, like save format and etc.
-/// </summary>
-class  LoadSaveOptionsData
-    : public ModelBase
+class  Object : public ModelBase
 {
 public:
-    LoadSaveOptionsData();
-    virtual ~LoadSaveOptionsData();
-
     /////////////////////////////////////////////
     /// ModelBase overrides
-
     void validate() override;
 
     web::json::value toJson() const override;
@@ -60,19 +52,12 @@ public:
     void fromMultiPart(const std::shared_ptr<MultipartFormData>& multipart, const utility::string_t& namePrefix) override;
 
     /////////////////////////////////////////////
-    /// LoadSaveOptionsData members
+    /// Object manipulation
+    web::json::value getValue(const utility::string_t& key) const;
+    void setValue(const utility::string_t& key, const web::json::value& value);
 
-    /// <summary>
-    /// Save format for assembled document
-    /// </summary>
-    utility::string_t getSaveFormat() const;
-    bool saveFormatIsSet() const;
-    void unsetSaveFormat();
-    void setSaveFormat(utility::string_t value);
-
-protected:
-    utility::string_t m_SaveFormat;
-    bool m_SaveFormatIsSet;
+private:
+    web::json::value m_object = web::json::value::object();
 };
 
 }
@@ -81,4 +66,4 @@ protected:
 }
 }
 
-#endif /* GROUPDOCS_ASSEMBLY_CLOUD_API_MODELS_LoadSaveOptionsData_H_ */
+#endif /* GROUPDOCS_ASSEMBLY_CLOUD_API_MODELS_Object_H_ */
