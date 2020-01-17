@@ -28,7 +28,9 @@
 
 namespace groupdocs {
 namespace assembly {
-namespace model {
+namespace cloud {
+namespace api {
+namespace models {
 
 FileResponse::FileResponse()
 {
@@ -65,6 +67,8 @@ void FileResponse::fromMultiPart(const std::shared_ptr<MultipartFormData>& multi
 {
 }
 
+}
+}
 }
 }
 }

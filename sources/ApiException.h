@@ -23,8 +23,8 @@
 * </summary> 
 -------------------------------------------------------------------------------------------------------------------- **/
 
-#ifndef _ApiException_H_
-#define _ApiException_H_
+#ifndef GROUPDOCS_ASSEMBLY_CLOUD_API_ApiException_H_
+#define GROUPDOCS_ASSEMBLY_CLOUD_API_ApiException_H_
 
 
 
@@ -34,9 +34,9 @@
 #include <cpprest/details/basic_types.h>
 #include <cpprest/http_msg.h>
 
-
 namespace groupdocs {
 namespace assembly {
+namespace cloud {
 namespace api {
 
 class  ApiException
@@ -45,22 +45,23 @@ class  ApiException
 public:
     ApiException( int errorCode
         , const utility::string_t& message
-        , std::shared_ptr<std::istream> content = nullptr );
+        , std::shared_ptr<std::istream> response = nullptr );
     ApiException( int errorCode
         , const utility::string_t& message
         , std::map<utility::string_t, utility::string_t>& headers
-        , std::shared_ptr<std::istream> content = nullptr );
+        , std::shared_ptr<std::istream> response = nullptr );
 
     std::map<utility::string_t, utility::string_t>& getHeaders();
-    std::shared_ptr<std::istream> getContent() const;
+    std::shared_ptr<std::istream> getResponse() const;
 
 protected:
-    std::shared_ptr<std::istream> m_Content;
+    std::shared_ptr<std::istream> m_Response;
     std::map<utility::string_t, utility::string_t> m_Headers;
 };
 
 }
 }
 }
+}
 
-#endif /* _ApiBase_H_ */
+#endif /* GROUPDOCS_ASSEMBLY_CLOUD_API_ApiBase_H_ */

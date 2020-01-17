@@ -26,7 +26,9 @@
 
 namespace groupdocs {
 namespace assembly {
-namespace model {
+namespace cloud {
+namespace api {
+namespace models {
 
 utility::string_t HttpContent::getContentDisposition() const
 {
@@ -84,6 +86,8 @@ void HttpContent::writeTo( std::ostream& stream )
     stream << m_Data->rdbuf();
 }
 
+}
+}
 }
 }
 }

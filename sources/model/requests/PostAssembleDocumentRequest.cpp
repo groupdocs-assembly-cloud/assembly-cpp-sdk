@@ -25,7 +25,9 @@
 #include "PostAssembleDocumentRequest.h"
 namespace groupdocs{
 namespace assembly{
-namespace model{
+namespace cloud{
+namespace api{
+namespace models{
 PostAssembleDocumentRequest::PostAssembleDocumentRequest(
         utility::string_t name,
                 std::shared_ptr<HttpContent> data,
@@ -78,6 +80,8 @@ PostAssembleDocumentRequest::PostAssembleDocumentRequest(
             m_destFileName = std::move(destFileName);
         }
 
+}
+}
 }
 }
 }

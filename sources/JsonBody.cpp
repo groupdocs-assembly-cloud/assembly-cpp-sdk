@@ -26,7 +26,9 @@
 
 namespace groupdocs {
 namespace assembly {
-namespace model {
+namespace cloud {
+namespace api {
+namespace models {
 
 JsonBody::JsonBody( const web::json::value& json)
     : m_Json(json)
@@ -38,6 +40,8 @@ void JsonBody::writeTo( std::ostream& target ) const
     m_Json.serialize(target);
 }
 
+}
+}
 }
 }
 }

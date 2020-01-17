@@ -23,12 +23,11 @@
 * </summary> 
 -------------------------------------------------------------------------------------------------------------------- **/
 
-#ifndef _AssemblyApi_H_
-#define _AssemblyApi_H_
+#ifndef GROUPDOCS_ASSEMBLY_CLOUD_API_AssemblyApi_H_
+#define GROUPDOCS_ASSEMBLY_CLOUD_API_AssemblyApi_H_
 
 
 #include "../ApiClient.h"
-
 
 #include "requests/PostAssembleDocumentRequest.h"
 
@@ -38,9 +37,18 @@
 #include <boost/optional.hpp>
 namespace groupdocs {
 namespace assembly {
+namespace cloud {
 namespace api {
 
-using namespace groupdocs::assembly::model;
+using namespace groupdocs::assembly::cloud::api::models;
+
+template<class T>
+struct GroupDocsResponse
+{
+	std::shared_ptr<web::http::http_response> httpResponse;
+    std::shared_ptr<T> body;
+};
+
 class  AssemblyApi
 {
 public:
@@ -51,13 +59,13 @@ public:
     ///
     ///</remarks>
     /// <param name="name">File name of template, which is located on a storage</param>
-    /// <param name="data">Report data in JSON or XML format</param>
-    /// <param name="saveOptions">Save options in json format</param>
-    /// <param name="folder">Folder path where template file is located(on a storage) (optional)</param>
-    /// <param name="destFileName">Result name of built document (optional)</param>
-    pplx::task<HttpContent> postAssembleDocument(
-        std::shared_ptr<PostAssembleDocumentRequest> request
-        );
+        /// <param name="data">Report data in JSON or XML format</param>
+        /// <param name="saveOptions">Save options in json format</param>
+        /// <param name="folder">Folder path where template file is located(on a storage) (optional)</param>
+        /// <param name="destFileName">Result name of built document (optional)</param>
+    	pplx::task<HttpContent> postAssembleDocument(
+		std::shared_ptr<PostAssembleDocumentRequest> request
+	);
 
 public:
     explicit AssemblyApi(std::shared_ptr<ApiClient> apiClient );
@@ -70,7 +78,8 @@ protected:
 }
 }
 }
+}
 
-#endif /* _AssemblyApi_H_ */
+#endif /* GROUPDOCS_ASSEMBLY_CLOUD_API_AssemblyApi_H_ */
 
 

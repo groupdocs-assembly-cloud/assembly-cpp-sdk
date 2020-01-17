@@ -23,8 +23,8 @@
 * </summary> 
 -------------------------------------------------------------------------------------------------------------------- **/
 
-#ifndef _JsonBody_H_
-#define _JsonBody_H_
+#ifndef GROUPDOCS_ASSEMBLY_CLOUD_API_MODELS_JsonBody_H_
+#define GROUPDOCS_ASSEMBLY_CLOUD_API_MODELS_JsonBody_H_
 
 
 #include "IHttpBody.h"
@@ -33,7 +33,9 @@
 
 namespace groupdocs {
 namespace assembly {
-namespace model {
+namespace cloud {
+namespace api {
+namespace models {
 
 class  JsonBody
     : public IHttpBody
@@ -50,5 +52,7 @@ protected:
 }
 }
 }
+}
+}
 
-#endif /* _JsonBody_H_ */
+#endif /* GROUPDOCS_ASSEMBLY_CLOUD_API_MODELS_JsonBody_H_ */
