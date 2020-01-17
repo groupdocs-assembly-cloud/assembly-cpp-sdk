@@ -23,8 +23,8 @@
 * </summary> 
 -------------------------------------------------------------------------------------------------------------------- **/
 
-#ifndef _ApiClient_H_
-#define _ApiClient_H_
+#ifndef GROUPDOCS_ASSEMBLY_CLOUD_API_ApiClient_H_
+#define GROUPDOCS_ASSEMBLY_CLOUD_API_ApiClient_H_
 
 
 #include "ApiConfiguration.h"
@@ -43,67 +43,26 @@
 
 namespace groupdocs {
 namespace assembly {
+namespace cloud {
 namespace api {
 
-using namespace groupdocs::assembly::model;
+using namespace groupdocs::assembly::cloud::api::models;
 
 class  ApiClient
 {
 public:
     explicit ApiClient( std::shared_ptr<ApiConfiguration> configuration = nullptr );
-    ///<summary>
-    ///Get configuration, applied to client
-    ///</summary>
-    ///<returns>Configuration instance</returns>
+
     std::shared_ptr<ApiConfiguration> getConfiguration() const;
-    ///<summary>
-    ///Set configuration
-    ///</summary>
-    ///<param name="configuration">Configuration instance to set</param>
     void setConfiguration(std::shared_ptr<ApiConfiguration> configuration);
 
-    ///<summary>
-    ///Convert parameter to string
-    ///</summary>
-    ///<param name="value">Value to convert</param>
-    ///<returns>Converted value</returns>
     static utility::string_t parameterToString(utility::string_t value);
-    ///<summary>
-    ///Convert parameter to string
-    ///</summary>
-    ///<param name="value">Value to convert</param>
-    ///<returns>Converted value</returns>
     static utility::string_t parameterToString(int32_t value);
-    ///<summary>
-    ///Convert parameter to string
-    ///</summary>
-    ///<param name="value">Value to convert</param>
-    ///<returns>Converted value</returns>
     static utility::string_t parameterToString(int64_t value);
-    ///<summary>
-    ///Convert parameter to string
-    ///</summary>
-    ///<param name="value">Value to convert</param>
-    ///<returns>Converted value</returns>
     static utility::string_t parameterToString(float value);
-    ///<summary>
-    ///Convert parameter to string
-    ///</summary>
-    ///<param name="value">Value to convert</param>
-    ///<returns>Converted value</returns>
     static utility::string_t parameterToString(double value);
-    ///<summary>
-    ///Convert parameter to string
-    ///</summary>
-    ///<param name="value">Value to convert</param>
-    ///<returns>Converted value</returns>
     static utility::string_t parameterToString(const utility::datetime &value);
 
-    ///<summary>
-    ///Convert parameter to string
-    ///</summary>
-    ///<param name="value">Value to convert</param>
-    ///<returns>Converted value</returns>
     template<class T>
     static utility::string_t parameterToString(const std::vector<T>& value)
     {
@@ -122,18 +81,7 @@ public:
         return result;
     }
 
-    ///<summary>
-    ///Make API Call
-    ///</summary>
-    ///<param name="path">URL path</param>
-    ///<param name="method">HTTP method</param>
-    ///<param name="queryParams">Query parameters</param>
-    ///<param name="postBody">POST Request body</param>
-    ///<param name="headerParams">Request header paramters</param>
-    ///<param name="formParams">Request form parameters</param>
-    ///<param name="fileParams">Request file parameters</param>
-    ///<param name="contentType">Request content type</param>
-    ///<returns>Http Response</returns>
+
     pplx::task<web::http::http_response> callApi(
         const utility::string_t& path,
         const utility::string_t& method,
@@ -144,16 +92,10 @@ public:
         const std::vector<std::pair<utility::string_t, std::shared_ptr<HttpContent>>>& fileParams,
         const utility::string_t& contentType
     );
-    ///<summary>
-    ///Request OAuth2 token
-    ///</summary>
+
     pplx::task<void> requestToken();
 
 protected:
-    ///<summary> 
-    ///Set authorization token
-    ///</summary>
-    ///<param name="token">Authorization token</param>
     void setAccessToken(utility::string_t token);
     std::shared_ptr<ApiConfiguration> m_Configuration;
 
@@ -161,36 +103,20 @@ private:
     utility::string_t m_AccessToken;
     std::array<std::pair<utility::string_t, utility::string_t>, 2> defaultHeaders =
     {
-        std::make_pair<utility::string_t, utility::string_t>(_XPLATSTR("x-aspose-client-version"), _XPLATSTR("1.0")),
+        std::make_pair<utility::string_t, utility::string_t>(_XPLATSTR("x-aspose-client-version"), _XPLATSTR("19.3")),
         std::make_pair<utility::string_t, utility::string_t>(_XPLATSTR("x-aspose-client"), _XPLATSTR("C++ SDK"))
     };
 
 private:
-    ///<summary> 
-    ///Get URL for token request
-    ///</summary>
-    ///<returns>URL for token request</returns>
     utility::string_t getTokenUrl() const;
-    ///<summary> 
-    ///Log outcoming request
-    ///</summary>
-    ///<param name="request">Request object</param>
     void logRequest(web::http::http_request request) const;
-    ///<summary> 
-    ///Log incoming response
-    ///</summary>
-    ///<param name="token">Response object</param>
 	void logResponse(web::http::http_response response) const;
-    ///<summary> 
-    ///Copy data from stream
-    ///</summary>
-    ///<param name="stream">Stream to copy data from</param>
-    ///<returns>String data</returns>
-	utility::string_t copyDataFromStream(const Concurrency::streams::istream& stream) const;
+	void logDataFromStream(const Concurrency::streams::istream& stream) const;
 };
 
 }
 }
 }
+}
 
-#endif /* _ApiClient_H_ */
+#endif /* GROUPDOCS_ASSEMBLY_CLOUD_API_ApiClient_H_ */

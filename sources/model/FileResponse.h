@@ -24,8 +24,8 @@
 * </summary> 
 -------------------------------------------------------------------------------------------------------------------- **/
 
-#ifndef _FileResponse_H_
-#define _FileResponse_H_
+#ifndef GROUPDOCS_ASSEMBLY_CLOUD_API_MODELS_FileResponse_H_
+#define GROUPDOCS_ASSEMBLY_CLOUD_API_MODELS_FileResponse_H_
 
 
 #include "../ModelBase.h"
@@ -33,7 +33,9 @@
 
 namespace groupdocs {
 namespace assembly {
-namespace model {
+namespace cloud {
+namespace api {
+namespace models {
 
 /// <summary>
 /// The empty type used as a flag.             
@@ -66,5 +68,7 @@ protected:
 }
 }
 }
+}
+}
 
-#endif /* _FileResponse_H_ */
+#endif /* GROUPDOCS_ASSEMBLY_CLOUD_API_MODELS_FileResponse_H_ */

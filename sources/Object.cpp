@@ -1,6 +1,5 @@
-
 /** --------------------------------------------------------------------------------------------------------------------
-* <copyright company="GroupDocs" file="LoadSaveOptionsData.h">
+* <copyright company="GroupDocs" file="Object.cpp">
 *   Copyright (c) 2019 GroupDocs.Assembly for Cloud
 * </copyright>
 * <summary>
@@ -23,14 +22,7 @@
 *  SOFTWARE.
 * </summary> 
 -------------------------------------------------------------------------------------------------------------------- **/
-
-#ifndef GROUPDOCS_ASSEMBLY_CLOUD_API_MODELS_LoadSaveOptionsData_H_
-#define GROUPDOCS_ASSEMBLY_CLOUD_API_MODELS_LoadSaveOptionsData_H_
-
-
-#include "../ModelBase.h"
-
-#include <cpprest/details/basic_types.h>
+#include "Object.h"
 
 namespace groupdocs {
 namespace assembly {
@@ -38,47 +30,49 @@ namespace cloud {
 namespace api {
 namespace models {
 
-/// <summary>
-/// Save options data which is using for specifying additional save options, like save format and etc.
-/// </summary>
-class  LoadSaveOptionsData
-    : public ModelBase
+void Object::validate()
 {
-public:
-    LoadSaveOptionsData();
-    virtual ~LoadSaveOptionsData();
+    // TODO: implement validation
+}
 
-    /////////////////////////////////////////////
-    /// ModelBase overrides
+web::json::value Object::toJson() const
+{
+    return m_object;
+}
 
-    void validate() override;
+void Object::fromJson(web::json::value& val)
+{
+    if (val.is_object())
+    {
+        m_object = val;
+    }
+}
 
-    web::json::value toJson() const override;
-    void fromJson(web::json::value& json) override;
+void Object::toMultipart(const std::shared_ptr<MultipartFormData>& multipart, const utility::string_t& prefix) const
+{
+    auto namePrefix = ModelBase::fixNamePrefix(prefix);
+    multipart->add(ModelBase::toHttpContent(namePrefix + _XPLATSTR("object"), m_object));
+}
 
-    void toMultipart(const std::shared_ptr<MultipartFormData>& multipart, const utility::string_t& namePrefix) const override;
-    void fromMultiPart(const std::shared_ptr<MultipartFormData>& multipart, const utility::string_t& namePrefix) override;
+void Object::fromMultiPart(const std::shared_ptr<MultipartFormData>& multipart, const utility::string_t& prefix)
+{
+    auto namePrefix = ModelBase::fixNamePrefix(prefix);
+    m_object = ModelBase::valueFromHttpContent(multipart->getContent(namePrefix + _XPLATSTR("object")));
+}
 
-    /////////////////////////////////////////////
-    /// LoadSaveOptionsData members
+web::json::value Object::getValue(const utility::string_t& key) const
+{
+    return m_object.at(key);
+}
 
-    /// <summary>
-    /// Save format for assembled document
-    /// </summary>
-    utility::string_t getSaveFormat() const;
-    bool saveFormatIsSet() const;
-    void unsetSaveFormat();
-    void setSaveFormat(utility::string_t value);
 
-protected:
-    utility::string_t m_SaveFormat;
-    bool m_SaveFormatIsSet;
-};
+void Object::setValue(const utility::string_t& key, const web::json::value& value)
+{
+    m_object[key] = value;
+}
 
 }
 }
 }
 }
 }
-
-#endif /* GROUPDOCS_ASSEMBLY_CLOUD_API_MODELS_LoadSaveOptionsData_H_ */

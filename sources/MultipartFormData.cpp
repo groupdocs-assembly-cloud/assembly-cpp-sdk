@@ -30,7 +30,9 @@
 
 namespace groupdocs {
 namespace assembly {
-namespace model {
+namespace cloud {
+namespace api {
+namespace models {
 
 MultipartFormData::MultipartFormData() :
  m_Boundary(utility::conversions::details::to_string_t(boost::uuids::random_generator()()))
@@ -108,6 +110,8 @@ for (const auto & content : m_Contents)
     }
 }
 
+}
+}
 }
 }
 }

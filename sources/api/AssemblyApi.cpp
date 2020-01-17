@@ -37,6 +37,8 @@ namespace groupdocs
 {
 namespace assembly 
 {
+namespace cloud 
+{
 namespace api 
 {
 
@@ -48,7 +50,7 @@ namespace api
 ///<returns>void</returns>
 void postInitializeResponse(web::json::value json, void* response)
 {
-    
+
 }
 
 ///<summary>
@@ -86,18 +88,13 @@ utility::string_t extractOptional(const boost::optional<T>& parameter)
 
     return {};
 }
-using namespace groupdocs::assembly::model;
+using namespace groupdocs::assembly::cloud::api::models;
 
 AssemblyApi::AssemblyApi(std::shared_ptr<ApiClient> apiClient)
     : m_ApiClient(std::move(apiClient))
 {
 }
 
-///<summary>
-///Builds a document using document template and XML or JSON data passed in request
-///</summary>
-///<param name="request">Request object to send</param>
-///<returns>Server response</returns>
 pplx::task<HttpContent> AssemblyApi::postAssembleDocument(std::shared_ptr<PostAssembleDocumentRequest> request)
 {
 
@@ -118,10 +115,6 @@ pplx::task<HttpContent> AssemblyApi::postAssembleDocument(std::shared_ptr<PostAs
     path = bPath;
     path = replacePathParameter(path, _XPLATSTR("name"),
         ApiClient::parameterToString(request->getName()));
-    path = replacePathParameter(path, _XPLATSTR("folder"), 
-        extractOptional(request->getFolder()));
-    path = replacePathParameter(path, _XPLATSTR("destFileName"), 
-        extractOptional(request->getDestFileName()));
 
     std::map<utility::string_t, utility::string_t> queryParams;
     std::map<utility::string_t, utility::string_t> headerParams(apiConfiguration->getDefaultHeaders());
@@ -163,19 +156,51 @@ pplx::task<HttpContent> AssemblyApi::postAssembleDocument(std::shared_ptr<PostAs
     {
         fileParams.push_back(make_pair(_XPLATSTR("Data"), (request->getData())));
     }
-    if (request->getFolder() && bPath.find(_XPLATSTR("folder")) == std::string::npos)
+    if (request->getFolder())
     {
         queryParams[_XPLATSTR("Folder")] = ApiClient::parameterToString(*(request->getFolder()));
     }
-    if (request->getDestFileName() && bPath.find(_XPLATSTR("destFileName")) == std::string::npos)
+    if (request->getDestFileName())
     {
         queryParams[_XPLATSTR("DestFileName")] = ApiClient::parameterToString(*(request->getDestFileName()));
     }
 
-    utility::string_t requestHttpContentType = _XPLATSTR("multipart/form-data");
-    formParams[_XPLATSTR("saveOptions")] = ModelBase::toJson(request->getSaveOptions()).serialize();
+    std::shared_ptr<IHttpBody> httpBody;
+    utility::string_t requestHttpContentType;
 
-    return m_ApiClient->callApi(path, _XPLATSTR("POST"), queryParams, nullptr, headerParams, formParams, fileParams,
+    // use JSON if possible
+    if (consumeHttpContentTypes.empty() || consumeHttpContentTypes.find(_XPLATSTR("application/json")) != 
+    consumeHttpContentTypes.end())
+    {
+        requestHttpContentType = _XPLATSTR("application/json");
+        web::json::value json;
+
+        json = ModelBase::toJson(request->getSaveOptions());
+        
+
+        httpBody = std::shared_ptr<IHttpBody>(new JsonBody(json));
+    }
+    // multipart formdata
+    else if (consumeHttpContentTypes.find(_XPLATSTR("multipart/form-data")) != consumeHttpContentTypes.end())
+    {
+        requestHttpContentType = _XPLATSTR("multipart/form-data");
+        std::shared_ptr<MultipartFormData> multipart = std::make_shared<MultipartFormData>();
+
+        if (request->getSaveOptions().get())
+        {
+            (request->getSaveOptions())->toMultipart(multipart, _XPLATSTR("saveOptions"));
+        }
+
+        httpBody = multipart;
+        requestHttpContentType += _XPLATSTR("; boundary=") + multipart->getBoundary();
+    }
+    else
+    {
+        throw ApiException(415, _XPLATSTR("AssemblyApi->postAssembleDocument does not consume any supported media type"));
+    }
+
+
+    return m_ApiClient->callApi(path, _XPLATSTR("POST"), queryParams, httpBody, headerParams, formParams, fileParams,
     requestHttpContentType)
     .then([=](web::http::http_response response)
     {
@@ -184,12 +209,12 @@ pplx::task<HttpContent> AssemblyApi::postAssembleDocument(std::shared_ptr<PostAs
         // 3xx - redirection   : OK
         // 4xx - client error  : not OK
         // 5xx - client error  : not OK
-        if (response.status_code() >= 400)
-        {
-            throw ApiException(response.status_code()
+		if (response.status_code() >= 400)
+		{
+			throw ApiException(response.status_code()
                 , _XPLATSTR("error calling postAssembleDocument: ") + response.reason_phrase()
                 , std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-        }
+		}
 
         return response.extract_vector();
     })
@@ -202,6 +227,7 @@ pplx::task<HttpContent> AssemblyApi::postAssembleDocument(std::shared_ptr<PostAs
     });
 }
 
+}
 }
 }
 }

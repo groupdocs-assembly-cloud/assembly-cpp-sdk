@@ -23,15 +23,17 @@
 * </summary> 
 -------------------------------------------------------------------------------------------------------------------- **/
 
-#ifndef _IHttpBody_H_
-#define _IHttpBody_H_
+#ifndef GROUPDOCS_ASSEMBLY_CLOUD_API_MODELS_IHttpBody_H_
+#define GROUPDOCS_ASSEMBLY_CLOUD_API_MODELS_IHttpBody_H_
 
 
 #include <iostream>
 
 namespace groupdocs {
 namespace assembly {
-namespace model {
+namespace cloud {
+namespace api {
+namespace models {
 
 class  IHttpBody
 {
@@ -44,5 +46,7 @@ public:
 }
 }
 }
+}
+}
 
-#endif /* _IHttpBody_H_ */
+#endif /* GROUPDOCS_ASSEMBLY_CLOUD_API_MODELS_IHttpBody_H_ */

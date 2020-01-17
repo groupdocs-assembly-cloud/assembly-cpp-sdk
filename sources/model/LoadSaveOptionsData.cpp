@@ -28,11 +28,13 @@
 
 namespace groupdocs {
 namespace assembly {
-namespace model {
+namespace cloud {
+namespace api {
+namespace models {
 
 LoadSaveOptionsData::LoadSaveOptionsData()
 {
-    m_SaveFormat = _XPLATSTR("");
+    m_SaveFormat = utility::conversions::to_string_t("");
     m_SaveFormatIsSet = false;
 }
 
@@ -109,6 +111,8 @@ void LoadSaveOptionsData::unsetSaveFormat()
     m_SaveFormatIsSet = false;
 }
 
+}
+}
 }
 }
 }

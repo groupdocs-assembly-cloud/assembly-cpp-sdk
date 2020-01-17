@@ -26,7 +26,9 @@
 
 namespace groupdocs {
 namespace assembly {
-namespace model {
+namespace cloud {
+namespace api {
+namespace models {
 
 web::json::value ModelBase::toJson( const utility::string_t& value )
 {
@@ -295,6 +297,8 @@ web::json::value ModelBase::valueFromHttpContent(const std::shared_ptr<HttpConte
     return web::json::value::parse(str);
 }
 
+}
+}
 }
 }
 }
