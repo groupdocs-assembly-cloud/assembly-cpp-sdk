@@ -1,1 +1,1 @@
-docker run --rm -v "%cd%:/groupdocs-assembly-cloud-cpp/" groupdocs-assembly-cloud-cpp:linux bash groupdocs-assembly-cloud-cpp/scripts/runAll.sh
+docker run --rm -v "%cd%:/groupdocs-assembly-cloud-cpp/" groupdocs-assembly-cloud-cpp:linux bash groupdocs-assembly-cloud-cpp/scripts/runAll.sh %1 %2 %3

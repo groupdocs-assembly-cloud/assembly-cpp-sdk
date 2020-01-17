@@ -1,3 +1,11 @@
+
+
+REM Generate credentials
+echo { "AppKey" : "%1", > groupdocs-assembly-cloud-cpp\servercreds.json
+echo  "AppSid" : "%2", >> groupdocs-assembly-cloud-cpp\servercreds.json
+echo  "BaseUrl" : "%3" >> groupdocs-assembly-cloud-cpp\servercreds.json
+echo } >> groupdocs-assembly-cloud-cpp\servercreds.json
+
 REM remove build directory
 rmdir groupdocs-assembly-cloud-cpp\build /s /q
 
@@ -14,3 +22,6 @@ cppcheck groupdocs-assembly-cloud-cpp  --quiet --xml -iboost/ -iinstall/ -ithird
 
 copy .\groupdocs-assembly-cloud-cpp\build\tests\test_result.xml c:\out
 copy checkResult.xml c:\out
+
+:end
+exit /b %ERRORLEVEL%
