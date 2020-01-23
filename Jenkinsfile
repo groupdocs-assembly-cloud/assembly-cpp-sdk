@@ -15,7 +15,7 @@ node('windows2019') {
 			stage('windows_tests'){
 				withCredentials([usernamePassword(credentialsId: '82329510-1355-497f-828a-b8ff8b5f6a30', passwordVariable: 'AppKey', usernameVariable: 'AppSid')]) {
 					bat 'docker build -f Dockerfile.windows -t groupdocs-assembly-cloud-cpp:windows --isolation=hyperv .'
-					bat 'runInDocker.windows.bat %WordsAppKey% %WordsAppSid% $testServerUrl'
+					bat 'runInDocker.windows.bat %AppKey% %AppSid% $testServerUrl'
 				}
 			}
 		}		
@@ -25,7 +25,7 @@ node('windows2019') {
 	}
 }
 
-node('words-lonux') {
+node('words-linux') {
 	try {
 		gitlabCommitStatus("checkout") {
 			stage('checkout'){
@@ -38,7 +38,7 @@ node('words-lonux') {
 				withCredentials([usernamePassword(credentialsId: '82329510-1355-497f-828a-b8ff8b5f6a30', passwordVariable: 'AppKey', usernameVariable: 'AppSid')]) {
 					sh 'docker build -f Dockerfile.linux -t groupdocs-assembly-cloud-cpp:linux .'
 					sh 'docker build -f Dockerfile.tests.linux -t groupdocs-assembly-cloud-cpp-tests:linux .'
-					sh 'docker run --rm -v "$PWD/out:/out/" groupdocs-assembly-cloud-cpp-tests:linux bash groupdocs-assembly-cloud-cpp/scripts/runAll.sh $WordsAppKey $WordsAppSid $testServerUrl'
+					sh 'docker run --rm -v "$PWD/out:/out/" groupdocs-assembly-cloud-cpp-tests:linux bash groupdocs-assembly-cloud-cpp/scripts/runAll.sh $AppKey $AppSid $testServerUrl'
 				}
 			}
 		}		
