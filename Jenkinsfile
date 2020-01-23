@@ -15,7 +15,7 @@ node('windows2019') {
 			stage('windows_tests'){
 				withCredentials([usernamePassword(credentialsId: '82329510-1355-497f-828a-b8ff8b5f6a30', passwordVariable: 'AppKey', usernameVariable: 'AppSid')]) {
 					bat 'docker build -f Dockerfile.windows -t groupdocs-assembly-cloud-cpp:windows --isolation=hyperv .'
-					bat 'runInDocker.windows.bat %AppKey% %AppSid% $testServerUrl'
+					bat 'runInDocker.windows.bat %AppKey% %AppSid% %testServerUrl%'
 				}
 			}
 		}		
