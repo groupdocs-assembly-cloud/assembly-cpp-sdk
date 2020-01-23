@@ -38,11 +38,26 @@ TEST_F(AssemblyApiTest, TestPostAssembleDocument){
 	utility::string_t fileName = _XPLATSTR("TestAllChartTypes.docx");
 	utility::string_t remoteName = fileName;
 
-	UploadFileToStorage(remoteBaseTestDataFolder + _XPLATSTR("GroupDocs.Assembly/") + fileName,
-		path_combine(LocalTestDataFolder, fileName)
+	std::shared_ptr<HttpContent> fileData = std::make_shared<HttpContent>();
+	fileData->setContentType(L"application/json");
+	fileData->setName(L"TestAllChartTypes");
+	fileData->setFileName(fileName);
+	fileData->setData(std::make_shared<std::ifstream>(path_combine(LocalTestDataFolder, fileName), std::ifstream::binary));
+
+	std::shared_ptr<FileUploadFileRequest> sp_request =
+		std::make_shared<FileUploadFileRequest>(
+			fileData, 
+			remoteBaseTestDataFolder + _XPLATSTR("GroupDocs.Assembly/") + fileName,
+			boost::none
 	);
+
+	
+	auto sp_result = get_api()->fileUploadFile(sp_request).get();
+
+	ASSERT_TRUE(sp_result.httpResponse->status_code() == 200);
+
 	std::shared_ptr<LoadSaveOptionsData> saveOptions = std::make_shared<LoadSaveOptionsData>();
-	saveOptions->setSaveFormat(_XPLATSTR("docx"));
+	saveOptions->setSaveFormat(_XPLATSTR("pdf"));
 
 	std::shared_ptr<PostAssembleDocumentRequest> request = 
 		std::make_shared<PostAssembleDocumentRequest>(
