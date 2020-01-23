@@ -39,8 +39,8 @@ TEST_F(AssemblyApiTest, TestPostAssembleDocument){
 	utility::string_t remoteName = fileName;
 
 	std::shared_ptr<HttpContent> fileData = std::make_shared<HttpContent>();
-	fileData->setContentType(L"application/json");
-	fileData->setName(L"TestAllChartTypes");
+	fileData->setContentType(_XPLATSTR("application/json"));
+	fileData->setName(_XPLATSTR("TestAllChartTypes"));
 	fileData->setFileName(fileName);
 	fileData->setData(std::make_shared<std::ifstream>(path_combine(LocalTestDataFolder, fileName), std::ifstream::binary));
 
