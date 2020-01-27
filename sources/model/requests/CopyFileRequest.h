@@ -1,5 +1,5 @@
 /** --------------------------------------------------------------------------------------------------------------------
-* <copyright company="GroupDocs" file="FileDeleteFileRequest.h">
+* <copyright company="GroupDocs" file="CopyFileRequest.h">
 *   Copyright (c) 2019 GroupDocs.Assembly for Cloud
 * </copyright>
 * <summary>
@@ -23,8 +23,8 @@
 * </summary> 
 -------------------------------------------------------------------------------------------------------------------- **/
 #pragma once
-#ifndef fileDeleteFile_H
-#define fileDeleteFile_H 
+#ifndef copyFile_H
+#define copyFile_H 
 
 #include "cpprest/details/basic_types.h"
 #include <boost/optional.hpp>
@@ -35,25 +35,35 @@ namespace cloud {
 namespace api {
 namespace models {
 
-class FileDeleteFileRequest{
+class CopyFileRequest{
     public: 
-     FileDeleteFileRequest(
-        utility::string_t path,
-                boost::optional<utility::string_t> storageName,
+     CopyFileRequest(
+        utility::string_t destPath,
+                utility::string_t srcPath,
+                boost::optional<utility::string_t> srcStorageName,
+                boost::optional<utility::string_t> destStorageName,
                 boost::optional<utility::string_t> versionId
         );
 
-        utility::string_t getPath() const;
-        void setPath(utility::string_t path);
+        utility::string_t getDestPath() const;
+        void setDestPath(utility::string_t destPath);
 
-        boost::optional<utility::string_t> getStorageName() const;
-        void setStorageName(boost::optional<utility::string_t> storageName);
+        utility::string_t getSrcPath() const;
+        void setSrcPath(utility::string_t srcPath);
+
+        boost::optional<utility::string_t> getSrcStorageName() const;
+        void setSrcStorageName(boost::optional<utility::string_t> srcStorageName);
+
+        boost::optional<utility::string_t> getDestStorageName() const;
+        void setDestStorageName(boost::optional<utility::string_t> destStorageName);
 
         boost::optional<utility::string_t> getVersionId() const;
         void setVersionId(boost::optional<utility::string_t> versionId);
     private:
-        utility::string_t m_path;
-        boost::optional<utility::string_t> m_storageName;
+        utility::string_t m_destPath;
+        utility::string_t m_srcPath;
+        boost::optional<utility::string_t> m_srcStorageName;
+        boost::optional<utility::string_t> m_destStorageName;
         boost::optional<utility::string_t> m_versionId;
 };
 

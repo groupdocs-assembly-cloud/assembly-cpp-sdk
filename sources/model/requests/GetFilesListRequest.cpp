@@ -1,5 +1,5 @@
 /** --------------------------------------------------------------------------------------------------------------------
-* <copyright company="GroupDocs" file="FolderMoveFolderRequest.h">
+* <copyright company="GroupDocs" file="GetFilesListRequest.cpp">
 *   Copyright (c) 2019 GroupDocs.Assembly for Cloud
 * </copyright>
 * <summary>
@@ -22,45 +22,36 @@
 *  SOFTWARE.
 * </summary> 
 -------------------------------------------------------------------------------------------------------------------- **/
-#pragma once
-#ifndef folderMoveFolder_H
-#define folderMoveFolder_H 
+#include "GetFilesListRequest.h"
+namespace groupdocs{
+namespace assembly{
+namespace cloud{
+namespace api{
+namespace models{
+GetFilesListRequest::GetFilesListRequest(
+        utility::string_t path,
+                boost::optional<utility::string_t> storageName
+        ) : 
+            m_path(std::move(path)),
+            m_storageName(std::move(storageName))
+        {
+            
+        }
 
-#include "cpprest/details/basic_types.h"
-#include <boost/optional.hpp>
-
-namespace groupdocs {
-namespace assembly {
-namespace cloud {
-namespace api {
-namespace models {
-
-class FolderMoveFolderRequest{
-    public: 
-     FolderMoveFolderRequest(
-        utility::string_t destPath,
-                utility::string_t srcPath,
-                boost::optional<utility::string_t> srcStorageName,
-                boost::optional<utility::string_t> destStorageName
-        );
-
-        utility::string_t getDestPath() const;
-        void setDestPath(utility::string_t destPath);
-
-        utility::string_t getSrcPath() const;
-        void setSrcPath(utility::string_t srcPath);
-
-        boost::optional<utility::string_t> getSrcStorageName() const;
-        void setSrcStorageName(boost::optional<utility::string_t> srcStorageName);
-
-        boost::optional<utility::string_t> getDestStorageName() const;
-        void setDestStorageName(boost::optional<utility::string_t> destStorageName);
-    private:
-        utility::string_t m_destPath;
-        utility::string_t m_srcPath;
-        boost::optional<utility::string_t> m_srcStorageName;
-        boost::optional<utility::string_t> m_destStorageName;
-};
+        utility::string_t GetFilesListRequest::getPath() const
+        {
+            return m_path;
+        }
+        void GetFilesListRequest::setPath(utility::string_t path){
+            m_path = std::move(path);
+        }
+        boost::optional<utility::string_t> GetFilesListRequest::getStorageName() const
+        {
+            return m_storageName;
+        }
+        void GetFilesListRequest::setStorageName(boost::optional<utility::string_t> storageName){
+            m_storageName = std::move(storageName);
+        }
 
 }
 }
@@ -68,4 +59,3 @@ class FolderMoveFolderRequest{
 }
 }
 
-#endif

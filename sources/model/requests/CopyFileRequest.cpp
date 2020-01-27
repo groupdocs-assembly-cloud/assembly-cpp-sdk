@@ -1,5 +1,5 @@
 /** --------------------------------------------------------------------------------------------------------------------
-* <copyright company="GroupDocs" file="FolderMoveFolderRequest.cpp">
+* <copyright company="GroupDocs" file="CopyFileRequest.cpp">
 *   Copyright (c) 2019 GroupDocs.Assembly for Cloud
 * </copyright>
 * <summary>
@@ -22,53 +22,62 @@
 *  SOFTWARE.
 * </summary> 
 -------------------------------------------------------------------------------------------------------------------- **/
-#include "FolderMoveFolderRequest.h"
+#include "CopyFileRequest.h"
 namespace groupdocs{
 namespace assembly{
 namespace cloud{
 namespace api{
 namespace models{
-FolderMoveFolderRequest::FolderMoveFolderRequest(
+CopyFileRequest::CopyFileRequest(
         utility::string_t destPath,
                 utility::string_t srcPath,
                 boost::optional<utility::string_t> srcStorageName,
-                boost::optional<utility::string_t> destStorageName
+                boost::optional<utility::string_t> destStorageName,
+                boost::optional<utility::string_t> versionId
         ) : 
             m_destPath(std::move(destPath)),
             m_srcPath(std::move(srcPath)),
             m_srcStorageName(std::move(srcStorageName)),
-            m_destStorageName(std::move(destStorageName))
+            m_destStorageName(std::move(destStorageName)),
+            m_versionId(std::move(versionId))
         {
             
         }
 
-        utility::string_t FolderMoveFolderRequest::getDestPath() const
+        utility::string_t CopyFileRequest::getDestPath() const
         {
             return m_destPath;
         }
-        void FolderMoveFolderRequest::setDestPath(utility::string_t destPath){
+        void CopyFileRequest::setDestPath(utility::string_t destPath){
             m_destPath = std::move(destPath);
         }
-        utility::string_t FolderMoveFolderRequest::getSrcPath() const
+        utility::string_t CopyFileRequest::getSrcPath() const
         {
             return m_srcPath;
         }
-        void FolderMoveFolderRequest::setSrcPath(utility::string_t srcPath){
+        void CopyFileRequest::setSrcPath(utility::string_t srcPath){
             m_srcPath = std::move(srcPath);
         }
-        boost::optional<utility::string_t> FolderMoveFolderRequest::getSrcStorageName() const
+        boost::optional<utility::string_t> CopyFileRequest::getSrcStorageName() const
         {
             return m_srcStorageName;
         }
-        void FolderMoveFolderRequest::setSrcStorageName(boost::optional<utility::string_t> srcStorageName){
+        void CopyFileRequest::setSrcStorageName(boost::optional<utility::string_t> srcStorageName){
             m_srcStorageName = std::move(srcStorageName);
         }
-        boost::optional<utility::string_t> FolderMoveFolderRequest::getDestStorageName() const
+        boost::optional<utility::string_t> CopyFileRequest::getDestStorageName() const
         {
             return m_destStorageName;
         }
-        void FolderMoveFolderRequest::setDestStorageName(boost::optional<utility::string_t> destStorageName){
+        void CopyFileRequest::setDestStorageName(boost::optional<utility::string_t> destStorageName){
             m_destStorageName = std::move(destStorageName);
+        }
+        boost::optional<utility::string_t> CopyFileRequest::getVersionId() const
+        {
+            return m_versionId;
+        }
+        void CopyFileRequest::setVersionId(boost::optional<utility::string_t> versionId){
+            m_versionId = std::move(versionId);
         }
 
 }

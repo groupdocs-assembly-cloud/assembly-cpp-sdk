@@ -1,5 +1,5 @@
 /** --------------------------------------------------------------------------------------------------------------------
-* <copyright company="GroupDocs" file="LoadSaveOptionsData.cpp">
+* <copyright company="GroupDocs" file="ReportOptionsData.cpp">
 *   Copyright (c) 2019 GroupDocs.Assembly for Cloud
 * </copyright>
 * <summary>
@@ -24,7 +24,7 @@
 -------------------------------------------------------------------------------------------------------------------- **/
 
 
-#include "LoadSaveOptionsData.h"
+#include "ReportOptionsData.h"
 
 namespace groupdocs {
 namespace assembly {
@@ -32,22 +32,24 @@ namespace cloud {
 namespace api {
 namespace models {
 
-LoadSaveOptionsData::LoadSaveOptionsData()
+ReportOptionsData::ReportOptionsData()
 {
     m_SaveFormat = utility::conversions::to_string_t("");
     m_SaveFormatIsSet = false;
+    m_ReportData = utility::conversions::to_string_t("");
+    m_ReportDataIsSet = false;
 }
 
-LoadSaveOptionsData::~LoadSaveOptionsData()
+ReportOptionsData::~ReportOptionsData()
 {
 }
 
-void LoadSaveOptionsData::validate()
+void ReportOptionsData::validate()
 {
     // TODO: implement validation
 }
 
-web::json::value LoadSaveOptionsData::toJson() const
+web::json::value ReportOptionsData::toJson() const
 {
     web::json::value val = web::json::value::object();
 
@@ -55,11 +57,15 @@ web::json::value LoadSaveOptionsData::toJson() const
     {
         val[_XPLATSTR("SaveFormat")] = ModelBase::toJson(m_SaveFormat);
     }
+    if(m_ReportDataIsSet)
+    {
+        val[_XPLATSTR("ReportData")] = ModelBase::toJson(m_ReportData);
+    }
 
     return val;
 }
 
-void LoadSaveOptionsData::fromJson(web::json::value& val)
+void ReportOptionsData::fromJson(web::json::value& val)
 {
     if(val.has_field(_XPLATSTR("SaveFormat")))
     {
@@ -69,9 +75,17 @@ void LoadSaveOptionsData::fromJson(web::json::value& val)
             setSaveFormat(ModelBase::stringFromJson(fieldValue));
         }
     }
+    if(val.has_field(_XPLATSTR("ReportData")))
+    {
+        web::json::value& fieldValue = val[_XPLATSTR("ReportData")];
+        if(!fieldValue.is_null())
+        {
+            setReportData(ModelBase::stringFromJson(fieldValue));
+        }
+    }
 }
 
-void LoadSaveOptionsData::toMultipart(const std::shared_ptr<MultipartFormData>& multipart, const utility::string_t& prefix) const
+void ReportOptionsData::toMultipart(const std::shared_ptr<MultipartFormData>& multipart, const utility::string_t& prefix) const
 {
     auto namePrefix = ModelBase::fixNamePrefix(prefix);
 
@@ -80,35 +94,65 @@ void LoadSaveOptionsData::toMultipart(const std::shared_ptr<MultipartFormData>& 
         multipart->add(ModelBase::toHttpContent(namePrefix + _XPLATSTR("SaveFormat"), m_SaveFormat));
         
     }
+    if(m_ReportDataIsSet)
+    {
+        multipart->add(ModelBase::toHttpContent(namePrefix + _XPLATSTR("ReportData"), m_ReportData));
+        
+    }
 }
 
-void LoadSaveOptionsData::fromMultiPart(const std::shared_ptr<MultipartFormData>& multipart, const utility::string_t& prefix)
+void ReportOptionsData::fromMultiPart(const std::shared_ptr<MultipartFormData>& multipart, const utility::string_t& prefix)
 {
     if(multipart->hasContent(_XPLATSTR("SaveFormat")))
     {
         setSaveFormat(ModelBase::stringFromHttpContent(multipart->getContent(_XPLATSTR("SaveFormat"))));
     }
+    if(multipart->hasContent(_XPLATSTR("ReportData")))
+    {
+        setReportData(ModelBase::stringFromHttpContent(multipart->getContent(_XPLATSTR("ReportData"))));
+    }
 }
 
-utility::string_t LoadSaveOptionsData::getSaveFormat() const
+utility::string_t ReportOptionsData::getSaveFormat() const
 {
     return m_SaveFormat;
 }
 
 
-void LoadSaveOptionsData::setSaveFormat(utility::string_t value)
+void ReportOptionsData::setSaveFormat(utility::string_t value)
 {
     m_SaveFormat = value;
     m_SaveFormatIsSet = true;
 }
-bool LoadSaveOptionsData::saveFormatIsSet() const
+bool ReportOptionsData::saveFormatIsSet() const
 {
     return m_SaveFormatIsSet;
 }
 
-void LoadSaveOptionsData::unsetSaveFormat()
+void ReportOptionsData::unsetSaveFormat()
 {
     m_SaveFormatIsSet = false;
+}
+
+utility::string_t ReportOptionsData::getReportData() const
+{
+    return m_ReportData;
+}
+
+
+void ReportOptionsData::setReportData(utility::string_t value)
+{
+    m_ReportData = value;
+    m_ReportDataIsSet = true;
+}
+bool ReportOptionsData::reportDataIsSet() const
+{
+    return m_ReportDataIsSet;
+}
+
+void ReportOptionsData::unsetReportData()
+{
+    m_ReportDataIsSet = false;
 }
 
 }

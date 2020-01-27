@@ -1,5 +1,5 @@
 /** --------------------------------------------------------------------------------------------------------------------
-* <copyright company="GroupDocs" file="FolderDeleteFolderRequest.cpp">
+* <copyright company="GroupDocs" file="CopyFolderRequest.h">
 *   Copyright (c) 2019 GroupDocs.Assembly for Cloud
 * </copyright>
 * <summary>
@@ -22,45 +22,45 @@
 *  SOFTWARE.
 * </summary> 
 -------------------------------------------------------------------------------------------------------------------- **/
-#include "FolderDeleteFolderRequest.h"
-namespace groupdocs{
-namespace assembly{
-namespace cloud{
-namespace api{
-namespace models{
-FolderDeleteFolderRequest::FolderDeleteFolderRequest(
-        utility::string_t path,
-                boost::optional<utility::string_t> storageName,
-                boost::optional<bool> recursive
-        ) : 
-            m_path(std::move(path)),
-            m_storageName(std::move(storageName)),
-            m_recursive(std::move(recursive))
-        {
-            
-        }
+#pragma once
+#ifndef copyFolder_H
+#define copyFolder_H 
 
-        utility::string_t FolderDeleteFolderRequest::getPath() const
-        {
-            return m_path;
-        }
-        void FolderDeleteFolderRequest::setPath(utility::string_t path){
-            m_path = std::move(path);
-        }
-        boost::optional<utility::string_t> FolderDeleteFolderRequest::getStorageName() const
-        {
-            return m_storageName;
-        }
-        void FolderDeleteFolderRequest::setStorageName(boost::optional<utility::string_t> storageName){
-            m_storageName = std::move(storageName);
-        }
-        boost::optional<bool> FolderDeleteFolderRequest::getRecursive() const
-        {
-            return m_recursive;
-        }
-        void FolderDeleteFolderRequest::setRecursive(boost::optional<bool> recursive){
-            m_recursive = std::move(recursive);
-        }
+#include "cpprest/details/basic_types.h"
+#include <boost/optional.hpp>
+
+namespace groupdocs {
+namespace assembly {
+namespace cloud {
+namespace api {
+namespace models {
+
+class CopyFolderRequest{
+    public: 
+     CopyFolderRequest(
+        utility::string_t destPath,
+                utility::string_t srcPath,
+                boost::optional<utility::string_t> srcStorageName,
+                boost::optional<utility::string_t> destStorageName
+        );
+
+        utility::string_t getDestPath() const;
+        void setDestPath(utility::string_t destPath);
+
+        utility::string_t getSrcPath() const;
+        void setSrcPath(utility::string_t srcPath);
+
+        boost::optional<utility::string_t> getSrcStorageName() const;
+        void setSrcStorageName(boost::optional<utility::string_t> srcStorageName);
+
+        boost::optional<utility::string_t> getDestStorageName() const;
+        void setDestStorageName(boost::optional<utility::string_t> destStorageName);
+    private:
+        utility::string_t m_destPath;
+        utility::string_t m_srcPath;
+        boost::optional<utility::string_t> m_srcStorageName;
+        boost::optional<utility::string_t> m_destStorageName;
+};
 
 }
 }
@@ -68,3 +68,4 @@ FolderDeleteFolderRequest::FolderDeleteFolderRequest(
 }
 }
 
+#endif

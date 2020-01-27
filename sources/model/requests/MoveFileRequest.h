@@ -1,5 +1,5 @@
 /** --------------------------------------------------------------------------------------------------------------------
-* <copyright company="GroupDocs" file="FileUploadFileRequest.h">
+* <copyright company="GroupDocs" file="MoveFileRequest.h">
 *   Copyright (c) 2019 GroupDocs.Assembly for Cloud
 * </copyright>
 * <summary>
@@ -23,11 +23,10 @@
 * </summary> 
 -------------------------------------------------------------------------------------------------------------------- **/
 #pragma once
-#ifndef fileUploadFile_H
-#define fileUploadFile_H 
+#ifndef moveFile_H
+#define moveFile_H 
 
 #include "cpprest/details/basic_types.h"
-#include "HttpContent.h"
 #include <boost/optional.hpp>
 
 namespace groupdocs {
@@ -36,26 +35,36 @@ namespace cloud {
 namespace api {
 namespace models {
 
-class FileUploadFileRequest{
+class MoveFileRequest{
     public: 
-     FileUploadFileRequest(
-        std::shared_ptr<HttpContent> fileData,
-                utility::string_t path,
-                boost::optional<utility::string_t> storageName
+     MoveFileRequest(
+        utility::string_t destPath,
+                utility::string_t srcPath,
+                boost::optional<utility::string_t> srcStorageName,
+                boost::optional<utility::string_t> destStorageName,
+                boost::optional<utility::string_t> versionId
         );
 
-        std::shared_ptr<HttpContent> getFileData() const;
-        void setFileData(std::shared_ptr<HttpContent> fileData);
+        utility::string_t getDestPath() const;
+        void setDestPath(utility::string_t destPath);
 
-        utility::string_t getPath() const;
-        void setPath(utility::string_t path);
+        utility::string_t getSrcPath() const;
+        void setSrcPath(utility::string_t srcPath);
 
-        boost::optional<utility::string_t> getStorageName() const;
-        void setStorageName(boost::optional<utility::string_t> storageName);
+        boost::optional<utility::string_t> getSrcStorageName() const;
+        void setSrcStorageName(boost::optional<utility::string_t> srcStorageName);
+
+        boost::optional<utility::string_t> getDestStorageName() const;
+        void setDestStorageName(boost::optional<utility::string_t> destStorageName);
+
+        boost::optional<utility::string_t> getVersionId() const;
+        void setVersionId(boost::optional<utility::string_t> versionId);
     private:
-        std::shared_ptr<HttpContent> m_fileData;
-        utility::string_t m_path;
-        boost::optional<utility::string_t> m_storageName;
+        utility::string_t m_destPath;
+        utility::string_t m_srcPath;
+        boost::optional<utility::string_t> m_srcStorageName;
+        boost::optional<utility::string_t> m_destStorageName;
+        boost::optional<utility::string_t> m_versionId;
 };
 
 }

@@ -145,11 +145,6 @@ pplx::task<web::http::http_response> ApiClient::callApi(
         throw ApiException(400, _XPLATSTR("Cannot have body and file params"));
     }
 
-    if (!fileParams.empty() && contentType != _XPLATSTR("multipart/form-data"))
-    {
-        throw ApiException(400, _XPLATSTR("Operations with file parameters must be called with multipart/form-data"));
-    }
-
     web::http::client::http_client client(m_Configuration->getBaseUrl(), m_Configuration->getHttpConfig());
 
     web::http::http_request request;

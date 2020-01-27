@@ -1,5 +1,5 @@
 /** --------------------------------------------------------------------------------------------------------------------
-* <copyright company="GroupDocs" file="FolderCreateFolderRequest.cpp">
+* <copyright company="GroupDocs" file="UploadFileRequest.cpp">
 *   Copyright (c) 2019 GroupDocs.Assembly for Cloud
 * </copyright>
 * <summary>
@@ -22,34 +22,43 @@
 *  SOFTWARE.
 * </summary> 
 -------------------------------------------------------------------------------------------------------------------- **/
-#include "FolderCreateFolderRequest.h"
+#include "UploadFileRequest.h"
 namespace groupdocs{
 namespace assembly{
 namespace cloud{
 namespace api{
 namespace models{
-FolderCreateFolderRequest::FolderCreateFolderRequest(
-        utility::string_t path,
+UploadFileRequest::UploadFileRequest(
+        std::shared_ptr<HttpContent> file,
+                utility::string_t path,
                 boost::optional<utility::string_t> storageName
         ) : 
+            m_file(std::move(file)),
             m_path(std::move(path)),
             m_storageName(std::move(storageName))
         {
             
         }
 
-        utility::string_t FolderCreateFolderRequest::getPath() const
+        std::shared_ptr<HttpContent> UploadFileRequest::getFile() const
+        {
+            return m_file;
+        }
+        void UploadFileRequest::setFile(std::shared_ptr<HttpContent> file){
+            m_file = std::move(file);
+        }
+        utility::string_t UploadFileRequest::getPath() const
         {
             return m_path;
         }
-        void FolderCreateFolderRequest::setPath(utility::string_t path){
+        void UploadFileRequest::setPath(utility::string_t path){
             m_path = std::move(path);
         }
-        boost::optional<utility::string_t> FolderCreateFolderRequest::getStorageName() const
+        boost::optional<utility::string_t> UploadFileRequest::getStorageName() const
         {
             return m_storageName;
         }
-        void FolderCreateFolderRequest::setStorageName(boost::optional<utility::string_t> storageName){
+        void UploadFileRequest::setStorageName(boost::optional<utility::string_t> storageName){
             m_storageName = std::move(storageName);
         }
 
@@ -58,4 +67,5 @@ FolderCreateFolderRequest::FolderCreateFolderRequest(
 }
 }
 }
+
 

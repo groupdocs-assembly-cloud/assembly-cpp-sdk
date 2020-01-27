@@ -1,5 +1,5 @@
 /** --------------------------------------------------------------------------------------------------------------------
-* <copyright company="GroupDocs" file="FolderGetFilesListRequest.h">
+* <copyright company="GroupDocs" file="DeleteFolderRequest.cpp">
 *   Copyright (c) 2019 GroupDocs.Assembly for Cloud
 * </copyright>
 * <summary>
@@ -22,40 +22,49 @@
 *  SOFTWARE.
 * </summary> 
 -------------------------------------------------------------------------------------------------------------------- **/
-#pragma once
-#ifndef folderGetFilesList_H
-#define folderGetFilesList_H 
-
-#include "cpprest/details/basic_types.h"
-#include <boost/optional.hpp>
-
-namespace groupdocs {
-namespace assembly {
-namespace cloud {
-namespace api {
-namespace models {
-
-class FolderGetFilesListRequest{
-    public: 
-     FolderGetFilesListRequest(
+#include "DeleteFolderRequest.h"
+namespace groupdocs{
+namespace assembly{
+namespace cloud{
+namespace api{
+namespace models{
+DeleteFolderRequest::DeleteFolderRequest(
         utility::string_t path,
-                boost::optional<utility::string_t> storageName
-        );
+                boost::optional<utility::string_t> storageName,
+                boost::optional<bool> recursive
+        ) : 
+            m_path(std::move(path)),
+            m_storageName(std::move(storageName)),
+            m_recursive(std::move(recursive))
+        {
+            
+        }
 
-        utility::string_t getPath() const;
-        void setPath(utility::string_t path);
+        utility::string_t DeleteFolderRequest::getPath() const
+        {
+            return m_path;
+        }
+        void DeleteFolderRequest::setPath(utility::string_t path){
+            m_path = std::move(path);
+        }
+        boost::optional<utility::string_t> DeleteFolderRequest::getStorageName() const
+        {
+            return m_storageName;
+        }
+        void DeleteFolderRequest::setStorageName(boost::optional<utility::string_t> storageName){
+            m_storageName = std::move(storageName);
+        }
+        boost::optional<bool> DeleteFolderRequest::getRecursive() const
+        {
+            return m_recursive;
+        }
+        void DeleteFolderRequest::setRecursive(boost::optional<bool> recursive){
+            m_recursive = std::move(recursive);
+        }
 
-        boost::optional<utility::string_t> getStorageName() const;
-        void setStorageName(boost::optional<utility::string_t> storageName);
-    private:
-        utility::string_t m_path;
-        boost::optional<utility::string_t> m_storageName;
-};
-
 }
 }
 }
 }
 }
 
-#endif

@@ -1,5 +1,5 @@
 /** --------------------------------------------------------------------------------------------------------------------
-* <copyright company="GroupDocs" file="FileDownloadFileRequest.cpp">
+* <copyright company="GroupDocs" file="CreateFolderRequest.cpp">
 *   Copyright (c) 2019 GroupDocs.Assembly for Cloud
 * </copyright>
 * <summary>
@@ -22,44 +22,35 @@
 *  SOFTWARE.
 * </summary> 
 -------------------------------------------------------------------------------------------------------------------- **/
-#include "FileDownloadFileRequest.h"
+#include "CreateFolderRequest.h"
 namespace groupdocs{
 namespace assembly{
 namespace cloud{
 namespace api{
 namespace models{
-FileDownloadFileRequest::FileDownloadFileRequest(
+CreateFolderRequest::CreateFolderRequest(
         utility::string_t path,
-                boost::optional<utility::string_t> storageName,
-                boost::optional<utility::string_t> versionId
+                boost::optional<utility::string_t> storageName
         ) : 
             m_path(std::move(path)),
-            m_storageName(std::move(storageName)),
-            m_versionId(std::move(versionId))
+            m_storageName(std::move(storageName))
         {
             
         }
 
-        utility::string_t FileDownloadFileRequest::getPath() const
+        utility::string_t CreateFolderRequest::getPath() const
         {
             return m_path;
         }
-        void FileDownloadFileRequest::setPath(utility::string_t path){
+        void CreateFolderRequest::setPath(utility::string_t path){
             m_path = std::move(path);
         }
-        boost::optional<utility::string_t> FileDownloadFileRequest::getStorageName() const
+        boost::optional<utility::string_t> CreateFolderRequest::getStorageName() const
         {
             return m_storageName;
         }
-        void FileDownloadFileRequest::setStorageName(boost::optional<utility::string_t> storageName){
+        void CreateFolderRequest::setStorageName(boost::optional<utility::string_t> storageName){
             m_storageName = std::move(storageName);
-        }
-        boost::optional<utility::string_t> FileDownloadFileRequest::getVersionId() const
-        {
-            return m_versionId;
-        }
-        void FileDownloadFileRequest::setVersionId(boost::optional<utility::string_t> versionId){
-            m_versionId = std::move(versionId);
         }
 
 }

@@ -1,5 +1,5 @@
 /** --------------------------------------------------------------------------------------------------------------------
-* <copyright company="GroupDocs" file="FolderCreateFolderRequest.h">
+* <copyright company="GroupDocs" file="CreateFolderRequest.h">
 *   Copyright (c) 2019 GroupDocs.Assembly for Cloud
 * </copyright>
 * <summary>
@@ -23,8 +23,8 @@
 * </summary> 
 -------------------------------------------------------------------------------------------------------------------- **/
 #pragma once
-#ifndef folderCreateFolder_H
-#define folderCreateFolder_H 
+#ifndef createFolder_H
+#define createFolder_H 
 
 #include "cpprest/details/basic_types.h"
 #include <boost/optional.hpp>
@@ -35,9 +35,9 @@ namespace cloud {
 namespace api {
 namespace models {
 
-class FolderCreateFolderRequest{
+class CreateFolderRequest{
     public: 
-     FolderCreateFolderRequest(
+     CreateFolderRequest(
         utility::string_t path,
                 boost::optional<utility::string_t> storageName
         );

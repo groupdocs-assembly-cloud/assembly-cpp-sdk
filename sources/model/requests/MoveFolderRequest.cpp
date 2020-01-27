@@ -1,5 +1,5 @@
 /** --------------------------------------------------------------------------------------------------------------------
-* <copyright company="GroupDocs" file="FolderCopyFolderRequest.cpp">
+* <copyright company="GroupDocs" file="MoveFolderRequest.cpp">
 *   Copyright (c) 2019 GroupDocs.Assembly for Cloud
 * </copyright>
 * <summary>
@@ -22,13 +22,13 @@
 *  SOFTWARE.
 * </summary> 
 -------------------------------------------------------------------------------------------------------------------- **/
-#include "FolderCopyFolderRequest.h"
+#include "MoveFolderRequest.h"
 namespace groupdocs{
 namespace assembly{
 namespace cloud{
 namespace api{
 namespace models{
-FolderCopyFolderRequest::FolderCopyFolderRequest(
+MoveFolderRequest::MoveFolderRequest(
         utility::string_t destPath,
                 utility::string_t srcPath,
                 boost::optional<utility::string_t> srcStorageName,
@@ -42,32 +42,32 @@ FolderCopyFolderRequest::FolderCopyFolderRequest(
             
         }
 
-        utility::string_t FolderCopyFolderRequest::getDestPath() const
+        utility::string_t MoveFolderRequest::getDestPath() const
         {
             return m_destPath;
         }
-        void FolderCopyFolderRequest::setDestPath(utility::string_t destPath){
+        void MoveFolderRequest::setDestPath(utility::string_t destPath){
             m_destPath = std::move(destPath);
         }
-        utility::string_t FolderCopyFolderRequest::getSrcPath() const
+        utility::string_t MoveFolderRequest::getSrcPath() const
         {
             return m_srcPath;
         }
-        void FolderCopyFolderRequest::setSrcPath(utility::string_t srcPath){
+        void MoveFolderRequest::setSrcPath(utility::string_t srcPath){
             m_srcPath = std::move(srcPath);
         }
-        boost::optional<utility::string_t> FolderCopyFolderRequest::getSrcStorageName() const
+        boost::optional<utility::string_t> MoveFolderRequest::getSrcStorageName() const
         {
             return m_srcStorageName;
         }
-        void FolderCopyFolderRequest::setSrcStorageName(boost::optional<utility::string_t> srcStorageName){
+        void MoveFolderRequest::setSrcStorageName(boost::optional<utility::string_t> srcStorageName){
             m_srcStorageName = std::move(srcStorageName);
         }
-        boost::optional<utility::string_t> FolderCopyFolderRequest::getDestStorageName() const
+        boost::optional<utility::string_t> MoveFolderRequest::getDestStorageName() const
         {
             return m_destStorageName;
         }
-        void FolderCopyFolderRequest::setDestStorageName(boost::optional<utility::string_t> destStorageName){
+        void MoveFolderRequest::setDestStorageName(boost::optional<utility::string_t> destStorageName){
             m_destStorageName = std::move(destStorageName);
         }
 

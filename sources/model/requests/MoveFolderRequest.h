@@ -1,5 +1,5 @@
 /** --------------------------------------------------------------------------------------------------------------------
-* <copyright company="GroupDocs" file="FolderGetFilesListRequest.cpp">
+* <copyright company="GroupDocs" file="MoveFolderRequest.h">
 *   Copyright (c) 2019 GroupDocs.Assembly for Cloud
 * </copyright>
 * <summary>
@@ -22,36 +22,45 @@
 *  SOFTWARE.
 * </summary> 
 -------------------------------------------------------------------------------------------------------------------- **/
-#include "FolderGetFilesListRequest.h"
-namespace groupdocs{
-namespace assembly{
-namespace cloud{
-namespace api{
-namespace models{
-FolderGetFilesListRequest::FolderGetFilesListRequest(
-        utility::string_t path,
-                boost::optional<utility::string_t> storageName
-        ) : 
-            m_path(std::move(path)),
-            m_storageName(std::move(storageName))
-        {
-            
-        }
+#pragma once
+#ifndef moveFolder_H
+#define moveFolder_H 
 
-        utility::string_t FolderGetFilesListRequest::getPath() const
-        {
-            return m_path;
-        }
-        void FolderGetFilesListRequest::setPath(utility::string_t path){
-            m_path = std::move(path);
-        }
-        boost::optional<utility::string_t> FolderGetFilesListRequest::getStorageName() const
-        {
-            return m_storageName;
-        }
-        void FolderGetFilesListRequest::setStorageName(boost::optional<utility::string_t> storageName){
-            m_storageName = std::move(storageName);
-        }
+#include "cpprest/details/basic_types.h"
+#include <boost/optional.hpp>
+
+namespace groupdocs {
+namespace assembly {
+namespace cloud {
+namespace api {
+namespace models {
+
+class MoveFolderRequest{
+    public: 
+     MoveFolderRequest(
+        utility::string_t destPath,
+                utility::string_t srcPath,
+                boost::optional<utility::string_t> srcStorageName,
+                boost::optional<utility::string_t> destStorageName
+        );
+
+        utility::string_t getDestPath() const;
+        void setDestPath(utility::string_t destPath);
+
+        utility::string_t getSrcPath() const;
+        void setSrcPath(utility::string_t srcPath);
+
+        boost::optional<utility::string_t> getSrcStorageName() const;
+        void setSrcStorageName(boost::optional<utility::string_t> srcStorageName);
+
+        boost::optional<utility::string_t> getDestStorageName() const;
+        void setDestStorageName(boost::optional<utility::string_t> destStorageName);
+    private:
+        utility::string_t m_destPath;
+        utility::string_t m_srcPath;
+        boost::optional<utility::string_t> m_srcStorageName;
+        boost::optional<utility::string_t> m_destStorageName;
+};
 
 }
 }
@@ -59,3 +68,4 @@ FolderGetFilesListRequest::FolderGetFilesListRequest(
 }
 }
 
+#endif

@@ -1,5 +1,5 @@
 /** --------------------------------------------------------------------------------------------------------------------
-* <copyright company="GroupDocs" file="FileDownloadFileRequest.h">
+* <copyright company="GroupDocs" file="DownloadFileRequest.h">
 *   Copyright (c) 2019 GroupDocs.Assembly for Cloud
 * </copyright>
 * <summary>
@@ -23,8 +23,8 @@
 * </summary> 
 -------------------------------------------------------------------------------------------------------------------- **/
 #pragma once
-#ifndef fileDownloadFile_H
-#define fileDownloadFile_H 
+#ifndef downloadFile_H
+#define downloadFile_H 
 
 #include "cpprest/details/basic_types.h"
 #include <boost/optional.hpp>
@@ -35,9 +35,9 @@ namespace cloud {
 namespace api {
 namespace models {
 
-class FileDownloadFileRequest{
+class DownloadFileRequest{
     public: 
-     FileDownloadFileRequest(
+     DownloadFileRequest(
         utility::string_t path,
                 boost::optional<utility::string_t> storageName,
                 boost::optional<utility::string_t> versionId

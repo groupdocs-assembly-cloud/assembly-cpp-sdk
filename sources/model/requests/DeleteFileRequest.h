@@ -1,5 +1,5 @@
 /** --------------------------------------------------------------------------------------------------------------------
-* <copyright company="GroupDocs" file="FileDeleteFileRequest.cpp">
+* <copyright company="GroupDocs" file="DeleteFileRequest.h">
 *   Copyright (c) 2019 GroupDocs.Assembly for Cloud
 * </copyright>
 * <summary>
@@ -22,45 +22,40 @@
 *  SOFTWARE.
 * </summary> 
 -------------------------------------------------------------------------------------------------------------------- **/
-#include "FileDeleteFileRequest.h"
-namespace groupdocs{
-namespace assembly{
-namespace cloud{
-namespace api{
-namespace models{
-FileDeleteFileRequest::FileDeleteFileRequest(
+#pragma once
+#ifndef deleteFile_H
+#define deleteFile_H 
+
+#include "cpprest/details/basic_types.h"
+#include <boost/optional.hpp>
+
+namespace groupdocs {
+namespace assembly {
+namespace cloud {
+namespace api {
+namespace models {
+
+class DeleteFileRequest{
+    public: 
+     DeleteFileRequest(
         utility::string_t path,
                 boost::optional<utility::string_t> storageName,
                 boost::optional<utility::string_t> versionId
-        ) : 
-            m_path(std::move(path)),
-            m_storageName(std::move(storageName)),
-            m_versionId(std::move(versionId))
-        {
-            
-        }
+        );
 
-        utility::string_t FileDeleteFileRequest::getPath() const
-        {
-            return m_path;
-        }
-        void FileDeleteFileRequest::setPath(utility::string_t path){
-            m_path = std::move(path);
-        }
-        boost::optional<utility::string_t> FileDeleteFileRequest::getStorageName() const
-        {
-            return m_storageName;
-        }
-        void FileDeleteFileRequest::setStorageName(boost::optional<utility::string_t> storageName){
-            m_storageName = std::move(storageName);
-        }
-        boost::optional<utility::string_t> FileDeleteFileRequest::getVersionId() const
-        {
-            return m_versionId;
-        }
-        void FileDeleteFileRequest::setVersionId(boost::optional<utility::string_t> versionId){
-            m_versionId = std::move(versionId);
-        }
+        utility::string_t getPath() const;
+        void setPath(utility::string_t path);
+
+        boost::optional<utility::string_t> getStorageName() const;
+        void setStorageName(boost::optional<utility::string_t> storageName);
+
+        boost::optional<utility::string_t> getVersionId() const;
+        void setVersionId(boost::optional<utility::string_t> versionId);
+    private:
+        utility::string_t m_path;
+        boost::optional<utility::string_t> m_storageName;
+        boost::optional<utility::string_t> m_versionId;
+};
 
 }
 }
@@ -68,3 +63,4 @@ FileDeleteFileRequest::FileDeleteFileRequest(
 }
 }
 
+#endif

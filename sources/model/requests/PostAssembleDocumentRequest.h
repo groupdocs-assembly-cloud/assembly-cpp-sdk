@@ -27,8 +27,7 @@
 #define postAssembleDocument_H 
 
 #include "cpprest/details/basic_types.h"
-#include "LoadSaveOptionsData.h"
-#include "HttpContent.h"
+#include "ReportOptionsData.h"
 #include <boost/optional.hpp>
 
 namespace groupdocs {
@@ -41,8 +40,7 @@ class PostAssembleDocumentRequest{
     public: 
      PostAssembleDocumentRequest(
         utility::string_t name,
-                std::shared_ptr<HttpContent> data,
-                std::shared_ptr<LoadSaveOptionsData> saveOptions,
+                std::shared_ptr<ReportOptionsData> reportData,
                 boost::optional<utility::string_t> folder,
                 boost::optional<utility::string_t> destFileName
         );
@@ -50,11 +48,8 @@ class PostAssembleDocumentRequest{
         utility::string_t getName() const;
         void setName(utility::string_t name);
 
-        std::shared_ptr<HttpContent> getData() const;
-        void setData(std::shared_ptr<HttpContent> data);
-
-        std::shared_ptr<LoadSaveOptionsData> getSaveOptions() const;
-        void setSaveOptions(std::shared_ptr<LoadSaveOptionsData> saveOptions);
+        std::shared_ptr<ReportOptionsData> getReportData() const;
+        void setReportData(std::shared_ptr<ReportOptionsData> reportData);
 
         boost::optional<utility::string_t> getFolder() const;
         void setFolder(boost::optional<utility::string_t> folder);
@@ -63,8 +58,7 @@ class PostAssembleDocumentRequest{
         void setDestFileName(boost::optional<utility::string_t> destFileName);
     private:
         utility::string_t m_name;
-        std::shared_ptr<HttpContent> m_data;
-        std::shared_ptr<LoadSaveOptionsData> m_saveOptions;
+        std::shared_ptr<ReportOptionsData> m_reportData;
         boost::optional<utility::string_t> m_folder;
         boost::optional<utility::string_t> m_destFileName;
 };

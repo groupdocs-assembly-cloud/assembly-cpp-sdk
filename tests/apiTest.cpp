@@ -23,6 +23,7 @@
 * </summary> 
 -------------------------------------------------------------------------------------------------------------------- **/
 #include "TestBase.h"
+#include <boost/filesystem/string_file.hpp>
 
 /// <summary>
 /// Example of Assembly API usage
@@ -44,26 +45,29 @@ TEST_F(AssemblyApiTest, TestPostAssembleDocument){
 	fileData->setFileName(fileName);
 	fileData->setData(std::make_shared<std::ifstream>(path_combine(LocalTestDataFolder, fileName), std::ifstream::binary));
 
-	std::shared_ptr<FileUploadFileRequest> sp_request =
-		std::make_shared<FileUploadFileRequest>(
+	std::shared_ptr<UploadFileRequest> sp_request =
+		std::make_shared<UploadFileRequest>(
 			fileData, 
 			remoteBaseTestDataFolder + _XPLATSTR("GroupDocs.Assembly/") + fileName,
 			boost::none
 	);
 
 	
-	auto sp_result = get_api()->fileUploadFile(sp_request).get();
+	auto sp_result = get_api()->uploadFile(sp_request).get();
 
 	ASSERT_TRUE(sp_result.httpResponse->status_code() == 200);
 
-	std::shared_ptr<LoadSaveOptionsData> saveOptions = std::make_shared<LoadSaveOptionsData>();
+	std::shared_ptr<ReportOptionsData> saveOptions = std::make_shared<ReportOptionsData>();
 	saveOptions->setSaveFormat(_XPLATSTR("pdf"));
+
+	std::string reportData;
+	boost::filesystem::load_string_file(path_combine(LocalTestDataFolder, _XPLATSTR("Teams.json")), reportData);
+	saveOptions->setReportData(utility::conversions::to_string_t(reportData));
 
 	std::shared_ptr<PostAssembleDocumentRequest> request = 
 		std::make_shared<PostAssembleDocumentRequest>(
 			fileName, 
-			generate_http_content_from_file(path_combine(LocalTestDataFolder, _XPLATSTR("Teams.json"))),
-			saveOptions, 
+			saveOptions,
 			boost::none,
 			boost::none
 			);

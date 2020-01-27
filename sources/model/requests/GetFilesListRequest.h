@@ -1,6 +1,5 @@
-
 /** --------------------------------------------------------------------------------------------------------------------
-* <copyright company="GroupDocs" file="LoadSaveOptionsData.h">
+* <copyright company="GroupDocs" file="GetFilesListRequest.h">
 *   Copyright (c) 2019 GroupDocs.Assembly for Cloud
 * </copyright>
 * <summary>
@@ -23,14 +22,12 @@
 *  SOFTWARE.
 * </summary> 
 -------------------------------------------------------------------------------------------------------------------- **/
+#pragma once
+#ifndef getFilesList_H
+#define getFilesList_H 
 
-#ifndef GROUPDOCS_ASSEMBLY_CLOUD_API_MODELS_LoadSaveOptionsData_H_
-#define GROUPDOCS_ASSEMBLY_CLOUD_API_MODELS_LoadSaveOptionsData_H_
-
-
-#include "../ModelBase.h"
-
-#include <cpprest/details/basic_types.h>
+#include "cpprest/details/basic_types.h"
+#include <boost/optional.hpp>
 
 namespace groupdocs {
 namespace assembly {
@@ -38,41 +35,21 @@ namespace cloud {
 namespace api {
 namespace models {
 
-/// <summary>
-/// Save options data which is using for specifying additional save options, like save format and etc.
-/// </summary>
-class  LoadSaveOptionsData
-    : public ModelBase
-{
-public:
-    LoadSaveOptionsData();
-    virtual ~LoadSaveOptionsData();
+class GetFilesListRequest{
+    public: 
+     GetFilesListRequest(
+        utility::string_t path,
+                boost::optional<utility::string_t> storageName
+        );
 
-    /////////////////////////////////////////////
-    /// ModelBase overrides
+        utility::string_t getPath() const;
+        void setPath(utility::string_t path);
 
-    void validate() override;
-
-    web::json::value toJson() const override;
-    void fromJson(web::json::value& json) override;
-
-    void toMultipart(const std::shared_ptr<MultipartFormData>& multipart, const utility::string_t& namePrefix) const override;
-    void fromMultiPart(const std::shared_ptr<MultipartFormData>& multipart, const utility::string_t& namePrefix) override;
-
-    /////////////////////////////////////////////
-    /// LoadSaveOptionsData members
-
-    /// <summary>
-    /// Save format for assembled document
-    /// </summary>
-    utility::string_t getSaveFormat() const;
-    bool saveFormatIsSet() const;
-    void unsetSaveFormat();
-    void setSaveFormat(utility::string_t value);
-
-protected:
-    utility::string_t m_SaveFormat;
-    bool m_SaveFormatIsSet;
+        boost::optional<utility::string_t> getStorageName() const;
+        void setStorageName(boost::optional<utility::string_t> storageName);
+    private:
+        utility::string_t m_path;
+        boost::optional<utility::string_t> m_storageName;
 };
 
 }
@@ -81,4 +58,4 @@ protected:
 }
 }
 
-#endif /* GROUPDOCS_ASSEMBLY_CLOUD_API_MODELS_LoadSaveOptionsData_H_ */
+#endif
