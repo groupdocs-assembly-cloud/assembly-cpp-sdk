@@ -30,14 +30,12 @@ namespace api{
 namespace models{
 PostAssembleDocumentRequest::PostAssembleDocumentRequest(
         utility::string_t name,
-                std::shared_ptr<HttpContent> data,
-                std::shared_ptr<LoadSaveOptionsData> saveOptions,
+                std::shared_ptr<ReportOptionsData> reportData,
                 boost::optional<utility::string_t> folder,
                 boost::optional<utility::string_t> destFileName
         ) : 
             m_name(std::move(name)),
-            m_data(std::move(data)),
-            m_saveOptions(std::move(saveOptions)),
+            m_reportData(std::move(reportData)),
             m_folder(std::move(folder)),
             m_destFileName(std::move(destFileName))
         {
@@ -51,19 +49,12 @@ PostAssembleDocumentRequest::PostAssembleDocumentRequest(
         void PostAssembleDocumentRequest::setName(utility::string_t name){
             m_name = std::move(name);
         }
-        std::shared_ptr<HttpContent> PostAssembleDocumentRequest::getData() const
+        std::shared_ptr<ReportOptionsData> PostAssembleDocumentRequest::getReportData() const
         {
-            return m_data;
+            return m_reportData;
         }
-        void PostAssembleDocumentRequest::setData(std::shared_ptr<HttpContent> data){
-            m_data = std::move(data);
-        }
-        std::shared_ptr<LoadSaveOptionsData> PostAssembleDocumentRequest::getSaveOptions() const
-        {
-            return m_saveOptions;
-        }
-        void PostAssembleDocumentRequest::setSaveOptions(std::shared_ptr<LoadSaveOptionsData> saveOptions){
-            m_saveOptions = std::move(saveOptions);
+        void PostAssembleDocumentRequest::setReportData(std::shared_ptr<ReportOptionsData> reportData){
+            m_reportData = std::move(reportData);
         }
         boost::optional<utility::string_t> PostAssembleDocumentRequest::getFolder() const
         {
@@ -85,5 +76,4 @@ PostAssembleDocumentRequest::PostAssembleDocumentRequest(
 }
 }
 }
-
 
