@@ -100,52 +100,6 @@ std::shared_ptr<HttpContent> InfrastructureTest::generate_http_content_from_file
 	return content;
 }
 
-void InfrastructureTest::UploadFileToStorage(const utility::string_t& path, const fs::path& filePath)
-{
-
-
-	std::vector<std::pair<utility::string_t, std::shared_ptr<HttpContent>>> fileParams;
-    fileParams.emplace_back(_XPLATSTR("file"), generate_http_content_from_file(filePath));
-
-    std::map<utility::string_t, utility::string_t> queryParams{{_XPLATSTR("path"), path}};
-
-	std::shared_ptr<ApiClient> client = get_client();
-
-    client->callApi(client->getConfiguration()->getBaseUrl() + _XPLATSTR("/v1.1/storage/file"),
-        _XPLATSTR("PUT"), queryParams, nullptr, {}, {}, fileParams, _XPLATSTR("multipart/form-data"))
-		.then([](const web::http::http_response& response) {
-
-            if (response.status_code() >= 400)
-			throw ApiException(response.status_code(), _XPLATSTR("error requesting token: ") + response.reason_phrase(), std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-	})
-		.wait();
-	//else
-	//{
-	//cout << "Unable to open file";
-	//throw L"Unable to find " + filePath;
-	//}
-}
-
-
-bool InfrastructureTest::GetIsExists(const utility::string_t& path)
-{
-    std::map<utility::string_t, utility::string_t> queryParams{{_XPLATSTR("path"), path}};
-
-	std::shared_ptr<ApiClient> client = get_client();
-
-	return (client->callApi(client->getConfiguration()->getBaseUrl() + _XPLATSTR("/v1.1/storage/exist"),
-        _XPLATSTR("GET"), queryParams, nullptr, {}, {}, {}, _XPLATSTR("application/json"))
-		.then([](const web::http::http_response& response) {
-		if (response.status_code() >= 400)
-			throw ApiException(response.status_code(), _XPLATSTR("error requesting token: ") + response.reason_phrase(), std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-		return response.extract_json();
-	}).then([=](web::json::value ans) {
-		
-		return ans.has_field(_XPLATSTR("FileExist")) && 
-			ans[_XPLATSTR("FileExist")][_XPLATSTR("IsExist")].as_bool();
-	}).get());
-}
-
 std::shared_ptr<ApiConfiguration> InfrastructureTest::get_configuration() const
 {
 	return m_Config;

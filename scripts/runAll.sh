@@ -28,7 +28,7 @@ echo "{
         \"AppKey\" : \"$1\",
         \"AppSid\" : \"$2\",
         \"BaseUrl\" : \"$3\"
-      }" > groupdocs-assembly-cpp/servercreds.json
+      }" > groupdocs-assembly-cloud-cpp/servercreds.json
 
 # Run tests
 cmake -E chdir groupdocs-assembly-cloud-cpp/build ctest -V -C Debug
