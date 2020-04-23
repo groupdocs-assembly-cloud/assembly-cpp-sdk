@@ -38,8 +38,7 @@
 using streambuf_t = std::basic_streambuf<utility::char_t>;
 
 using namespace groupdocs::assembly;
-using namespace groupdocs::assembly::api;
-using namespace groupdocs::assembly::model;
+using namespace groupdocs::assembly::cloud::api;
 
 ///<summary>
 ///Get configuration for AssemblyApi

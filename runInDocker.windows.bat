@@ -1,7 +1,6 @@
-REM clear test output dir
-rmdir out /s /q
+if exist out rmdir out /s /q
 mkdir out
 
-REM run test
-docker build -f Dockerfile.tests.windows -t groupdocs-assembly-cloud-cpp-test:windows .
-docker run --rm -m 2g -v "%cd%/scripts:C:/scripts" -v "%cd%/out:C:/out" -i -t groupdocs-assembly-cloud-cpp-test:windows cmd /c ".\scripts\runAll.bat
+docker build -f Dockerfile.tests.windows -t groupdocs-assembly-cloud-cpp-tests:windows --isolation=hyperv .
+docker run --rm -m 3g -v "%cd%/scripts:C:/scripts" -v "%cd%/out:C:/out" --isolation=hyperv groupdocs-assembly-cloud-cpp-tests:windows cmd /c ".\scripts\runAll.bat %1 %2 %3
+exit /b %ERRORLEVEL%
