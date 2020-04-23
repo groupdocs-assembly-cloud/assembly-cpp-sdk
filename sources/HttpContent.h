@@ -1,6 +1,6 @@
 /** --------------------------------------------------------------------------------------------------------------------
-* <copyright company="GroupDocs" file="HttpContent.h">
-*   Copyright (c) 2019 GroupDocs.Assembly for Cloud
+* <copyright company="Aspose" file="HttpContent.h">
+*   Copyright (c) 2020 GroupDocs.Assembly for Cloud
 * </copyright>
 * <summary>
 *   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -23,8 +23,8 @@
 * </summary> 
 -------------------------------------------------------------------------------------------------------------------- **/
 
-#ifndef _HttpContent_H_
-#define _HttpContent_H_
+#ifndef GROUPDOCS_ASSEMBLY_CLOUD_API_MODELS_HttpContent_H_
+#define GROUPDOCS_ASSEMBLY_CLOUD_API_MODELS_HttpContent_H_
 
 
 
@@ -34,7 +34,9 @@
 
 namespace groupdocs {
 namespace assembly {
-namespace model {
+namespace cloud {
+namespace api {
+namespace models {
 
 class  HttpContent
 {
@@ -70,5 +72,7 @@ protected:
 }
 }
 }
+}
+}
 
-#endif /* _HttpContent_H_ */
+#endif /* GROUPDOCS_ASSEMBLY_CLOUD_API_MODELS_HttpContent_H_ */

@@ -1,6 +1,6 @@
 /** --------------------------------------------------------------------------------------------------------------------
-* <copyright company="GroupDocs" file="ApiConfiguration.h">
-*   Copyright (c) 2019 GroupDocs.Assembly for Cloud
+* <copyright company="Aspose" file="ApiConfiguration.h">
+*   Copyright (c) 2020 GroupDocs.Assembly for Cloud
 * </copyright>
 * <summary>
 *   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -22,8 +22,8 @@
 *  SOFTWARE.
 * </summary> 
 -------------------------------------------------------------------------------------------------------------------- **/
-#ifndef _ApiConfiguration_H_
-#define _ApiConfiguration_H_
+#ifndef GROUPDOCS_ASSEMBLY_CLOUD_API_ApiConfiguration_H_
+#define GROUPDOCS_ASSEMBLY_CLOUD_API_ApiConfiguration_H_
 
 
 
@@ -34,11 +34,15 @@
 #include <cpprest/http_client.h>
 namespace groupdocs {
 namespace assembly {
+namespace cloud {
 namespace api {
+#define STCONVERT(s) utility::conversions::to_string_t(s)
 
 class  ApiConfiguration
 {
 public:
+    ApiConfiguration() = default;
+    ApiConfiguration(utility::string_t appKey, utility::string_t appSid);
     virtual ~ApiConfiguration() = default;
 
     web::http::client::http_client_config& getHttpConfig();
@@ -62,20 +66,18 @@ public:
     void setAppSid( utility::string_t apiSid );
 
     utility::string_t getApiVersion() const;
-	void setApiVersion( utility::string_t apiVersion);
 
     bool isDebugMode() const;
     void setDebugMode(bool debug);
 
 protected:
     bool m_DebugMode = false;
-    utility::string_t m_BaseUrl;
+     utility::string_t m_BaseUrl = STCONVERT("https://api.groupdocs.cloud");
     std::map<utility::string_t, utility::string_t> m_DefaultHeaders;
     std::unordered_map<utility::string_t, utility::string_t> m_ApiKeys;
 
     utility::string_t m_AppKey;
     utility::string_t m_AppSid;
-	utility::string_t m_ApiVersion;
 
     web::http::client::http_client_config m_HttpConfig;
     utility::string_t m_UserAgent;
@@ -84,4 +86,5 @@ protected:
 }
 }
 }
-#endif /* _ApiConfiguration_H_ */
+}
+#endif /* GROUPDOCS_ASSEMBLY_CLOUD_API_ApiConfiguration_H_ */

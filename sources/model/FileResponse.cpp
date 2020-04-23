@@ -1,6 +1,6 @@
 /** --------------------------------------------------------------------------------------------------------------------
-* <copyright company="GroupDocs" file="FileResponse.cpp">
-*   Copyright (c) 2019 GroupDocs.Assembly for Cloud
+* <copyright company="Aspose" file="FileResponse.cpp">
+*   Copyright (c) 2020 GroupDocs.Assembly for Cloud
 * </copyright>
 * <summary>
 *   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -28,7 +28,9 @@
 
 namespace groupdocs {
 namespace assembly {
-namespace model {
+namespace cloud {
+namespace api {
+namespace models {
 
 FileResponse::FileResponse()
 {
@@ -65,6 +67,8 @@ void FileResponse::fromMultiPart(const std::shared_ptr<MultipartFormData>& multi
 {
 }
 
+}
+}
 }
 }
 }

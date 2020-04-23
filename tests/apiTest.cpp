@@ -1,6 +1,6 @@
 /** --------------------------------------------------------------------------------------------------------------------
-* <copyright company="GroupDocs" file="apiTest.cpp">
-*   Copyright (c) 2019 GroupDocs.Assembly for Cloud
+* <copyright company="Aspose" file="apiTest.cpp">
+*   Copyright (c) 2020 GroupDocs.Assembly for Cloud
 * </copyright>
 * <summary>
 *   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -34,24 +34,22 @@ protected:
 ///<summary>
 ///Builds a document using document template and XML or JSON data passed in request
 ///</summary>
-TEST_F(AssemblyApiTest, TestPostAssembleDocument){
+TEST_F(AssemblyApiTest, TestAssembleDocument){
 	utility::string_t fileName = _XPLATSTR("TestAllChartTypes.docx");
 	utility::string_t remoteName = fileName;
 
 	UploadFileToStorage(remoteBaseTestDataFolder + _XPLATSTR("GroupDocs.Assembly/") + fileName,
 		path_combine(LocalTestDataFolder, fileName)
 	);
-	std::shared_ptr<LoadSaveOptionsData> saveOptions = std::make_shared<LoadSaveOptionsData>();
-	saveOptions->setSaveFormat(_XPLATSTR("docx"));
+	std::shared_ptr<AssembleOptionsData> assembleOptions = std::make_shared<AssembleOptionsData>();
+	std::shared_ptr<TemplateFileInfo> fileInfo = std::make_shared<TemplateFileInfo>();
+    fileInfo->setFilePath(_XPLATSTR(fileName));
+	assembleOptions->setSaveFormat(_XPLATSTR("docx"));
+    assembleOptions->setTemplateFileInfo(fileInfo);
+    assembleOptions->setReportData(generate_http_content_from_file(path_combine(LocalTestDataFolder, _XPLATSTR("Teams.json"))));
 
-	std::shared_ptr<PostAssembleDocumentRequest> request = 
-		std::make_shared<PostAssembleDocumentRequest>(
-			fileName, 
-			generate_http_content_from_file(path_combine(LocalTestDataFolder, _XPLATSTR("Teams.json"))),
-			saveOptions, 
-			boost::none,
-			boost::none
-			);
+	std::shared_ptr<AssembleDocumentRequest> request = 
+		std::make_shared<AssembleDocumentRequest>(assembleOptions);
 	HttpContent result = get_api()->postAssembleDocument(request).get();
 
 	ASSERT_TRUE(result.getData()->peek());

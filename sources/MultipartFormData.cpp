@@ -1,6 +1,6 @@
 /** --------------------------------------------------------------------------------------------------------------------
-* <copyright company="GroupDocs" file="MultipartFormData.cpp">
-*   Copyright (c) 2019 GroupDocs.Assembly for Cloud
+* <copyright company="Aspose" file="MultipartFormData.cpp">
+*   Copyright (c) 2020 GroupDocs.Assembly for Cloud
 * </copyright>
 * <summary>
 *   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -30,7 +30,9 @@
 
 namespace groupdocs {
 namespace assembly {
-namespace model {
+namespace cloud {
+namespace api {
+namespace models {
 
 MultipartFormData::MultipartFormData() :
  m_Boundary(utility::conversions::details::to_string_t(boost::uuids::random_generator()()))
@@ -108,6 +110,8 @@ for (const auto & content : m_Contents)
     }
 }
 
+}
+}
 }
 }
 }

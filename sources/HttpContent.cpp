@@ -1,6 +1,6 @@
 /** --------------------------------------------------------------------------------------------------------------------
-* <copyright company="GroupDocs" file="HttpContent.cpp">
-*   Copyright (c) 2019 GroupDocs.Assembly for Cloud
+* <copyright company="Aspose" file="HttpContent.cpp">
+*   Copyright (c) 2020 GroupDocs.Assembly for Cloud
 * </copyright>
 * <summary>
 *   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -26,7 +26,9 @@
 
 namespace groupdocs {
 namespace assembly {
-namespace model {
+namespace cloud {
+namespace api {
+namespace models {
 
 utility::string_t HttpContent::getContentDisposition() const
 {
@@ -84,6 +86,8 @@ void HttpContent::writeTo( std::ostream& stream )
     stream << m_Data->rdbuf();
 }
 
+}
+}
 }
 }
 }

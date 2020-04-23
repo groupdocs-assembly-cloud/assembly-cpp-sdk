@@ -1,6 +1,6 @@
 /** --------------------------------------------------------------------------------------------------------------------
-* <copyright company="GroupDocs" file="LoadSaveOptionsData.cpp">
-*   Copyright (c) 2019 GroupDocs.Assembly for Cloud
+* <copyright company="Aspose" file="AssemblyResponse.cpp">
+*   Copyright (c) 2020 GroupDocs.Assembly for Cloud
 * </copyright>
 * <summary>
 *   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -24,91 +24,95 @@
 -------------------------------------------------------------------------------------------------------------------- **/
 
 
-#include "LoadSaveOptionsData.h"
+#include "AssemblyResponse.h"
 
 namespace groupdocs {
 namespace assembly {
-namespace model {
+namespace cloud {
+namespace api {
+namespace models {
 
-LoadSaveOptionsData::LoadSaveOptionsData()
+AssemblyResponse::AssemblyResponse()
 {
-    m_SaveFormat = _XPLATSTR("");
-    m_SaveFormatIsSet = false;
+    m_RequestId = utility::conversions::to_string_t("");
+    m_RequestIdIsSet = false;
 }
 
-LoadSaveOptionsData::~LoadSaveOptionsData()
+AssemblyResponse::~AssemblyResponse()
 {
 }
 
-void LoadSaveOptionsData::validate()
+void AssemblyResponse::validate()
 {
     // TODO: implement validation
 }
 
-web::json::value LoadSaveOptionsData::toJson() const
+web::json::value AssemblyResponse::toJson() const
 {
     web::json::value val = web::json::value::object();
 
-    if(m_SaveFormatIsSet)
+    if(m_RequestIdIsSet)
     {
-        val[_XPLATSTR("SaveFormat")] = ModelBase::toJson(m_SaveFormat);
+        val[_XPLATSTR("RequestId")] = ModelBase::toJson(m_RequestId);
     }
 
     return val;
 }
 
-void LoadSaveOptionsData::fromJson(web::json::value& val)
+void AssemblyResponse::fromJson(web::json::value& val)
 {
-    if(val.has_field(_XPLATSTR("SaveFormat")))
+    if(val.has_field(_XPLATSTR("RequestId")))
     {
-        web::json::value& fieldValue = val[_XPLATSTR("SaveFormat")];
+        web::json::value& fieldValue = val[_XPLATSTR("RequestId")];
         if(!fieldValue.is_null())
         {
-            setSaveFormat(ModelBase::stringFromJson(fieldValue));
+            setRequestId(ModelBase::stringFromJson(fieldValue));
         }
     }
 }
 
-void LoadSaveOptionsData::toMultipart(const std::shared_ptr<MultipartFormData>& multipart, const utility::string_t& prefix) const
+void AssemblyResponse::toMultipart(const std::shared_ptr<MultipartFormData>& multipart, const utility::string_t& prefix) const
 {
     auto namePrefix = ModelBase::fixNamePrefix(prefix);
 
-    if(m_SaveFormatIsSet)
+    if(m_RequestIdIsSet)
     {
-        multipart->add(ModelBase::toHttpContent(namePrefix + _XPLATSTR("SaveFormat"), m_SaveFormat));
+        multipart->add(ModelBase::toHttpContent(namePrefix + _XPLATSTR("RequestId"), m_RequestId));
         
     }
 }
 
-void LoadSaveOptionsData::fromMultiPart(const std::shared_ptr<MultipartFormData>& multipart, const utility::string_t& prefix)
+void AssemblyResponse::fromMultiPart(const std::shared_ptr<MultipartFormData>& multipart, const utility::string_t& prefix)
 {
-    if(multipart->hasContent(_XPLATSTR("SaveFormat")))
+    if(multipart->hasContent(_XPLATSTR("RequestId")))
     {
-        setSaveFormat(ModelBase::stringFromHttpContent(multipart->getContent(_XPLATSTR("SaveFormat"))));
+        setRequestId(ModelBase::stringFromHttpContent(multipart->getContent(_XPLATSTR("RequestId"))));
     }
 }
 
-utility::string_t LoadSaveOptionsData::getSaveFormat() const
+utility::string_t AssemblyResponse::getRequestId() const
 {
-    return m_SaveFormat;
+    return m_RequestId;
 }
 
 
-void LoadSaveOptionsData::setSaveFormat(utility::string_t value)
+void AssemblyResponse::setRequestId(utility::string_t value)
 {
-    m_SaveFormat = value;
-    m_SaveFormatIsSet = true;
+    m_RequestId = value;
+    m_RequestIdIsSet = true;
 }
-bool LoadSaveOptionsData::saveFormatIsSet() const
+bool AssemblyResponse::requestIdIsSet() const
 {
-    return m_SaveFormatIsSet;
-}
-
-void LoadSaveOptionsData::unsetSaveFormat()
-{
-    m_SaveFormatIsSet = false;
+    return m_RequestIdIsSet;
 }
 
+void AssemblyResponse::unsetRequestId()
+{
+    m_RequestIdIsSet = false;
+}
+
+}
+}
 }
 }
 }

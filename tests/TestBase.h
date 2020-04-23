@@ -1,6 +1,6 @@
 /** --------------------------------------------------------------------------------------------------------------------
-* <copyright company="GroupDocs" file="TestBase.h">
-*   Copyright (c) 2019 GroupDocs.Assembly for Cloud
+* <copyright company="Aspose" file="TestBase.h">
+*   Copyright (c) 2020 GroupDocs.Assembly for Cloud
 * </copyright>
 * <summary>
 *   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -29,6 +29,9 @@
 
 #include <gtest/gtest.h>
 #include "AssemblyApi.h"
+#include "FileApi.h"
+#include "FolderApi.h"
+#include "InfoApi.h"
 
 #define STCONVERT(s) utility::conversions::to_string_t(s)
 

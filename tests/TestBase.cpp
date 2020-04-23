@@ -1,6 +1,6 @@
 /** --------------------------------------------------------------------------------------------------------------------
-* <copyright company="GroupDocs" file="TestBase.cpp">
-*   Copyright (c) 2019 GroupDocs.Assembly for Cloud
+* <copyright company="Aspose" file="TestBase.cpp">
+*   Copyright (c) 2020 GroupDocs.Assembly for Cloud
 * </copyright>
 * <summary>
 *   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -63,7 +63,7 @@ std::shared_ptr<ApiConfiguration> get_config()
 	newConfig->setAppKey(fileJson[_XPLATSTR("AppKey")].as_string());
 	newConfig->setBaseUrl(fileJson[_XPLATSTR("BaseUrl")].as_string());
 	newConfig->setAppSid(fileJson[_XPLATSTR("AppSid")].as_string());
-	newConfig->setUserAgent(_XPLATSTR("CppAsposeClient"));
+	newConfig->setUserAgent(_XPLATSTR("CppGroupDocsClient"));
 	newConfig->setApiVersion(_XPLATSTR("v1"));
 	newConfig->setHttpConfig(conf);
 
