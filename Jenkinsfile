@@ -41,10 +41,10 @@ node('words-linux') {
 		
 		gitlabCommitStatus("linux_tests") {
 			stage('linux_tests'){
-				withCredentials([usernamePassword(credentialsId: '82329510-1355-497f-828a-b8ff8b5f6a30', passwordVariable: 'WordsAppKey', usernameVariable: 'WordsAppSid')]) {
-					sh 'docker build -f Dockerfile.linux -t aspose-words-cloud-cpp:linux .'
-					sh 'docker build -f Dockerfile.tests.linux -t aspose-words-cloud-cpp-tests:linux .'
-					sh 'docker run --rm -v "$PWD/out:/out/" aspose-words-cloud-cpp-tests:linux bash aspose-words-cloud-cpp/scripts/runAll.sh $WordsAppKey $WordsAppSid https://api.aspose.cloud'
+				withCredentials([usernamePassword(credentialsId: '82329510-1355-497f-828a-b8ff8b5f6a30', passwordVariable: 'AppKey', usernameVariable: 'AppSid')]) {
+					sh 'docker build -f Dockerfile.linux -t groupdocs-assembly-cloud-cpp:linux .'
+					sh 'docker build -f Dockerfile.tests.linux -t groupdocs-assembly-cloud-cpp:linux .'
+					sh 'docker run --rm -v "$PWD/out:/out/" groupdocs-assembly-cloud-cpp-tests:linux bash groupdocs-assembly-cloud-cpp/scripts/runAll.sh $AppKey $AppSid https://api.groupdocs.cloud'
 				}
 			}
 		}		
