@@ -29,9 +29,6 @@
 
 #include <gtest/gtest.h>
 #include "AssemblyApi.h"
-#include "FileApi.h"
-#include "FolderApi.h"
-#include "InfoApi.h"
 
 #define STCONVERT(s) utility::conversions::to_string_t(s)
 
