@@ -50,7 +50,7 @@ TEST_F(AssemblyApiTest, TestAssembleDocument){
 
 	std::shared_ptr<AssembleDocumentRequest> request = 
 		std::make_shared<AssembleDocumentRequest>(assembleOptions);
-	HttpContent result = get_api()->postAssembleDocument(request).get();
+	HttpContent result = get_api()->assembleDocument(request).get();
 
 	ASSERT_TRUE(result.getData()->peek());
 }
