@@ -41,7 +41,7 @@ TEST_F(AssemblyApiTest, TestAssembleDocument){
 	UploadFileToStorage(remoteBaseTestDataFolder + _XPLATSTR("GroupDocs.Assembly/") + fileName,
 		path_combine(LocalTestDataFolder, fileName)
 	);
-	std::shared_ptr<AssembleOptionsData> assembleOptions = std::make_shared<AssembleOptionsData>();
+	std::shared_ptr<AssembleOptions> assembleOptions = std::make_shared<AssembleOptions>();
 	std::shared_ptr<TemplateFileInfo> fileInfo = std::make_shared<TemplateFileInfo>();
     fileInfo->setFilePath(_XPLATSTR(fileName));
 	assembleOptions->setSaveFormat(_XPLATSTR("docx"));
