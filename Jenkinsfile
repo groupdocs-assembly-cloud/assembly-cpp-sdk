@@ -21,7 +21,7 @@ parallel windows: {
                 stage('windows_tests'){
                     withCredentials([usernamePassword(credentialsId: '82329510-1355-497f-828a-b8ff8b5f6a30', passwordVariable: 'AppKey', usernameVariable: 'AppSid')]) {
                         try {
-                            bat 'docker build -f Dockerfile.windows -t groupdocs-assembly-cloud-cpp:windows .'
+                            bat 'docker build -f Dockerfile.windows -t groupdocs-assembly-cloud-cpp-tests:windows .'
                             def apiUrl = params.apiUrl
                             bat 'runInDocker.windows.bat %AppKey% %AppSid% %apiUrl%'
                         } finally {
