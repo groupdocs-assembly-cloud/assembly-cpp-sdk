@@ -9,7 +9,7 @@ properties([
 	]
 ])
 
-def buildCacheImage = "git.auckland.dynabic.com:4567/groupdocs-cloud/api/cpp"
+def buildCacheImage = "git.auckland.dynabic.com:4567/assembly-cloud/groupdocs.assembly-for-cloud/cpp"
 def needToBuildWindows = false
 def needToBuildLinux = false
 
@@ -74,13 +74,13 @@ parallel windows: {
                         withCredentials([usernamePassword(credentialsId: 'cc2e3c9b-b3da-4455-b702-227bcce18895', usernameVariable: 'dockerrigistry_login', passwordVariable: 'dockerregistry_password')]) {
                             sh 'docker login -u "${dockerrigistry_login}" -p "${dockerregistry_password}" git.auckland.dynabic.com:4567'
                         }
-                        withCredentials([usernamePassword(credentialsId: '6839cbe8-39fa-40c0-86ce-90706f0bae5d', passwordVariable: 'WordsAppKey', usernameVariable: 'WordsAppSid')]) {
+                        withCredentials([usernamePassword(credentialsId: '6179b564-811f-48a9-8b85-875076fadbf5', passwordVariable: 'AppKey', usernameVariable: 'AppSid')]) {
                             try {
                                 sh (script: "docker pull ${buildCacheImage}/linux")
-                                sh (script: "docker build -f Dockerfile.linux --cache-from=${buildCacheImage}/linux -t ${buildCacheImage}/linux -t aspose-words-cloud-cpp-tests:linux .")
+                                sh (script: "docker build -f Dockerfile.linux --cache-from=${buildCacheImage}/linux -t ${buildCacheImage}/linux -t groupdocs-assembly-cloud-cpp-tests:linux .")
                                 sh (script: "docker push ${buildCacheImage}/linux")
 
-                                sh 'docker run --rm -v "$PWD/out:/out/" aspose-words-cloud-cpp-tests:linux bash aspose-words-cloud-cpp/scripts/runAll.sh $WordsAppKey $WordsAppSid $apiUrl'
+                                sh 'docker run --rm -v "$PWD/out:/out/" groupdocs-assembly-cloud-cpp-tests:linux bash groupdocs-assembly-cloud-cpp/scripts/runAll.sh $AppKey $AppSid $apiUrl'
                             } finally {
                                 junit '**\\out\\test_result.xml'
                             }
