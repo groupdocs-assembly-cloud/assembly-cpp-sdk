@@ -24,11 +24,6 @@
 -------------------------------------------------------------------------------------------------------------------- **/
 #include "TestBase.h"
 
-#include <boost/filesystem/fstream.hpp>
-#include <boost/filesystem.hpp>
-
-namespace fs = boost::filesystem;
-
 utility::string_t get_file_text_as_string(const fs::path& file)
 {
 #ifdef _UTF16_STRINGS
