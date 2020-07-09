@@ -100,7 +100,7 @@ std::shared_ptr<HttpContent> InfrastructureTest::generate_http_content_from_file
 	return content;
 }
 
-void InfrastructureTest::UploadFileToStorage(const utility::string_t& path, const fs::path& filePath)
+void InfrastructureTest::UploadFileToStorage(const utility::string_t& remoteName, const fs::path& filePath)
 {
 	std::shared_ptr<UploadFileRequest> request = std::make_shared<UploadFileRequest>(generate_http_content_from_file(filePath), remoteName, boost::none);
 	std::shared_ptr<AssemblyApi> api = get_api();
