@@ -65,7 +65,7 @@ std::shared_ptr<ApiConfiguration> get_config()
 	newConfig->setAppSid(fileJson[_XPLATSTR("AppSid")].as_string());
 	newConfig->setUserAgent(_XPLATSTR("CppGroupDocsClient"));
 	newConfig->setHttpConfig(conf);
-	cout << newConfig->getAppKey();
+	std::cout << newConfig->getAppKey();
 
 	return newConfig;
 }
