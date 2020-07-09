@@ -75,7 +75,6 @@ pplx::task<void> ApiClient::requestToken()
 		return response.extract_json();
     }).then([this](web::json::value val) {
         this->setAccessToken(val[_XPLATSTR("access_token")].as_string());
-		ucout << _XPLATSTR(m_AccessToken);
     });
 }
 

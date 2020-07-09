@@ -116,7 +116,7 @@ void InfrastructureTest::UploadFileToStorage(const utility::string_t& path, cons
 		.then([](const web::http::http_response& response) {
 
             if (response.status_code() > 400)
-			throw ApiException(response.status_code(), _XPLATSTR("error requesting token: ") + response.reason_phrase(), std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
+			throw ApiException(response.status_code(), _XPLATSTR("upload failed: ") + response.reason_phrase(), std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
 	})
 		.wait();
 	//else
