@@ -65,7 +65,6 @@ std::shared_ptr<ApiConfiguration> get_config()
 	newConfig->setAppSid(fileJson[_XPLATSTR("AppSid")].as_string());
 	newConfig->setUserAgent(_XPLATSTR("CppGroupDocsClient"));
 	newConfig->setHttpConfig(conf);
-	std::cout << newConfig->getAppKey();
 
 	return newConfig;
 }
@@ -116,7 +115,7 @@ void InfrastructureTest::UploadFileToStorage(const utility::string_t& path, cons
         _XPLATSTR("PUT"), queryParams, nullptr, {}, {}, fileParams, _XPLATSTR("multipart/form-data"))
 		.then([](const web::http::http_response& response) {
 
-            if (response.status_code() >= 400)
+            if (response.status_code() > 400)
 			throw ApiException(response.status_code(), _XPLATSTR("error requesting token: ") + response.reason_phrase(), std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
 	})
 		.wait();

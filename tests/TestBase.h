@@ -99,7 +99,6 @@ public:
 protected:
     const utility::string_t baseTestOutPath{_XPLATSTR("TestOut")};
     const utility::string_t remoteBaseTestDataFolder{_XPLATSTR("Temp/SdkTests/TestData")};
-    const boost::filesystem::path commonFolder{"Common"};
 
 private:
 	std::shared_ptr<ApiClient> client;
