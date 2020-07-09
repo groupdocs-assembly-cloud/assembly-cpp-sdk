@@ -1,5 +1,5 @@
 /** --------------------------------------------------------------------------------------------------------------------
-* <copyright company="Aspose" file="apiTest.cpp">
+* <copyright company="Aspose" file="AssembleDocumentRequest.cpp">
 *   Copyright (c) 2020 GroupDocs.Assembly for Cloud
 * </copyright>
 * <summary>
@@ -22,35 +22,30 @@
 *  SOFTWARE.
 * </summary> 
 -------------------------------------------------------------------------------------------------------------------- **/
-#include "TestBase.h"
+#include "AssembleDocumentRequest.h"
+namespace groupdocs{
+namespace assembly{
+namespace cloud{
+namespace api{
+namespace models{
+AssembleDocumentRequest::AssembleDocumentRequest(
+        std::shared_ptr<AssembleOptions> assembleOptions
+        ) : 
+            m_assembleOptions(std::move(assembleOptions))
+        {
+            
+        }
 
-/// <summary>
-/// Example of Assembly API usage
-/// </summary>
-class AssemblyApiTest : public InfrastructureTest {
-protected:
-};
+        std::shared_ptr<AssembleOptions> AssembleDocumentRequest::getAssembleOptions() const
+        {
+            return m_assembleOptions;
+        }
+        void AssembleDocumentRequest::setAssembleOptions(std::shared_ptr<AssembleOptions> assembleOptions){
+            m_assembleOptions = std::move(assembleOptions);
+        }
 
-///<summary>
-///Builds a document using document template and XML or JSON data passed in request
-///</summary>
-TEST_F(AssemblyApiTest, TestAssembleDocument){
-	utility::string_t fileName = _XPLATSTR("TestAllChartTypes.docx");
-	utility::string_t remoteName = fileName;
-
-	UploadFileToStorage(remoteBaseTestDataFolder + _XPLATSTR("GroupDocs.Assembly/") + fileName,
-		path_combine(LocalTestDataFolder, fileName)
-	);
-	std::shared_ptr<AssembleOptions> assembleOptions = std::make_shared<AssembleOptions>();
-	std::shared_ptr<TemplateFileInfo> fileInfo = std::make_shared<TemplateFileInfo>();
-    fileInfo->setFilePath(fileName);
-	assembleOptions->setSaveFormat(_XPLATSTR("docx"));
-    assembleOptions->setTemplateFileInfo(fileInfo);
-    assembleOptions->setReportData(get_file_text_as_string(path_combine(LocalTestDataFolder, _XPLATSTR("Teams.json"))));
-
-	std::shared_ptr<AssembleDocumentRequest> request = 
-		std::make_shared<AssembleDocumentRequest>(assembleOptions);
-	HttpContent result = get_api()->assembleDocument(request).get();
-
-	ASSERT_TRUE(result.getData()->peek());
 }
+}
+}
+}
+}

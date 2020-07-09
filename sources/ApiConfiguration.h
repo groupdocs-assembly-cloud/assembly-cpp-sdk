@@ -1,6 +1,6 @@
 /** --------------------------------------------------------------------------------------------------------------------
-* <copyright company="GroupDocs" file="ApiConfiguration.h">
-*   Copyright (c) 2019 GroupDocs.Assembly for Cloud
+* <copyright company="Aspose" file="ApiConfiguration.h">
+*   Copyright (c) 2020 GroupDocs.Assembly for Cloud
 * </copyright>
 * <summary>
 *   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -36,10 +36,13 @@ namespace groupdocs {
 namespace assembly {
 namespace cloud {
 namespace api {
+#define STCONVERT(s) utility::conversions::to_string_t(s)
 
 class  ApiConfiguration
 {
 public:
+    ApiConfiguration() = default;
+    ApiConfiguration(utility::string_t appKey, utility::string_t appSid);
     virtual ~ApiConfiguration() = default;
 
     web::http::client::http_client_config& getHttpConfig();
@@ -69,7 +72,7 @@ public:
 
 protected:
     bool m_DebugMode = false;
-    utility::string_t m_BaseUrl;
+     utility::string_t m_BaseUrl = STCONVERT("https://api.groupdocs.cloud");
     std::map<utility::string_t, utility::string_t> m_DefaultHeaders;
     std::unordered_map<utility::string_t, utility::string_t> m_ApiKeys;
 

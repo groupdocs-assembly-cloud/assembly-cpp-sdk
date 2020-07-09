@@ -1,5 +1,4 @@
 
-
 REM Generate credentials
 echo { "AppKey" : "%1", > groupdocs-assembly-cloud-cpp\servercreds.json
 echo  "AppSid" : "%2", >> groupdocs-assembly-cloud-cpp\servercreds.json

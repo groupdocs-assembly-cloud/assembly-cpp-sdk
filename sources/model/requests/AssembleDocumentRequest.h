@@ -1,5 +1,5 @@
 /** --------------------------------------------------------------------------------------------------------------------
-* <copyright company="Aspose" file="MoveFolderRequest.h">
+* <copyright company="Aspose" file="AssembleDocumentRequest.h">
 *   Copyright (c) 2020 GroupDocs.Assembly for Cloud
 * </copyright>
 * <summary>
@@ -23,10 +23,11 @@
 * </summary> 
 -------------------------------------------------------------------------------------------------------------------- **/
 #pragma once
-#ifndef moveFolder_H
-#define moveFolder_H 
+#ifndef assembleDocument_H
+#define assembleDocument_H 
 
 #include "cpprest/details/basic_types.h"
+#include "AssembleOptions.h"
 #include <boost/optional.hpp>
 
 namespace groupdocs {
@@ -35,31 +36,16 @@ namespace cloud {
 namespace api {
 namespace models {
 
-class MoveFolderRequest{
+class AssembleDocumentRequest{
     public: 
-     MoveFolderRequest(
-        utility::string_t destPath,
-                utility::string_t srcPath,
-                boost::optional<utility::string_t> srcStorageName,
-                boost::optional<utility::string_t> destStorageName
+    explicit AssembleDocumentRequest(
+        std::shared_ptr<AssembleOptions> assembleOptions
         );
 
-        utility::string_t getDestPath() const;
-        void setDestPath(utility::string_t destPath);
-
-        utility::string_t getSrcPath() const;
-        void setSrcPath(utility::string_t srcPath);
-
-        boost::optional<utility::string_t> getSrcStorageName() const;
-        void setSrcStorageName(boost::optional<utility::string_t> srcStorageName);
-
-        boost::optional<utility::string_t> getDestStorageName() const;
-        void setDestStorageName(boost::optional<utility::string_t> destStorageName);
+        std::shared_ptr<AssembleOptions> getAssembleOptions() const;
+        void setAssembleOptions(std::shared_ptr<AssembleOptions> assembleOptions);
     private:
-        utility::string_t m_destPath;
-        utility::string_t m_srcPath;
-        boost::optional<utility::string_t> m_srcStorageName;
-        boost::optional<utility::string_t> m_destStorageName;
+        std::shared_ptr<AssembleOptions> m_assembleOptions;
 };
 
 }

@@ -1,6 +1,6 @@
 /** --------------------------------------------------------------------------------------------------------------------
-* <copyright company="GroupDocs" file="CopyFileRequest.h">
-*   Copyright (c) 2019 GroupDocs.Assembly for Cloud
+* <copyright company="Aspose" file="CopyFileRequest.h">
+*   Copyright (c) 2020 GroupDocs.Assembly for Cloud
 * </copyright>
 * <summary>
 *   Permission is hereby granted, free of charge, to any person obtaining a copy

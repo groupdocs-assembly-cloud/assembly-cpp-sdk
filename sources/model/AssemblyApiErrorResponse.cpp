@@ -1,5 +1,5 @@
 /** --------------------------------------------------------------------------------------------------------------------
-* <copyright company="Aspose" file="ErrorDetails.cpp">
+* <copyright company="Aspose" file="AssemblyApiErrorResponse.cpp">
 *   Copyright (c) 2020 GroupDocs.Assembly for Cloud
 * </copyright>
 * <summary>
@@ -24,7 +24,7 @@
 -------------------------------------------------------------------------------------------------------------------- **/
 
 
-#include "ErrorDetails.h"
+#include "AssemblyApiErrorResponse.h"
 
 namespace groupdocs {
 namespace assembly {
@@ -32,50 +32,49 @@ namespace cloud {
 namespace api {
 namespace models {
 
-ErrorDetails::ErrorDetails()
+AssemblyApiErrorResponse::AssemblyApiErrorResponse()
 {
-    m_RequestId = utility::conversions::to_string_t("");
-    m_RequestIdIsSet = false;
-    m_Date = utility::datetime();
+    m_ErrorIsSet = false;
 }
 
-ErrorDetails::~ErrorDetails()
+AssemblyApiErrorResponse::~AssemblyApiErrorResponse()
 {
 }
 
-void ErrorDetails::validate()
+void AssemblyApiErrorResponse::validate()
 {
     // TODO: implement validation
 }
 
-web::json::value ErrorDetails::toJson() const
+web::json::value AssemblyApiErrorResponse::toJson() const
 {
-    web::json::value val = web::json::value::object();
+    web::json::value val = this->AssemblyResponse::toJson();
 
-    if(m_RequestIdIsSet)
+    if(m_ErrorIsSet)
     {
-        val[_XPLATSTR("RequestId")] = ModelBase::toJson(m_RequestId);
+        val[_XPLATSTR("Error")] = ModelBase::toJson(m_Error);
     }
-    val[_XPLATSTR("Date")] = ModelBase::toJson(m_Date);
 
     return val;
 }
 
-void ErrorDetails::fromJson(web::json::value& val)
+void AssemblyApiErrorResponse::fromJson(web::json::value& val)
 {
-    if(val.has_field(_XPLATSTR("RequestId")))
+    this->AssemblyResponse::fromJson(val);
+
+    if(val.has_field(_XPLATSTR("Error")))
     {
-        web::json::value& fieldValue = val[_XPLATSTR("RequestId")];
+        web::json::value& fieldValue = val[_XPLATSTR("Error")];
         if(!fieldValue.is_null())
         {
-            setRequestId(ModelBase::stringFromJson(fieldValue));
+            std::shared_ptr<ApiError> newItem(new ApiError());
+            newItem->fromJson(fieldValue);
+            setError( newItem );
         }
     }
-    setDate
-    (ModelBase::dateFromJson(val[_XPLATSTR("Date")]));
 }
 
-void ErrorDetails::toMultipart(const std::shared_ptr<MultipartFormData>& multipart, const utility::string_t& prefix) const
+void AssemblyApiErrorResponse::toMultipart(const std::shared_ptr<MultipartFormData>& multipart, const utility::string_t& prefix) const
 {
     auto namePrefix = ModelBase::fixNamePrefix(prefix);
 
@@ -84,50 +83,54 @@ void ErrorDetails::toMultipart(const std::shared_ptr<MultipartFormData>& multipa
         multipart->add(ModelBase::toHttpContent(namePrefix + _XPLATSTR("RequestId"), m_RequestId));
         
     }
-    multipart->add(ModelBase::toHttpContent(namePrefix + _XPLATSTR("Date"), m_Date));
+    if(m_ErrorIsSet)
+    {
+        if (m_Error.get())
+        {
+            m_Error->toMultipart(multipart, _XPLATSTR("Error."));
+        }
+        
+    }
 }
 
-void ErrorDetails::fromMultiPart(const std::shared_ptr<MultipartFormData>& multipart, const utility::string_t& prefix)
+void AssemblyApiErrorResponse::fromMultiPart(const std::shared_ptr<MultipartFormData>& multipart, const utility::string_t& prefix)
 {
     if(multipart->hasContent(_XPLATSTR("RequestId")))
     {
         setRequestId(ModelBase::stringFromHttpContent(multipart->getContent(_XPLATSTR("RequestId"))));
     }
-    setDate(ModelBase::dateFromHttpContent(multipart->getContent(_XPLATSTR("Date"))));
+    if(multipart->hasContent(_XPLATSTR("Error")))
+    {
+        if(multipart->hasContent(_XPLATSTR("Error")))
+        {
+            std::shared_ptr<ApiError> newItem(new ApiError());
+            newItem->fromMultiPart(multipart, _XPLATSTR("Error."));
+            setError( newItem );
+        }
+    }
 }
 
-utility::string_t ErrorDetails::getRequestId() const
+std::shared_ptr<ApiError> AssemblyApiErrorResponse::getError() const
 {
-    return m_RequestId;
+    return m_Error;
 }
 
 
-void ErrorDetails::setRequestId(utility::string_t value)
+void AssemblyApiErrorResponse::setError(std::shared_ptr<ApiError> value)
 {
-    m_RequestId = value;
-    m_RequestIdIsSet = true;
+    m_Error = value;
+    m_ErrorIsSet = true;
 }
-bool ErrorDetails::requestIdIsSet() const
+bool AssemblyApiErrorResponse::errorIsSet() const
 {
-    return m_RequestIdIsSet;
+    return m_ErrorIsSet;
 }
 
-void ErrorDetails::unsetRequestId()
+void AssemblyApiErrorResponse::unsetError()
 {
-    m_RequestIdIsSet = false;
+    m_ErrorIsSet = false;
 }
 
-utility::datetime ErrorDetails::getDate() const
-{
-    return m_Date;
-}
-
-
-void ErrorDetails::setDate(utility::datetime value)
-{
-    m_Date = value;
-    
-}
 }
 }
 }

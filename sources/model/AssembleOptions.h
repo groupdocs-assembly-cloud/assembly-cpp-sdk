@@ -1,6 +1,6 @@
 
 /** --------------------------------------------------------------------------------------------------------------------
-* <copyright company="Aspose" file="StorageFile.h">
+* <copyright company="Aspose" file="AssembleOptions.h">
 *   Copyright (c) 2020 GroupDocs.Assembly for Cloud
 * </copyright>
 * <summary>
@@ -24,13 +24,14 @@
 * </summary> 
 -------------------------------------------------------------------------------------------------------------------- **/
 
-#ifndef GROUPDOCS_ASSEMBLY_CLOUD_API_MODELS_StorageFile_H_
-#define GROUPDOCS_ASSEMBLY_CLOUD_API_MODELS_StorageFile_H_
+#ifndef GROUPDOCS_ASSEMBLY_CLOUD_API_MODELS_AssembleOptions_H_
+#define GROUPDOCS_ASSEMBLY_CLOUD_API_MODELS_AssembleOptions_H_
 
 
 #include "../ModelBase.h"
 
 #include <cpprest/details/basic_types.h>
+#include "TemplateFileInfo.h"
 
 namespace groupdocs {
 namespace assembly {
@@ -39,14 +40,14 @@ namespace api {
 namespace models {
 
 /// <summary>
-/// File or folder information
+/// Assemble options data which is using for specifying assemble options, like template name, save format, report data and etc.
 /// </summary>
-class  StorageFile
+class  AssembleOptions
     : public ModelBase
 {
 public:
-    StorageFile();
-    virtual ~StorageFile();
+    AssembleOptions();
+    virtual ~AssembleOptions();
 
     /////////////////////////////////////////////
     /// ModelBase overrides
@@ -60,49 +61,46 @@ public:
     void fromMultiPart(const std::shared_ptr<MultipartFormData>& multipart, const utility::string_t& namePrefix) override;
 
     /////////////////////////////////////////////
-    /// StorageFile members
+    /// AssembleOptions members
 
     /// <summary>
-    /// File or folder name.
+    /// Gets or sets the template name which is located on storage.
     /// </summary>
-    utility::string_t getName() const;
-    bool nameIsSet() const;
-    void unsetName();
-    void setName(utility::string_t value);
+    std::shared_ptr<TemplateFileInfo> getTemplateFileInfo() const;
+    bool templateFileInfoIsSet() const;
+    void unsetTemplateFileInfo();
+    void setTemplateFileInfo(std::shared_ptr<TemplateFileInfo> value);
     /// <summary>
-    /// True if it is a folder.
+    /// Gets or sets a save format for assembled document.
     /// </summary>
-    bool isIsFolder() const;
-        void setIsFolder(bool value);
+    utility::string_t getSaveFormat() const;
+    bool saveFormatIsSet() const;
+    void unsetSaveFormat();
+    void setSaveFormat(utility::string_t value);
     /// <summary>
-    /// File or folder last modified .
+    /// Gets or sets a data for report.
     /// </summary>
-    utility::datetime getModifiedDate() const;
-    bool modifiedDateIsSet() const;
-    void unsetModifiedDate();
-    void setModifiedDate(utility::datetime value);
+    utility::string_t getReportData() const;
+    bool reportDataIsSet() const;
+    void unsetReportData();
+    void setReportData(utility::string_t value);
     /// <summary>
-    /// File or folder size.
+    /// Gets or sets result path of a built document.
     /// </summary>
-    int64_t getSize() const;
-        void setSize(int64_t value);
-    /// <summary>
-    /// File or folder path.
-    /// </summary>
-    utility::string_t getPath() const;
-    bool pathIsSet() const;
-    void unsetPath();
-    void setPath(utility::string_t value);
+    utility::string_t getOutputPath() const;
+    bool outputPathIsSet() const;
+    void unsetOutputPath();
+    void setOutputPath(utility::string_t value);
 
 protected:
-    utility::string_t m_Name;
-    bool m_NameIsSet;
-    bool m_IsFolder;
-        utility::datetime m_ModifiedDate;
-    bool m_ModifiedDateIsSet;
-    int64_t m_Size;
-        utility::string_t m_Path;
-    bool m_PathIsSet;
+    std::shared_ptr<TemplateFileInfo> m_TemplateFileInfo;
+    bool m_TemplateFileInfoIsSet;
+    utility::string_t m_SaveFormat;
+    bool m_SaveFormatIsSet;
+    utility::string_t m_ReportData;
+    bool m_ReportDataIsSet;
+    utility::string_t m_OutputPath;
+    bool m_OutputPathIsSet;
 };
 
 }
@@ -111,4 +109,4 @@ protected:
 }
 }
 
-#endif /* GROUPDOCS_ASSEMBLY_CLOUD_API_MODELS_StorageFile_H_ */
+#endif /* GROUPDOCS_ASSEMBLY_CLOUD_API_MODELS_AssembleOptions_H_ */

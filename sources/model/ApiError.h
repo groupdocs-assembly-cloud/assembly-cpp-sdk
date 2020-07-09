@@ -1,6 +1,6 @@
 
 /** --------------------------------------------------------------------------------------------------------------------
-* <copyright company="Aspose" file="StorageFile.h">
+* <copyright company="Aspose" file="ApiError.h">
 *   Copyright (c) 2020 GroupDocs.Assembly for Cloud
 * </copyright>
 * <summary>
@@ -24,12 +24,13 @@
 * </summary> 
 -------------------------------------------------------------------------------------------------------------------- **/
 
-#ifndef GROUPDOCS_ASSEMBLY_CLOUD_API_MODELS_StorageFile_H_
-#define GROUPDOCS_ASSEMBLY_CLOUD_API_MODELS_StorageFile_H_
+#ifndef GROUPDOCS_ASSEMBLY_CLOUD_API_MODELS_ApiError_H_
+#define GROUPDOCS_ASSEMBLY_CLOUD_API_MODELS_ApiError_H_
 
 
 #include "../ModelBase.h"
 
+#include "ApiError.h"
 #include <cpprest/details/basic_types.h>
 
 namespace groupdocs {
@@ -39,14 +40,14 @@ namespace api {
 namespace models {
 
 /// <summary>
-/// File or folder information
+/// Error class.             
 /// </summary>
-class  StorageFile
+class  ApiError
     : public ModelBase
 {
 public:
-    StorageFile();
-    virtual ~StorageFile();
+    ApiError();
+    virtual ~ApiError();
 
     /////////////////////////////////////////////
     /// ModelBase overrides
@@ -60,49 +61,55 @@ public:
     void fromMultiPart(const std::shared_ptr<MultipartFormData>& multipart, const utility::string_t& namePrefix) override;
 
     /////////////////////////////////////////////
-    /// StorageFile members
+    /// ApiError members
 
     /// <summary>
-    /// File or folder name.
+    /// Gets or sets api error code.
     /// </summary>
-    utility::string_t getName() const;
-    bool nameIsSet() const;
-    void unsetName();
-    void setName(utility::string_t value);
+    utility::string_t getCode() const;
+    bool codeIsSet() const;
+    void unsetCode();
+    void setCode(utility::string_t value);
     /// <summary>
-    /// True if it is a folder.
+    /// Gets or sets error message.
     /// </summary>
-    bool isIsFolder() const;
-        void setIsFolder(bool value);
+    utility::string_t getMessage() const;
+    bool messageIsSet() const;
+    void unsetMessage();
+    void setMessage(utility::string_t value);
     /// <summary>
-    /// File or folder last modified .
+    /// Gets or sets error description.
     /// </summary>
-    utility::datetime getModifiedDate() const;
-    bool modifiedDateIsSet() const;
-    void unsetModifiedDate();
-    void setModifiedDate(utility::datetime value);
+    utility::string_t getDescription() const;
+    bool descriptionIsSet() const;
+    void unsetDescription();
+    void setDescription(utility::string_t value);
     /// <summary>
-    /// File or folder size.
+    /// Gets or sets server datetime.
     /// </summary>
-    int64_t getSize() const;
-        void setSize(int64_t value);
+    utility::datetime getDateTime() const;
+    bool dateTimeIsSet() const;
+    void unsetDateTime();
+    void setDateTime(utility::datetime value);
     /// <summary>
-    /// File or folder path.
+    /// Gets or sets inner error.
     /// </summary>
-    utility::string_t getPath() const;
-    bool pathIsSet() const;
-    void unsetPath();
-    void setPath(utility::string_t value);
+    std::shared_ptr<ApiError> getInnerApiError() const;
+    bool innerApiErrorIsSet() const;
+    void unsetInnerApiError();
+    void setInnerApiError(std::shared_ptr<ApiError> value);
 
 protected:
-    utility::string_t m_Name;
-    bool m_NameIsSet;
-    bool m_IsFolder;
-        utility::datetime m_ModifiedDate;
-    bool m_ModifiedDateIsSet;
-    int64_t m_Size;
-        utility::string_t m_Path;
-    bool m_PathIsSet;
+    utility::string_t m_Code;
+    bool m_CodeIsSet;
+    utility::string_t m_Message;
+    bool m_MessageIsSet;
+    utility::string_t m_Description;
+    bool m_DescriptionIsSet;
+    utility::datetime m_DateTime;
+    bool m_DateTimeIsSet;
+    std::shared_ptr<ApiError> m_InnerApiError;
+    bool m_InnerApiErrorIsSet;
 };
 
 }
@@ -111,4 +118,4 @@ protected:
 }
 }
 
-#endif /* GROUPDOCS_ASSEMBLY_CLOUD_API_MODELS_StorageFile_H_ */
+#endif /* GROUPDOCS_ASSEMBLY_CLOUD_API_MODELS_ApiError_H_ */

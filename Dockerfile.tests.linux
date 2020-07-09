@@ -1,3 +1,0 @@
-from groupdocs-assembly-cloud-cpp:linux
-
-COPY . groupdocs-assembly-cloud-cpp

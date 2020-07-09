@@ -1,5 +1,5 @@
 /** --------------------------------------------------------------------------------------------------------------------
-* <copyright company="Aspose" file="Error.cpp">
+* <copyright company="Aspose" file="ApiError.cpp">
 *   Copyright (c) 2020 GroupDocs.Assembly for Cloud
 * </copyright>
 * <summary>
@@ -24,7 +24,7 @@
 -------------------------------------------------------------------------------------------------------------------- **/
 
 
-#include "Error.h"
+#include "ApiError.h"
 
 namespace groupdocs {
 namespace assembly {
@@ -32,7 +32,7 @@ namespace cloud {
 namespace api {
 namespace models {
 
-Error::Error()
+ApiError::ApiError()
 {
     m_Code = utility::conversions::to_string_t("");
     m_CodeIsSet = false;
@@ -40,19 +40,21 @@ Error::Error()
     m_MessageIsSet = false;
     m_Description = utility::conversions::to_string_t("");
     m_DescriptionIsSet = false;
-    m_InnerErrorIsSet = false;
+    m_DateTime = utility::datetime();
+    m_DateTimeIsSet = false;
+    m_InnerApiErrorIsSet = false;
 }
 
-Error::~Error()
+ApiError::~ApiError()
 {
 }
 
-void Error::validate()
+void ApiError::validate()
 {
     // TODO: implement validation
 }
 
-web::json::value Error::toJson() const
+web::json::value ApiError::toJson() const
 {
     web::json::value val = web::json::value::object();
 
@@ -68,15 +70,19 @@ web::json::value Error::toJson() const
     {
         val[_XPLATSTR("Description")] = ModelBase::toJson(m_Description);
     }
-    if(m_InnerErrorIsSet)
+    if(m_DateTimeIsSet)
     {
-        val[_XPLATSTR("InnerError")] = ModelBase::toJson(m_InnerError);
+        val[_XPLATSTR("DateTime")] = ModelBase::toJson(m_DateTime);
+    }
+    if(m_InnerApiErrorIsSet)
+    {
+        val[_XPLATSTR("InnerApiError")] = ModelBase::toJson(m_InnerApiError);
     }
 
     return val;
 }
 
-void Error::fromJson(web::json::value& val)
+void ApiError::fromJson(web::json::value& val)
 {
     if(val.has_field(_XPLATSTR("Code")))
     {
@@ -102,19 +108,27 @@ void Error::fromJson(web::json::value& val)
             setDescription(ModelBase::stringFromJson(fieldValue));
         }
     }
-    if(val.has_field(_XPLATSTR("InnerError")))
+    if(val.has_field(_XPLATSTR("DateTime")))
     {
-        web::json::value& fieldValue = val[_XPLATSTR("InnerError")];
+        web::json::value& fieldValue = val[_XPLATSTR("DateTime")];
         if(!fieldValue.is_null())
         {
-            std::shared_ptr<ErrorDetails> newItem(new ErrorDetails());
+            setDateTime(ModelBase::dateFromJson(fieldValue));
+        }
+    }
+    if(val.has_field(_XPLATSTR("InnerApiError")))
+    {
+        web::json::value& fieldValue = val[_XPLATSTR("InnerApiError")];
+        if(!fieldValue.is_null())
+        {
+            std::shared_ptr<ApiError> newItem(new ApiError());
             newItem->fromJson(fieldValue);
-            setInnerError( newItem );
+            setInnerApiError( newItem );
         }
     }
 }
 
-void Error::toMultipart(const std::shared_ptr<MultipartFormData>& multipart, const utility::string_t& prefix) const
+void ApiError::toMultipart(const std::shared_ptr<MultipartFormData>& multipart, const utility::string_t& prefix) const
 {
     auto namePrefix = ModelBase::fixNamePrefix(prefix);
 
@@ -133,17 +147,22 @@ void Error::toMultipart(const std::shared_ptr<MultipartFormData>& multipart, con
         multipart->add(ModelBase::toHttpContent(namePrefix + _XPLATSTR("Description"), m_Description));
         
     }
-    if(m_InnerErrorIsSet)
+    if(m_DateTimeIsSet)
     {
-        if (m_InnerError.get())
+        multipart->add(ModelBase::toHttpContent(namePrefix + _XPLATSTR("DateTime"), m_DateTime));
+        
+    }
+    if(m_InnerApiErrorIsSet)
+    {
+        if (m_InnerApiError.get())
         {
-            m_InnerError->toMultipart(multipart, _XPLATSTR("InnerError."));
+            m_InnerApiError->toMultipart(multipart, _XPLATSTR("InnerApiError."));
         }
         
     }
 }
 
-void Error::fromMultiPart(const std::shared_ptr<MultipartFormData>& multipart, const utility::string_t& prefix)
+void ApiError::fromMultiPart(const std::shared_ptr<MultipartFormData>& multipart, const utility::string_t& prefix)
 {
     if(multipart->hasContent(_XPLATSTR("Code")))
     {
@@ -157,99 +176,124 @@ void Error::fromMultiPart(const std::shared_ptr<MultipartFormData>& multipart, c
     {
         setDescription(ModelBase::stringFromHttpContent(multipart->getContent(_XPLATSTR("Description"))));
     }
-    if(multipart->hasContent(_XPLATSTR("InnerError")))
+    if(multipart->hasContent(_XPLATSTR("DateTime")))
     {
-        if(multipart->hasContent(_XPLATSTR("InnerError")))
+        setDateTime(ModelBase::dateFromHttpContent(multipart->getContent(_XPLATSTR("DateTime"))));
+    }
+    if(multipart->hasContent(_XPLATSTR("InnerApiError")))
+    {
+        if(multipart->hasContent(_XPLATSTR("InnerApiError")))
         {
-            std::shared_ptr<ErrorDetails> newItem(new ErrorDetails());
-            newItem->fromMultiPart(multipart, _XPLATSTR("InnerError."));
-            setInnerError( newItem );
+            std::shared_ptr<ApiError> newItem(new ApiError());
+            newItem->fromMultiPart(multipart, _XPLATSTR("InnerApiError."));
+            setInnerApiError( newItem );
         }
     }
 }
 
-utility::string_t Error::getCode() const
+utility::string_t ApiError::getCode() const
 {
     return m_Code;
 }
 
 
-void Error::setCode(utility::string_t value)
+void ApiError::setCode(utility::string_t value)
 {
     m_Code = value;
     m_CodeIsSet = true;
 }
-bool Error::codeIsSet() const
+bool ApiError::codeIsSet() const
 {
     return m_CodeIsSet;
 }
 
-void Error::unsetCode()
+void ApiError::unsetCode()
 {
     m_CodeIsSet = false;
 }
 
-utility::string_t Error::getMessage() const
+utility::string_t ApiError::getMessage() const
 {
     return m_Message;
 }
 
 
-void Error::setMessage(utility::string_t value)
+void ApiError::setMessage(utility::string_t value)
 {
     m_Message = value;
     m_MessageIsSet = true;
 }
-bool Error::messageIsSet() const
+bool ApiError::messageIsSet() const
 {
     return m_MessageIsSet;
 }
 
-void Error::unsetMessage()
+void ApiError::unsetMessage()
 {
     m_MessageIsSet = false;
 }
 
-utility::string_t Error::getDescription() const
+utility::string_t ApiError::getDescription() const
 {
     return m_Description;
 }
 
 
-void Error::setDescription(utility::string_t value)
+void ApiError::setDescription(utility::string_t value)
 {
     m_Description = value;
     m_DescriptionIsSet = true;
 }
-bool Error::descriptionIsSet() const
+bool ApiError::descriptionIsSet() const
 {
     return m_DescriptionIsSet;
 }
 
-void Error::unsetDescription()
+void ApiError::unsetDescription()
 {
     m_DescriptionIsSet = false;
 }
 
-std::shared_ptr<ErrorDetails> Error::getInnerError() const
+utility::datetime ApiError::getDateTime() const
 {
-    return m_InnerError;
+    return m_DateTime;
 }
 
 
-void Error::setInnerError(std::shared_ptr<ErrorDetails> value)
+void ApiError::setDateTime(utility::datetime value)
 {
-    m_InnerError = value;
-    m_InnerErrorIsSet = true;
+    m_DateTime = value;
+    m_DateTimeIsSet = true;
 }
-bool Error::innerErrorIsSet() const
+bool ApiError::dateTimeIsSet() const
 {
-    return m_InnerErrorIsSet;
+    return m_DateTimeIsSet;
 }
 
-void Error::unsetInnerError()
+void ApiError::unsetDateTime()
 {
-    m_InnerErrorIsSet = false;
+    m_DateTimeIsSet = false;
+}
+
+std::shared_ptr<ApiError> ApiError::getInnerApiError() const
+{
+    return m_InnerApiError;
+}
+
+
+void ApiError::setInnerApiError(std::shared_ptr<ApiError> value)
+{
+    m_InnerApiError = value;
+    m_InnerApiErrorIsSet = true;
+}
+bool ApiError::innerApiErrorIsSet() const
+{
+    return m_InnerApiErrorIsSet;
+}
+
+void ApiError::unsetInnerApiError()
+{
+    m_InnerApiErrorIsSet = false;
 }
 
 }

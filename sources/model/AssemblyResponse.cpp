@@ -1,5 +1,5 @@
 /** --------------------------------------------------------------------------------------------------------------------
-* <copyright company="Aspose" file="FileResponse.cpp">
+* <copyright company="Aspose" file="AssemblyResponse.cpp">
 *   Copyright (c) 2020 GroupDocs.Assembly for Cloud
 * </copyright>
 * <summary>
@@ -24,7 +24,7 @@
 -------------------------------------------------------------------------------------------------------------------- **/
 
 
-#include "FileResponse.h"
+#include "AssemblyResponse.h"
 
 namespace groupdocs {
 namespace assembly {
@@ -32,39 +32,83 @@ namespace cloud {
 namespace api {
 namespace models {
 
-FileResponse::FileResponse()
+AssemblyResponse::AssemblyResponse()
+{
+    m_RequestId = utility::conversions::to_string_t("");
+    m_RequestIdIsSet = false;
+}
+
+AssemblyResponse::~AssemblyResponse()
 {
 }
 
-FileResponse::~FileResponse()
-{
-}
-
-void FileResponse::validate()
+void AssemblyResponse::validate()
 {
     // TODO: implement validation
 }
 
-web::json::value FileResponse::toJson() const
+web::json::value AssemblyResponse::toJson() const
 {
     web::json::value val = web::json::value::object();
 
+    if(m_RequestIdIsSet)
+    {
+        val[_XPLATSTR("RequestId")] = ModelBase::toJson(m_RequestId);
+    }
 
     return val;
 }
 
-void FileResponse::fromJson(web::json::value& val)
+void AssemblyResponse::fromJson(web::json::value& val)
 {
+    if(val.has_field(_XPLATSTR("RequestId")))
+    {
+        web::json::value& fieldValue = val[_XPLATSTR("RequestId")];
+        if(!fieldValue.is_null())
+        {
+            setRequestId(ModelBase::stringFromJson(fieldValue));
+        }
+    }
 }
 
-void FileResponse::toMultipart(const std::shared_ptr<MultipartFormData>& multipart, const utility::string_t& prefix) const
+void AssemblyResponse::toMultipart(const std::shared_ptr<MultipartFormData>& multipart, const utility::string_t& prefix) const
 {
     auto namePrefix = ModelBase::fixNamePrefix(prefix);
 
+    if(m_RequestIdIsSet)
+    {
+        multipart->add(ModelBase::toHttpContent(namePrefix + _XPLATSTR("RequestId"), m_RequestId));
+        
+    }
 }
 
-void FileResponse::fromMultiPart(const std::shared_ptr<MultipartFormData>& multipart, const utility::string_t& prefix)
+void AssemblyResponse::fromMultiPart(const std::shared_ptr<MultipartFormData>& multipart, const utility::string_t& prefix)
 {
+    if(multipart->hasContent(_XPLATSTR("RequestId")))
+    {
+        setRequestId(ModelBase::stringFromHttpContent(multipart->getContent(_XPLATSTR("RequestId"))));
+    }
+}
+
+utility::string_t AssemblyResponse::getRequestId() const
+{
+    return m_RequestId;
+}
+
+
+void AssemblyResponse::setRequestId(utility::string_t value)
+{
+    m_RequestId = value;
+    m_RequestIdIsSet = true;
+}
+bool AssemblyResponse::requestIdIsSet() const
+{
+    return m_RequestIdIsSet;
+}
+
+void AssemblyResponse::unsetRequestId()
+{
+    m_RequestIdIsSet = false;
 }
 
 }

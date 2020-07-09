@@ -1,5 +1,6 @@
+
 /** --------------------------------------------------------------------------------------------------------------------
-* <copyright company="Aspose" file="MoveFolderRequest.h">
+* <copyright company="Aspose" file="AssemblyResponse.h">
 *   Copyright (c) 2020 GroupDocs.Assembly for Cloud
 * </copyright>
 * <summary>
@@ -22,12 +23,14 @@
 *  SOFTWARE.
 * </summary> 
 -------------------------------------------------------------------------------------------------------------------- **/
-#pragma once
-#ifndef moveFolder_H
-#define moveFolder_H 
 
-#include "cpprest/details/basic_types.h"
-#include <boost/optional.hpp>
+#ifndef GROUPDOCS_ASSEMBLY_CLOUD_API_MODELS_AssemblyResponse_H_
+#define GROUPDOCS_ASSEMBLY_CLOUD_API_MODELS_AssemblyResponse_H_
+
+
+#include "../ModelBase.h"
+
+#include <cpprest/details/basic_types.h>
 
 namespace groupdocs {
 namespace assembly {
@@ -35,31 +38,41 @@ namespace cloud {
 namespace api {
 namespace models {
 
-class MoveFolderRequest{
-    public: 
-     MoveFolderRequest(
-        utility::string_t destPath,
-                utility::string_t srcPath,
-                boost::optional<utility::string_t> srcStorageName,
-                boost::optional<utility::string_t> destStorageName
-        );
+/// <summary>
+/// Base class for all responses.
+/// </summary>
+class  AssemblyResponse
+    : public ModelBase
+{
+public:
+    AssemblyResponse();
+    virtual ~AssemblyResponse();
 
-        utility::string_t getDestPath() const;
-        void setDestPath(utility::string_t destPath);
+    /////////////////////////////////////////////
+    /// ModelBase overrides
 
-        utility::string_t getSrcPath() const;
-        void setSrcPath(utility::string_t srcPath);
+    void validate() override;
 
-        boost::optional<utility::string_t> getSrcStorageName() const;
-        void setSrcStorageName(boost::optional<utility::string_t> srcStorageName);
+    web::json::value toJson() const override;
+    void fromJson(web::json::value& json) override;
 
-        boost::optional<utility::string_t> getDestStorageName() const;
-        void setDestStorageName(boost::optional<utility::string_t> destStorageName);
-    private:
-        utility::string_t m_destPath;
-        utility::string_t m_srcPath;
-        boost::optional<utility::string_t> m_srcStorageName;
-        boost::optional<utility::string_t> m_destStorageName;
+    void toMultipart(const std::shared_ptr<MultipartFormData>& multipart, const utility::string_t& namePrefix) const override;
+    void fromMultiPart(const std::shared_ptr<MultipartFormData>& multipart, const utility::string_t& namePrefix) override;
+
+    /////////////////////////////////////////////
+    /// AssemblyResponse members
+
+    /// <summary>
+    /// Gets or sets request Id.
+    /// </summary>
+    utility::string_t getRequestId() const;
+    bool requestIdIsSet() const;
+    void unsetRequestId();
+    void setRequestId(utility::string_t value);
+
+protected:
+    utility::string_t m_RequestId;
+    bool m_RequestIdIsSet;
 };
 
 }
@@ -68,4 +81,4 @@ class MoveFolderRequest{
 }
 }
 
-#endif
+#endif /* GROUPDOCS_ASSEMBLY_CLOUD_API_MODELS_AssemblyResponse_H_ */

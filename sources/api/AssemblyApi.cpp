@@ -1,6 +1,6 @@
 /** --------------------------------------------------------------------------------------------------------------------
-* <copyright company="GroupDocs" file="AssemblyApi.cpp">
-*   Copyright (c) 2019 GroupDocs.Assembly for Cloud
+* <copyright company="Aspose" file="AssemblyApi.cpp">
+*   Copyright (c) 2020 GroupDocs.Assembly for Cloud
 * </copyright>
 * <summary>
 *   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -90,11 +90,126 @@ utility::string_t extractOptional(const boost::optional<T>& parameter)
 }
 using namespace groupdocs::assembly::cloud::api::models;
 
-AssemblyApi::AssemblyApi(std::shared_ptr<ApiClient> apiClient)
-    : m_ApiClient(std::move(apiClient))
+AssemblyApi::AssemblyApi(std::shared_ptr<ApiConfiguration> configuration)
+    : m_ApiClient(std::make_shared<ApiClient>(configuration))
 {
 }
 
+pplx::task<HttpContent> AssemblyApi::assembleDocument(std::shared_ptr<AssembleDocumentRequest> request)
+{
+
+    // verify the required parameter 'assembleOptions' is set
+    if (request->getAssembleOptions() == nullptr)
+    {
+        throw ApiException(400, _XPLATSTR("Missing required parameter 'assembleOptions' when calling AssemblyApi->assembleDocument"));
+    }
+
+    std::shared_ptr<ApiConfiguration> apiConfiguration(m_ApiClient->getConfiguration());
+    utility::string_t bPath = _XPLATSTR("/") + apiConfiguration->getApiVersion() + _XPLATSTR("/assembly/assemble"),
+    path = bPath;
+
+    std::map<utility::string_t, utility::string_t> queryParams;
+    std::map<utility::string_t, utility::string_t> headerParams(apiConfiguration->getDefaultHeaders());
+    std::map<utility::string_t, utility::string_t> formParams;
+    std::vector<std::pair<utility::string_t, std::shared_ptr<HttpContent>>> fileParams;
+
+    std::unordered_set<utility::string_t> responseHttpContentTypes;
+    responseHttpContentTypes.insert(_XPLATSTR("application/json"));
+    responseHttpContentTypes.insert(_XPLATSTR("application/xml"));
+
+    utility::string_t responseHttpContentType;
+
+    // use JSON if possible
+    if (responseHttpContentTypes.empty())
+    {
+        responseHttpContentType = _XPLATSTR("application/json");
+    }
+    // JSON
+    else if (responseHttpContentTypes.find(_XPLATSTR("application/json")) != responseHttpContentTypes.end())
+    {
+        responseHttpContentType = _XPLATSTR("application/json");
+    }
+    // multipart formdata
+    else if (responseHttpContentTypes.find(_XPLATSTR("multipart/form-data")) != responseHttpContentTypes.end())
+    {
+        responseHttpContentType = _XPLATSTR("multipart/form-data");
+    }
+    else
+    {
+        //It's going to be binary, so just use the first one.
+        responseHttpContentType = *responseHttpContentTypes.begin();
+    }
+
+    headerParams[_XPLATSTR("Accept")] = responseHttpContentType;
+
+    std::unordered_set<utility::string_t> consumeHttpContentTypes;
+    consumeHttpContentTypes.insert(_XPLATSTR("application/json"));
+    consumeHttpContentTypes.insert(_XPLATSTR("application/xml"));
+
+
+    std::shared_ptr<IHttpBody> httpBody;
+    utility::string_t requestHttpContentType;
+
+    // use JSON if possible
+    if (consumeHttpContentTypes.empty() || consumeHttpContentTypes.find(_XPLATSTR("application/json")) != 
+    consumeHttpContentTypes.end())
+    {
+        requestHttpContentType = _XPLATSTR("application/json");
+        web::json::value json;
+
+        json = ModelBase::toJson(request->getAssembleOptions());
+        
+
+        httpBody = std::shared_ptr<IHttpBody>(new JsonBody(json));
+    }
+    // multipart formdata
+    else if (consumeHttpContentTypes.find(_XPLATSTR("multipart/form-data")) != consumeHttpContentTypes.end())
+    {
+        requestHttpContentType = _XPLATSTR("multipart/form-data");
+        std::shared_ptr<MultipartFormData> multipart = std::make_shared<MultipartFormData>();
+
+        if (request->getAssembleOptions().get())
+        {
+            (request->getAssembleOptions())->toMultipart(multipart, _XPLATSTR("assembleOptions"));
+        }
+
+        httpBody = multipart;
+        requestHttpContentType += _XPLATSTR("; boundary=") + multipart->getBoundary();
+    }
+    else
+    {
+        throw ApiException(415, _XPLATSTR("AssemblyApi->assembleDocument does not consume any supported media type"));
+    }
+
+    // authentication (JWT) required
+    // oauth2 authentication is added automatically as part of the http_client_config
+
+    return m_ApiClient->callApi(path, _XPLATSTR("POST"), queryParams, httpBody, headerParams, formParams, fileParams,
+    requestHttpContentType)
+    .then([=](web::http::http_response response)
+    {
+        // 1xx - informational : OK
+        // 2xx - successful       : OK
+        // 3xx - redirection   : OK
+        // 4xx - client error  : not OK
+        // 5xx - client error  : not OK
+		if (response.status_code() >= 400)
+		{
+			web::json::value error_json = response.extract_json().get();
+			throw ApiException(response.status_code()
+				, _XPLATSTR("request error: ") + response.reason_phrase());
+		}
+
+        return response.extract_vector();
+    })
+    .then([=](std::vector<unsigned char> response)
+    {
+        HttpContent result;
+        std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(response.begin(), response.end()));
+        result.setData(stream);
+        return result;
+    });
+}
 pplx::task<std::shared_ptr<web::http::http_response>> AssemblyApi::copyFile(std::shared_ptr<CopyFileRequest> request)
 {
 
@@ -822,7 +937,7 @@ pplx::task<GroupDocsResponse<FilesList>> AssemblyApi::getFilesList(std::shared_p
         return result;
     });
 }
-pplx::task<GroupDocsResponse<FormatCollection>> AssemblyApi::getSupportedFileFormats(std::shared_ptr<GetSupportedFileFormatsRequest> request)
+pplx::task<GroupDocsResponse<FileFormatsResponse>> AssemblyApi::getSupportedFileFormats(std::shared_ptr<GetSupportedFileFormatsRequest> request)
 {
 
     std::shared_ptr<ApiConfiguration> apiConfiguration(m_ApiClient->getConfiguration());
@@ -909,9 +1024,9 @@ pplx::task<GroupDocsResponse<FormatCollection>> AssemblyApi::getSupportedFileFor
     })
     .then([=](web::http::http_response response)
     {
-		GroupDocsResponse<FormatCollection> result = {
+		GroupDocsResponse<FileFormatsResponse> result = {
 			std::make_shared<web::http::http_response>(response),
-			std::shared_ptr<FormatCollection>(new FormatCollection())
+			std::shared_ptr<FileFormatsResponse>(new FileFormatsResponse())
 		};
 
         if (responseHttpContentType == _XPLATSTR("application/json"))
@@ -1143,131 +1258,6 @@ pplx::task<std::shared_ptr<web::http::http_response>> AssemblyApi::moveFolder(st
         return std::make_shared<web::http::http_response>(response);
     });
 }
-pplx::task<HttpContent> AssemblyApi::postAssembleDocument(std::shared_ptr<PostAssembleDocumentRequest> request)
-{
-
-    // verify the required parameter 'reportData' is set
-    if (request->getReportData() == nullptr)
-    {
-        throw ApiException(400, _XPLATSTR("Missing required parameter 'reportData' when calling AssemblyApi->postAssembleDocument"));
-    }
-
-    std::shared_ptr<ApiConfiguration> apiConfiguration(m_ApiClient->getConfiguration());
-    utility::string_t bPath = _XPLATSTR("/") + apiConfiguration->getApiVersion() + _XPLATSTR("/assembly/{name}/build"),
-    path = bPath;
-    path = replacePathParameter(path, _XPLATSTR("name"),
-        ApiClient::parameterToString(request->getName()));
-
-    std::map<utility::string_t, utility::string_t> queryParams;
-    std::map<utility::string_t, utility::string_t> headerParams(apiConfiguration->getDefaultHeaders());
-    std::map<utility::string_t, utility::string_t> formParams;
-    std::vector<std::pair<utility::string_t, std::shared_ptr<HttpContent>>> fileParams;
-
-    std::unordered_set<utility::string_t> responseHttpContentTypes;
-    responseHttpContentTypes.insert(_XPLATSTR("application/json"));
-    responseHttpContentTypes.insert(_XPLATSTR("application/xml"));
-
-    utility::string_t responseHttpContentType;
-
-    // use JSON if possible
-    if (responseHttpContentTypes.empty())
-    {
-        responseHttpContentType = _XPLATSTR("application/json");
-    }
-    // JSON
-    else if (responseHttpContentTypes.find(_XPLATSTR("application/json")) != responseHttpContentTypes.end())
-    {
-        responseHttpContentType = _XPLATSTR("application/json");
-    }
-    // multipart formdata
-    else if (responseHttpContentTypes.find(_XPLATSTR("multipart/form-data")) != responseHttpContentTypes.end())
-    {
-        responseHttpContentType = _XPLATSTR("multipart/form-data");
-    }
-    else
-    {
-        //It's going to be binary, so just use the first one.
-        responseHttpContentType = *responseHttpContentTypes.begin();
-    }
-
-    headerParams[_XPLATSTR("Accept")] = responseHttpContentType;
-
-    std::unordered_set<utility::string_t> consumeHttpContentTypes;
-    consumeHttpContentTypes.insert(_XPLATSTR("application/json"));
-    consumeHttpContentTypes.insert(_XPLATSTR("application/xml"));
-
-    if (request->getFolder())
-    {
-        queryParams[_XPLATSTR("Folder")] = ApiClient::parameterToString(*(request->getFolder()));
-    }
-    if (request->getDestFileName())
-    {
-        queryParams[_XPLATSTR("DestFileName")] = ApiClient::parameterToString(*(request->getDestFileName()));
-    }
-
-    std::shared_ptr<IHttpBody> httpBody;
-    utility::string_t requestHttpContentType;
-
-    // use JSON if possible
-    if (consumeHttpContentTypes.empty() || consumeHttpContentTypes.find(_XPLATSTR("application/json")) != 
-    consumeHttpContentTypes.end())
-    {
-        requestHttpContentType = _XPLATSTR("application/json");
-        web::json::value json;
-
-        json = ModelBase::toJson(request->getReportData());
-        
-
-        httpBody = std::shared_ptr<IHttpBody>(new JsonBody(json));
-    }
-    // multipart formdata
-    else if (consumeHttpContentTypes.find(_XPLATSTR("multipart/form-data")) != consumeHttpContentTypes.end())
-    {
-        requestHttpContentType = _XPLATSTR("multipart/form-data");
-        std::shared_ptr<MultipartFormData> multipart = std::make_shared<MultipartFormData>();
-
-        if (request->getReportData().get())
-        {
-            (request->getReportData())->toMultipart(multipart, _XPLATSTR("reportData"));
-        }
-
-        httpBody = multipart;
-        requestHttpContentType += _XPLATSTR("; boundary=") + multipart->getBoundary();
-    }
-    else
-    {
-        throw ApiException(415, _XPLATSTR("AssemblyApi->postAssembleDocument does not consume any supported media type"));
-    }
-
-    // authentication (JWT) required
-    // oauth2 authentication is added automatically as part of the http_client_config
-
-    return m_ApiClient->callApi(path, _XPLATSTR("POST"), queryParams, httpBody, headerParams, formParams, fileParams,
-    requestHttpContentType)
-    .then([=](web::http::http_response response)
-    {
-        // 1xx - informational : OK
-        // 2xx - successful       : OK
-        // 3xx - redirection   : OK
-        // 4xx - client error  : not OK
-        // 5xx - client error  : not OK
-		if (response.status_code() >= 400)
-		{
-			web::json::value error_json = response.extract_json().get();
-			throw ApiException(response.status_code()
-				, _XPLATSTR("request error: ") + response.reason_phrase());
-		}
-
-        return response.extract_vector();
-    })
-    .then([=](std::vector<unsigned char> response)
-    {
-        HttpContent result;
-        std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(response.begin(), response.end()));
-        result.setData(stream);
-        return result;
-    });
-}
 pplx::task<GroupDocsResponse<FilesUploadResult>> AssemblyApi::uploadFile(std::shared_ptr<UploadFileRequest> request)
 {
 
@@ -1317,8 +1307,6 @@ pplx::task<GroupDocsResponse<FilesUploadResult>> AssemblyApi::uploadFile(std::sh
     headerParams[_XPLATSTR("Accept")] = responseHttpContentType;
 
     std::unordered_set<utility::string_t> consumeHttpContentTypes;
-    consumeHttpContentTypes.insert(_XPLATSTR("application/json"));
-    consumeHttpContentTypes.insert(_XPLATSTR("application/xml"));
     consumeHttpContentTypes.insert(_XPLATSTR("multipart/form-data"));
 
     if (request->getFile() != nullptr)
@@ -1401,5 +1389,4 @@ pplx::task<GroupDocsResponse<FilesUploadResult>> AssemblyApi::uploadFile(std::sh
 }
 }
 }
-
-
+

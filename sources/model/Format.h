@@ -1,7 +1,7 @@
 
 /** --------------------------------------------------------------------------------------------------------------------
-* <copyright company="GroupDocs" file="Format.h">
-*   Copyright (c) 2019 GroupDocs.Assembly for Cloud
+* <copyright company="Aspose" file="Format.h">
+*   Copyright (c) 2020 GroupDocs.Assembly for Cloud
 * </copyright>
 * <summary>
 *   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -63,14 +63,14 @@ public:
     /// Format members
 
     /// <summary>
-    /// File format.
+    /// Gets or sets file format.
     /// </summary>
     utility::string_t getFileFormat() const;
     bool fileFormatIsSet() const;
     void unsetFileFormat();
     void setFileFormat(utility::string_t value);
     /// <summary>
-    /// File extension.
+    /// Gets or sets file extension.
     /// </summary>
     utility::string_t getExtension() const;
     bool extensionIsSet() const;

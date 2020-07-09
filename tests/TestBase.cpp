@@ -1,6 +1,6 @@
 /** --------------------------------------------------------------------------------------------------------------------
-* <copyright company="GroupDocs" file="TestBase.cpp">
-*   Copyright (c) 2019 GroupDocs.Assembly for Cloud
+* <copyright company="Aspose" file="TestBase.cpp">
+*   Copyright (c) 2020 GroupDocs.Assembly for Cloud
 * </copyright>
 * <summary>
 *   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -23,11 +23,6 @@
 * </summary> 
 -------------------------------------------------------------------------------------------------------------------- **/
 #include "TestBase.h"
-
-#include <boost/filesystem/fstream.hpp>
-#include <boost/filesystem.hpp>
-
-namespace fs = boost::filesystem;
 
 utility::string_t get_file_text_as_string(const fs::path& file)
 {
@@ -55,7 +50,7 @@ std::shared_ptr<ApiConfiguration> get_config()
 	utility::string_t credentials;
 	credentials = get_file_text_as_string({ fs::path{ TEST_ROOT }.parent_path() / "servercreds.json" });
 	web::json::value fileJson = web::json::value::parse(credentials);
-
+	
 	web::http::client::http_client_config conf;
 	conf.set_timeout(std::chrono::seconds(60));
 
@@ -63,7 +58,7 @@ std::shared_ptr<ApiConfiguration> get_config()
 	newConfig->setAppKey(fileJson[_XPLATSTR("AppKey")].as_string());
 	newConfig->setBaseUrl(fileJson[_XPLATSTR("BaseUrl")].as_string());
 	newConfig->setAppSid(fileJson[_XPLATSTR("AppSid")].as_string());
-	newConfig->setUserAgent(_XPLATSTR("CppAsposeClient"));
+	newConfig->setUserAgent(_XPLATSTR("CppGroupDocsClient"));
 	newConfig->setHttpConfig(conf);
 
 	return newConfig;
@@ -100,6 +95,33 @@ std::shared_ptr<HttpContent> InfrastructureTest::generate_http_content_from_file
 	return content;
 }
 
+void InfrastructureTest::UploadFileToStorage(const utility::string_t& remoteName, const fs::path& filePath)
+{
+	std::shared_ptr<UploadFileRequest> request = std::make_shared<UploadFileRequest>(generate_http_content_from_file(filePath), remoteName, boost::none);
+	std::shared_ptr<AssemblyApi> api = get_api();
+	auto result = api->uploadFile(request).get();
+}
+
+
+bool InfrastructureTest::GetIsExists(const utility::string_t& path)
+{
+    std::map<utility::string_t, utility::string_t> queryParams{{_XPLATSTR("path"), path}};
+
+	std::shared_ptr<ApiClient> client = get_client();
+
+	return (client->callApi(client->getConfiguration()->getBaseUrl() + _XPLATSTR("/v1.0/storage/exist"),
+        _XPLATSTR("GET"), queryParams, nullptr, {}, {}, {}, _XPLATSTR("application/json"))
+		.then([](const web::http::http_response& response) {
+		if (response.status_code() > 400)
+			throw ApiException(response.status_code(), _XPLATSTR("error requesting token: ") + response.reason_phrase(), std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
+		return response.extract_json();
+	}).then([=](web::json::value ans) {
+		
+		return ans.has_field(_XPLATSTR("FileExist")) && 
+			ans[_XPLATSTR("FileExist")][_XPLATSTR("IsExist")].as_bool();
+	}).get());
+}
+
 std::shared_ptr<ApiConfiguration> InfrastructureTest::get_configuration() const
 {
 	return m_Config;
@@ -118,7 +140,7 @@ std::shared_ptr<AssemblyApi> InfrastructureTest::get_api()
 {
 	if (!api)
 	{
-		api = std::make_shared<AssemblyApi>(get_client());
+		api = std::make_shared<AssemblyApi>(get_configuration());
 	}
 	return api;
 }

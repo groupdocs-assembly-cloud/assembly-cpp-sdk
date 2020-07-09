@@ -1,6 +1,6 @@
 /** --------------------------------------------------------------------------------------------------------------------
-* <copyright company="GroupDocs" file="GetSupportedFileFormatsRequest.cpp">
-*   Copyright (c) 2019 GroupDocs.Assembly for Cloud
+* <copyright company="Aspose" file="GetSupportedFileFormatsRequest.cpp">
+*   Copyright (c) 2020 GroupDocs.Assembly for Cloud
 * </copyright>
 * <summary>
 *   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -39,5 +39,4 @@ GetSupportedFileFormatsRequest::GetSupportedFileFormatsRequest(
 }
 }
 }
-}
-
+}

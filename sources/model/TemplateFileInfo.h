@@ -1,6 +1,6 @@
 
 /** --------------------------------------------------------------------------------------------------------------------
-* <copyright company="Aspose" file="StorageFile.h">
+* <copyright company="Aspose" file="TemplateFileInfo.h">
 *   Copyright (c) 2020 GroupDocs.Assembly for Cloud
 * </copyright>
 * <summary>
@@ -24,8 +24,8 @@
 * </summary> 
 -------------------------------------------------------------------------------------------------------------------- **/
 
-#ifndef GROUPDOCS_ASSEMBLY_CLOUD_API_MODELS_StorageFile_H_
-#define GROUPDOCS_ASSEMBLY_CLOUD_API_MODELS_StorageFile_H_
+#ifndef GROUPDOCS_ASSEMBLY_CLOUD_API_MODELS_TemplateFileInfo_H_
+#define GROUPDOCS_ASSEMBLY_CLOUD_API_MODELS_TemplateFileInfo_H_
 
 
 #include "../ModelBase.h"
@@ -39,14 +39,14 @@ namespace api {
 namespace models {
 
 /// <summary>
-/// File or folder information
+/// TemplateFileInfo dto.             
 /// </summary>
-class  StorageFile
+class  TemplateFileInfo
     : public ModelBase
 {
 public:
-    StorageFile();
-    virtual ~StorageFile();
+    TemplateFileInfo();
+    virtual ~TemplateFileInfo();
 
     /////////////////////////////////////////////
     /// ModelBase overrides
@@ -60,49 +60,46 @@ public:
     void fromMultiPart(const std::shared_ptr<MultipartFormData>& multipart, const utility::string_t& namePrefix) override;
 
     /////////////////////////////////////////////
-    /// StorageFile members
+    /// TemplateFileInfo members
 
     /// <summary>
-    /// File or folder name.
+    /// Gets or sets path to file.             
     /// </summary>
-    utility::string_t getName() const;
-    bool nameIsSet() const;
-    void unsetName();
-    void setName(utility::string_t value);
+    utility::string_t getFilePath() const;
+    bool filePathIsSet() const;
+    void unsetFilePath();
+    void setFilePath(utility::string_t value);
     /// <summary>
-    /// True if it is a folder.
+    /// Gets or sets the name of storage.             
     /// </summary>
-    bool isIsFolder() const;
-        void setIsFolder(bool value);
+    utility::string_t getStorageName() const;
+    bool storageNameIsSet() const;
+    void unsetStorageName();
+    void setStorageName(utility::string_t value);
     /// <summary>
-    /// File or folder last modified .
+    /// Gets or sets the name of storage.             
     /// </summary>
-    utility::datetime getModifiedDate() const;
-    bool modifiedDateIsSet() const;
-    void unsetModifiedDate();
-    void setModifiedDate(utility::datetime value);
+    utility::string_t getVersionId() const;
+    bool versionIdIsSet() const;
+    void unsetVersionId();
+    void setVersionId(utility::string_t value);
     /// <summary>
-    /// File or folder size.
+    /// Gets or sets the password.             
     /// </summary>
-    int64_t getSize() const;
-        void setSize(int64_t value);
-    /// <summary>
-    /// File or folder path.
-    /// </summary>
-    utility::string_t getPath() const;
-    bool pathIsSet() const;
-    void unsetPath();
-    void setPath(utility::string_t value);
+    utility::string_t getPassword() const;
+    bool passwordIsSet() const;
+    void unsetPassword();
+    void setPassword(utility::string_t value);
 
 protected:
-    utility::string_t m_Name;
-    bool m_NameIsSet;
-    bool m_IsFolder;
-        utility::datetime m_ModifiedDate;
-    bool m_ModifiedDateIsSet;
-    int64_t m_Size;
-        utility::string_t m_Path;
-    bool m_PathIsSet;
+    utility::string_t m_FilePath;
+    bool m_FilePathIsSet;
+    utility::string_t m_StorageName;
+    bool m_StorageNameIsSet;
+    utility::string_t m_VersionId;
+    bool m_VersionIdIsSet;
+    utility::string_t m_Password;
+    bool m_PasswordIsSet;
 };
 
 }
@@ -111,4 +108,4 @@ protected:
 }
 }
 
-#endif /* GROUPDOCS_ASSEMBLY_CLOUD_API_MODELS_StorageFile_H_ */
+#endif /* GROUPDOCS_ASSEMBLY_CLOUD_API_MODELS_TemplateFileInfo_H_ */

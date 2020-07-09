@@ -1,6 +1,6 @@
 
 /** --------------------------------------------------------------------------------------------------------------------
-* <copyright company="Aspose" file="StorageFile.h">
+* <copyright company="Aspose" file="FileFormatsResponse.h">
 *   Copyright (c) 2020 GroupDocs.Assembly for Cloud
 * </copyright>
 * <summary>
@@ -24,12 +24,12 @@
 * </summary> 
 -------------------------------------------------------------------------------------------------------------------- **/
 
-#ifndef GROUPDOCS_ASSEMBLY_CLOUD_API_MODELS_StorageFile_H_
-#define GROUPDOCS_ASSEMBLY_CLOUD_API_MODELS_StorageFile_H_
+#ifndef GROUPDOCS_ASSEMBLY_CLOUD_API_MODELS_FileFormatsResponse_H_
+#define GROUPDOCS_ASSEMBLY_CLOUD_API_MODELS_FileFormatsResponse_H_
 
 
-#include "../ModelBase.h"
-
+#include "AssemblyResponse.h"
+#include "FormatCollection.h"
 #include <cpprest/details/basic_types.h>
 
 namespace groupdocs {
@@ -39,14 +39,14 @@ namespace api {
 namespace models {
 
 /// <summary>
-/// File or folder information
+/// Response with file formats.
 /// </summary>
-class  StorageFile
-    : public ModelBase
+class  FileFormatsResponse
+    : public AssemblyResponse
 {
 public:
-    StorageFile();
-    virtual ~StorageFile();
+    FileFormatsResponse();
+    virtual ~FileFormatsResponse();
 
     /////////////////////////////////////////////
     /// ModelBase overrides
@@ -60,49 +60,37 @@ public:
     void fromMultiPart(const std::shared_ptr<MultipartFormData>& multipart, const utility::string_t& namePrefix) override;
 
     /////////////////////////////////////////////
-    /// StorageFile members
+    /// FileFormatsResponse members
 
     /// <summary>
-    /// File or folder name.
+    /// Gets or sets file formats.
     /// </summary>
-    utility::string_t getName() const;
-    bool nameIsSet() const;
-    void unsetName();
-    void setName(utility::string_t value);
+    std::shared_ptr<FormatCollection> getFileFormats() const;
+    bool fileFormatsIsSet() const;
+    void unsetFileFormats();
+    void setFileFormats(std::shared_ptr<FormatCollection> value);
     /// <summary>
-    /// True if it is a folder.
+    /// Gets response status code.
     /// </summary>
-    bool isIsFolder() const;
-        void setIsFolder(bool value);
+    int32_t getCode() const;
+    bool codeIsSet() const;
+    void unsetCode();
+    void setCode(int32_t value);
     /// <summary>
-    /// File or folder last modified .
+    /// Gets or sets response status.
     /// </summary>
-    utility::datetime getModifiedDate() const;
-    bool modifiedDateIsSet() const;
-    void unsetModifiedDate();
-    void setModifiedDate(utility::datetime value);
-    /// <summary>
-    /// File or folder size.
-    /// </summary>
-    int64_t getSize() const;
-        void setSize(int64_t value);
-    /// <summary>
-    /// File or folder path.
-    /// </summary>
-    utility::string_t getPath() const;
-    bool pathIsSet() const;
-    void unsetPath();
-    void setPath(utility::string_t value);
+    utility::string_t getStatus() const;
+    bool statusIsSet() const;
+    void unsetStatus();
+    void setStatus(utility::string_t value);
 
 protected:
-    utility::string_t m_Name;
-    bool m_NameIsSet;
-    bool m_IsFolder;
-        utility::datetime m_ModifiedDate;
-    bool m_ModifiedDateIsSet;
-    int64_t m_Size;
-        utility::string_t m_Path;
-    bool m_PathIsSet;
+    std::shared_ptr<FormatCollection> m_FileFormats;
+    bool m_FileFormatsIsSet;
+    int32_t m_Code;
+    bool m_CodeIsSet;
+    utility::string_t m_Status;
+    bool m_StatusIsSet;
 };
 
 }
@@ -111,4 +99,4 @@ protected:
 }
 }
 
-#endif /* GROUPDOCS_ASSEMBLY_CLOUD_API_MODELS_StorageFile_H_ */
+#endif /* GROUPDOCS_ASSEMBLY_CLOUD_API_MODELS_FileFormatsResponse_H_ */

@@ -1,7 +1,7 @@
 
 /** --------------------------------------------------------------------------------------------------------------------
-* <copyright company="GroupDocs" file="FormatCollection.h">
-*   Copyright (c) 2019 GroupDocs.Assembly for Cloud
+* <copyright company="Aspose" file="FormatCollection.h">
+*   Copyright (c) 2020 GroupDocs.Assembly for Cloud
 * </copyright>
 * <summary>
 *   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -64,7 +64,7 @@ public:
     /// FormatCollection members
 
     /// <summary>
-    /// Supported file formats.
+    /// Gets or sets supported file formats.
     /// </summary>
     std::vector<std::shared_ptr<Format>>& getFormats();
     bool formatsIsSet() const;

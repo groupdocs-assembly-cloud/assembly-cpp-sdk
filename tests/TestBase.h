@@ -1,6 +1,6 @@
 /** --------------------------------------------------------------------------------------------------------------------
-* <copyright company="GroupDocs" file="TestBase.h">
-*   Copyright (c) 2019 GroupDocs.Assembly for Cloud
+* <copyright company="Aspose" file="TestBase.h">
+*   Copyright (c) 2020 GroupDocs.Assembly for Cloud
 * </copyright>
 * <summary>
 *   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -26,9 +26,13 @@
 #define TEST_BASE
 
 #include <boost/filesystem/path.hpp>
+#include <boost/filesystem/fstream.hpp>
+#include <boost/filesystem.hpp>
 
 #include <gtest/gtest.h>
 #include "AssemblyApi.h"
+
+namespace fs = boost::filesystem;
 
 #define STCONVERT(s) utility::conversions::to_string_t(s)
 
@@ -41,6 +45,8 @@ using namespace groupdocs::assembly::cloud::api;
 ///Get configuration for AssemblyApi
 ///</summary>
 std::shared_ptr<ApiConfiguration> get_config();
+
+utility::string_t get_file_text_as_string(const fs::path& file);
 
 class InfrastructureTest : public ::testing::Test
 {
@@ -99,7 +105,6 @@ public:
 protected:
     const utility::string_t baseTestOutPath{_XPLATSTR("TestOut")};
     const utility::string_t remoteBaseTestDataFolder{_XPLATSTR("Temp/SdkTests/TestData")};
-    const boost::filesystem::path commonFolder{"Common"};
 
 private:
 	std::shared_ptr<ApiClient> client;

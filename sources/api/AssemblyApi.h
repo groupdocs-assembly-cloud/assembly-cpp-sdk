@@ -1,6 +1,6 @@
 /** --------------------------------------------------------------------------------------------------------------------
-* <copyright company="GroupDocs" file="AssemblyApi.h">
-*   Copyright (c) 2019 GroupDocs.Assembly for Cloud
+* <copyright company="Aspose" file="AssemblyApi.h">
+*   Copyright (c) 2020 GroupDocs.Assembly for Cloud
 * </copyright>
 * <summary>
 *   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -29,6 +29,7 @@
 
 #include "../ApiClient.h"
 
+#include "requests/AssembleDocumentRequest.h"
 #include "requests/CopyFileRequest.h"
 #include "requests/CopyFolderRequest.h"
 #include "requests/CreateFolderRequest.h"
@@ -39,14 +40,13 @@
 #include "requests/GetSupportedFileFormatsRequest.h"
 #include "requests/MoveFileRequest.h"
 #include "requests/MoveFolderRequest.h"
-#include "requests/PostAssembleDocumentRequest.h"
 #include "requests/UploadFileRequest.h"
 
+#include "AssembleOptions.h"
+#include "FileFormatsResponse.h"
 #include "FilesList.h"
 #include "FilesUploadResult.h"
-#include "FormatCollection.h"
 #include "HttpContent.h"
-#include "ReportOptionsData.h"
 #include <cpprest/details/basic_types.h>
 #include <boost/optional.hpp>
 namespace groupdocs {
@@ -66,6 +66,16 @@ struct GroupDocsResponse
 class  AssemblyApi
 {
 public:
+    ///<summary>
+    ///Builds a document using document template and XML or JSON data passed in request.
+    ///</summary>
+    ///<remarks>
+    ///
+    ///</remarks>
+    /// <param name="assembleOptions">Assemble Options. It should be JSON with TemplateName, SaveFormat, ReportData and etc.             </param>
+    	pplx::task<HttpContent> assembleDocument(
+		std::shared_ptr<AssembleDocumentRequest> request
+	);
     ///<summary>
     ///Copy file
     ///</summary>
@@ -157,7 +167,7 @@ public:
     ///<remarks>
     ///
     ///</remarks>
-	pplx::task<GroupDocsResponse<FormatCollection>> getSupportedFileFormats(
+	pplx::task<GroupDocsResponse<FileFormatsResponse>> getSupportedFileFormats(
 		std::shared_ptr<GetSupportedFileFormatsRequest> request
 	);
     ///<summary>
@@ -188,19 +198,6 @@ public:
 		std::shared_ptr<MoveFolderRequest> request
 	);
     ///<summary>
-    ///Builds a document using document template and XML or JSON data passed in request
-    ///</summary>
-    ///<remarks>
-    ///
-    ///</remarks>
-    /// <param name="name">File name of template, which is located on a storage</param>
-        /// <param name="reportData">Report Data Options. It should be JSON with SaveFormat and ReportData</param>
-        /// <param name="folder">Folder path where template file is located(on a storage) (optional)</param>
-        /// <param name="destFileName">Result name of built document (optional)</param>
-    	pplx::task<HttpContent> postAssembleDocument(
-		std::shared_ptr<PostAssembleDocumentRequest> request
-	);
-    ///<summary>
     ///Upload file
     ///</summary>
     ///<remarks>
@@ -214,7 +211,7 @@ public:
 	);
 
 public:
-    explicit AssemblyApi(std::shared_ptr<ApiClient> apiClient );
+    explicit AssemblyApi(std::shared_ptr<ApiConfiguration> configuration);
     virtual ~AssemblyApi() = default;
     
 protected:
@@ -227,5 +224,4 @@ protected:
 }
 
 #endif /* GROUPDOCS_ASSEMBLY_CLOUD_API_AssemblyApi_H_ */
-
-
+

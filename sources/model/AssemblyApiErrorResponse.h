@@ -1,7 +1,7 @@
 
 /** --------------------------------------------------------------------------------------------------------------------
-* <copyright company="GroupDocs" file="ReportOptionsData.h">
-*   Copyright (c) 2019 GroupDocs.Assembly for Cloud
+* <copyright company="Aspose" file="AssemblyApiErrorResponse.h">
+*   Copyright (c) 2020 GroupDocs.Assembly for Cloud
 * </copyright>
 * <summary>
 *   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -24,12 +24,12 @@
 * </summary> 
 -------------------------------------------------------------------------------------------------------------------- **/
 
-#ifndef GROUPDOCS_ASSEMBLY_CLOUD_API_MODELS_ReportOptionsData_H_
-#define GROUPDOCS_ASSEMBLY_CLOUD_API_MODELS_ReportOptionsData_H_
+#ifndef GROUPDOCS_ASSEMBLY_CLOUD_API_MODELS_AssemblyApiErrorResponse_H_
+#define GROUPDOCS_ASSEMBLY_CLOUD_API_MODELS_AssemblyApiErrorResponse_H_
 
 
-#include "../ModelBase.h"
-
+#include "ApiError.h"
+#include "AssemblyResponse.h"
 #include <cpprest/details/basic_types.h>
 
 namespace groupdocs {
@@ -39,14 +39,14 @@ namespace api {
 namespace models {
 
 /// <summary>
-/// Save options data which is using for specifying additional save options, like save format and etc.
+/// Error response for exceptions.             
 /// </summary>
-class  ReportOptionsData
-    : public ModelBase
+class  AssemblyApiErrorResponse
+    : public AssemblyResponse
 {
 public:
-    ReportOptionsData();
-    virtual ~ReportOptionsData();
+    AssemblyApiErrorResponse();
+    virtual ~AssemblyApiErrorResponse();
 
     /////////////////////////////////////////////
     /// ModelBase overrides
@@ -60,28 +60,19 @@ public:
     void fromMultiPart(const std::shared_ptr<MultipartFormData>& multipart, const utility::string_t& namePrefix) override;
 
     /////////////////////////////////////////////
-    /// ReportOptionsData members
+    /// AssemblyApiErrorResponse members
 
     /// <summary>
-    /// Save format for assembled document
+    /// Gets or sets error.
     /// </summary>
-    utility::string_t getSaveFormat() const;
-    bool saveFormatIsSet() const;
-    void unsetSaveFormat();
-    void setSaveFormat(utility::string_t value);
-    /// <summary>
-    /// Data for report
-    /// </summary>
-    utility::string_t getReportData() const;
-    bool reportDataIsSet() const;
-    void unsetReportData();
-    void setReportData(utility::string_t value);
+    std::shared_ptr<ApiError> getError() const;
+    bool errorIsSet() const;
+    void unsetError();
+    void setError(std::shared_ptr<ApiError> value);
 
 protected:
-    utility::string_t m_SaveFormat;
-    bool m_SaveFormatIsSet;
-    utility::string_t m_ReportData;
-    bool m_ReportDataIsSet;
+    std::shared_ptr<ApiError> m_Error;
+    bool m_ErrorIsSet;
 };
 
 }
@@ -90,4 +81,4 @@ protected:
 }
 }
 
-#endif /* GROUPDOCS_ASSEMBLY_CLOUD_API_MODELS_ReportOptionsData_H_ */
+#endif /* GROUPDOCS_ASSEMBLY_CLOUD_API_MODELS_AssemblyApiErrorResponse_H_ */
