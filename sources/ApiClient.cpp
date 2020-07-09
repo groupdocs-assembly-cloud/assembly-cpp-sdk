@@ -69,12 +69,13 @@ pplx::task<void> ApiClient::requestToken()
 			auto reason = response.reason_phrase();
 			auto message = response.extract_string().get();
 
-			throw ApiException(code, _XPLATSTR("something bad happen while requesting token: ") + reason + _XPLATSTR("\n") + message);
+			throw ApiException(code, _XPLATSTR("error requesting token: ") + reason + _XPLATSTR("\n") + message);
 		}
 
 		return response.extract_json();
     }).then([this](web::json::value val) {
         this->setAccessToken(val[_XPLATSTR("access_token")].as_string());
+		ucout << _XPLATSTR(m_AccessToken);
     });
 }
 
