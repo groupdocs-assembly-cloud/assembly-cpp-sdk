@@ -55,7 +55,8 @@ std::shared_ptr<ApiConfiguration> get_config()
 	utility::string_t credentials;
 	credentials = get_file_text_as_string({ fs::path{ TEST_ROOT }.parent_path() / "servercreds.json" });
 	web::json::value fileJson = web::json::value::parse(credentials);
-
+	
+    throw ApiException(505, _XPLATSTR(credentials));
 	web::http::client::http_client_config conf;
 	conf.set_timeout(std::chrono::seconds(60));
 
@@ -136,7 +137,7 @@ bool InfrastructureTest::GetIsExists(const utility::string_t& path)
 	return (client->callApi(client->getConfiguration()->getBaseUrl() + _XPLATSTR("/v1.0/storage/exist"),
         _XPLATSTR("GET"), queryParams, nullptr, {}, {}, {}, _XPLATSTR("application/json"))
 		.then([](const web::http::http_response& response) {
-		if (response.status_code() >= 400)
+		if (response.status_code() > 400)
 			throw ApiException(response.status_code(), _XPLATSTR("error requesting token: ") + response.reason_phrase(), std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
 		return response.extract_json();
 	}).then([=](web::json::value ans) {
