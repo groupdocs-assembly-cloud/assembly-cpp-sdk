@@ -56,7 +56,6 @@ std::shared_ptr<ApiConfiguration> get_config()
 	credentials = get_file_text_as_string({ fs::path{ TEST_ROOT }.parent_path() / "servercreds.json" });
 	web::json::value fileJson = web::json::value::parse(credentials);
 	
-    throw ApiException(505, _XPLATSTR(credentials));
 	web::http::client::http_client_config conf;
 	conf.set_timeout(std::chrono::seconds(60));
 
