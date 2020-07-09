@@ -102,28 +102,9 @@ std::shared_ptr<HttpContent> InfrastructureTest::generate_http_content_from_file
 
 void InfrastructureTest::UploadFileToStorage(const utility::string_t& path, const fs::path& filePath)
 {
-
-
-	std::vector<std::pair<utility::string_t, std::shared_ptr<HttpContent>>> fileParams;
-    fileParams.emplace_back(_XPLATSTR("file"), generate_http_content_from_file(filePath));
-
-    std::map<utility::string_t, utility::string_t> queryParams{{_XPLATSTR("path"), path}};
-
-	std::shared_ptr<ApiClient> client = get_client();
-
-    client->callApi(client->getConfiguration()->getBaseUrl() + _XPLATSTR("/v1.0/storage/file"),
-        _XPLATSTR("PUT"), queryParams, nullptr, {}, {}, fileParams, _XPLATSTR("multipart/form-data"))
-		.then([](const web::http::http_response& response) {
-
-            if (response.status_code() > 400)
-			throw ApiException(response.status_code(), _XPLATSTR("upload failed: ") + response.reason_phrase(), std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-	})
-		.wait();
-	//else
-	//{
-	//cout << "Unable to open file";
-	//throw L"Unable to find " + filePath;
-	//}
+	std::shared_ptr<UploadFileRequest> request = std::make_shared<UploadFileRequest>(generate_http_content_from_file(filePath), remoteName, boost::none);
+	std::shared_ptr<AssemblyApi> api = get_api();
+	auto result = api->uploadFile(request).get();
 }
 
 
