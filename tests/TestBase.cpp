@@ -65,6 +65,7 @@ std::shared_ptr<ApiConfiguration> get_config()
 	newConfig->setAppSid(fileJson[_XPLATSTR("AppSid")].as_string());
 	newConfig->setUserAgent(_XPLATSTR("CppGroupDocsClient"));
 	newConfig->setHttpConfig(conf);
+	cout << newConfig->getAppKey();
 
 	return newConfig;
 }
@@ -111,7 +112,7 @@ void InfrastructureTest::UploadFileToStorage(const utility::string_t& path, cons
 
 	std::shared_ptr<ApiClient> client = get_client();
 
-    client->callApi(client->getConfiguration()->getBaseUrl() + _XPLATSTR("/v1.1/storage/file"),
+    client->callApi(client->getConfiguration()->getBaseUrl() + _XPLATSTR("/v1.0/storage/file"),
         _XPLATSTR("PUT"), queryParams, nullptr, {}, {}, fileParams, _XPLATSTR("multipart/form-data"))
 		.then([](const web::http::http_response& response) {
 
@@ -133,7 +134,7 @@ bool InfrastructureTest::GetIsExists(const utility::string_t& path)
 
 	std::shared_ptr<ApiClient> client = get_client();
 
-	return (client->callApi(client->getConfiguration()->getBaseUrl() + _XPLATSTR("/v1.1/storage/exist"),
+	return (client->callApi(client->getConfiguration()->getBaseUrl() + _XPLATSTR("/v1.0/storage/exist"),
         _XPLATSTR("GET"), queryParams, nullptr, {}, {}, {}, _XPLATSTR("application/json"))
 		.then([](const web::http::http_response& response) {
 		if (response.status_code() >= 400)
