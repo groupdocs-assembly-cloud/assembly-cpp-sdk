@@ -46,7 +46,7 @@ TEST_F(AssemblyApiTest, TestAssembleDocument){
     fileInfo->setFilePath(_XPLATSTR(fileName));
 	assembleOptions->setSaveFormat(_XPLATSTR("docx"));
     assembleOptions->setTemplateFileInfo(fileInfo);
-    assembleOptions->setReportData(get_file_text(path_combine(LocalTestDataFolder, _XPLATSTR("Teams.json"))));
+    assembleOptions->setReportData(get_file_text_as_string(path_combine(LocalTestDataFolder, _XPLATSTR("Teams.json"))));
 
 	std::shared_ptr<AssembleDocumentRequest> request = 
 		std::make_shared<AssembleDocumentRequest>(assembleOptions);

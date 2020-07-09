@@ -64,7 +64,6 @@ std::shared_ptr<ApiConfiguration> get_config()
 	newConfig->setBaseUrl(fileJson[_XPLATSTR("BaseUrl")].as_string());
 	newConfig->setAppSid(fileJson[_XPLATSTR("AppSid")].as_string());
 	newConfig->setUserAgent(_XPLATSTR("CppGroupDocsClient"));
-	newConfig->setApiVersion(_XPLATSTR("v1"));
 	newConfig->setHttpConfig(conf);
 
 	return newConfig;
@@ -165,7 +164,7 @@ std::shared_ptr<AssemblyApi> InfrastructureTest::get_api()
 {
 	if (!api)
 	{
-		api = std::make_shared<AssemblyApi>(get_client());
+		api = std::make_shared<AssemblyApi>(get_configuration());
 	}
 	return api;
 }
