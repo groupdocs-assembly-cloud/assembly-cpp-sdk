@@ -13,18 +13,16 @@ node('windows2019') {
 		env.SDK_VERSION = powershell(returnStdout: true, script:'echo ((ConvertFrom-Json -InputObject (New-Object System.Net.WebClient).DownloadString("https://api.groupdocs.cloud/v1.0/assembly/swagger/spec")).info.version | Select-String -Pattern "^\\d+\\.\\d+" ).Matches[0].Value').trim()
 		
 		gitlabCommitStatus("add version tag") {
-			stage('add version tag') {
-				withCredentials([usernamePassword(credentialsId: '361885ba-9425-4230-950e-0af201d90547', usernameVariable: 'gitUsername', passwordVariable: 'gitPass')]) {
-					env.gitRepoUrl = "https://%gitUsername%:%gitPass%@git.auckland.dynabic.com/assembly-cloud/assembly-cpp-sdk.git"
-				}
-				
+			stage('add version tag') {			
 				bat "git config user.email 'jenkins.aspose@gmail.com'"
 				bat "git config user.name 'jenkins'"
 				
-				bat "git remote set-url origin %gitRepoUrl%"
-				bat 'git reset --hard origin/master'
-				bat "git tag -a %SDK_VERSION% -m 'version %SDK_VERSION%'"
-				bat "git push %gitRepoUrl% %SDK_VERSION%"
+				bat "git tag -a %SDK_VERSION% -m \"version %SDK_VERSION%\""
+				
+				withCredentials([usernamePassword(credentialsId: '361885ba-9425-4230-950e-0af201d90547', usernameVariable: 'gitUsername', passwordVariable: 'gitPass')]) {
+					bat "git push https://%gitUsername%:%gitPass%@git.auckland.dynabic.com/assembly-cloud/assembly-cpp-sdk.git %SDK_VERSION%"
+				}
+				
 			}
 		}
 	} finally {
