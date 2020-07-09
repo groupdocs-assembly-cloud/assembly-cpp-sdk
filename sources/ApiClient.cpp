@@ -69,7 +69,7 @@ pplx::task<void> ApiClient::requestToken()
 			auto reason = response.reason_phrase();
 			auto message = response.extract_string().get();
 
-			throw ApiException(code, _XPLATSTR("error requesting token: ") + reason + _XPLATSTR("\n") + message);
+			throw ApiException(code, _XPLATSTR("something bad happen while requesting token: ") + reason + _XPLATSTR("\n") + message);
 		}
 
 		return response.extract_json();
@@ -79,7 +79,6 @@ pplx::task<void> ApiClient::requestToken()
 }
 
 utility::string_t ApiClient::getTokenUrl() const {
-	throw ApiException(505, _XPLATSTR(m_Configuration->getBaseUrl() + _XPLATSTR("/connect/token")));
 	return m_Configuration->getBaseUrl() + _XPLATSTR("/connect/token");            
 }
 
