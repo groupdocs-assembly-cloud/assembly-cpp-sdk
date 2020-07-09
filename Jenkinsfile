@@ -31,7 +31,7 @@ parallel windows: {
             if (needToBuildWindows) {
                 gitlabCommitStatus("windows_tests") {
                     stage('windows_tests'){
-                        withCredentials([usernamePassword(credentialsId: 'cc2e3c9b-b3da-4455-b702-227bcce18895', usernameVariable: 'dockerrigistry_login', passwordVariable: 'dockerregistry_password')]) {
+                        withCredentials([usernamePassword(credentialsId: 'assembly-registry', usernameVariable: 'dockerrigistry_login', passwordVariable: 'dockerregistry_password')]) {
                             bat 'docker login -u "%dockerrigistry_login%" -p "%dockerregistry_password%" git.auckland.dynabic.com:4567'
                         }
                         withCredentials([usernamePassword(credentialsId: '6179b564-811f-48a9-8b85-875076fadbf5', passwordVariable: 'AppKey', usernameVariable: 'AppSid')]) {
@@ -71,7 +71,7 @@ parallel windows: {
             if (needToBuildLinux) {
                 gitlabCommitStatus("linux_tests") {
                     stage('linux_tests'){
-                        withCredentials([usernamePassword(credentialsId: 'cc2e3c9b-b3da-4455-b702-227bcce18895', usernameVariable: 'dockerrigistry_login', passwordVariable: 'dockerregistry_password')]) {
+                        withCredentials([usernamePassword(credentialsId: 'assembly-registry', usernameVariable: 'dockerrigistry_login', passwordVariable: 'dockerregistry_password')]) {
                             sh 'docker login -u "${dockerrigistry_login}" -p "${dockerregistry_password}" git.auckland.dynabic.com:4567'
                         }
                         withCredentials([usernamePassword(credentialsId: '6179b564-811f-48a9-8b85-875076fadbf5', passwordVariable: 'AppKey', usernameVariable: 'AppSid')]) {
