@@ -1,6 +1,6 @@
 /** --------------------------------------------------------------------------------------------------------------------
 * <copyright company="Aspose" file="AssemblyApi.cpp">
-*   Copyright (c) 2020 GroupDocs.Assembly for Cloud
+*   Copyright (c) 2021 GroupDocs.Assembly for Cloud
 * </copyright>
 * <summary>
 *   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -1261,10 +1261,10 @@ pplx::task<std::shared_ptr<web::http::http_response>> AssemblyApi::moveFolder(st
 pplx::task<GroupDocsResponse<FilesUploadResult>> AssemblyApi::uploadFile(std::shared_ptr<UploadFileRequest> request)
 {
 
-    // verify the required parameter 'file' is set
-    if (request->getFile() == nullptr)
+    // verify the required parameter 'fileContent' is set
+    if (request->getFileContent() == nullptr)
     {
-        throw ApiException(400, _XPLATSTR("Missing required parameter 'file' when calling AssemblyApi->uploadFile"));
+        throw ApiException(400, _XPLATSTR("Missing required parameter 'fileContent' when calling AssemblyApi->uploadFile"));
     }
 
     std::shared_ptr<ApiConfiguration> apiConfiguration(m_ApiClient->getConfiguration());
@@ -1309,9 +1309,9 @@ pplx::task<GroupDocsResponse<FilesUploadResult>> AssemblyApi::uploadFile(std::sh
     std::unordered_set<utility::string_t> consumeHttpContentTypes;
     consumeHttpContentTypes.insert(_XPLATSTR("multipart/form-data"));
 
-    if (request->getFile() != nullptr)
+    if (request->getFileContent() != nullptr)
     {
-        fileParams.push_back(make_pair(_XPLATSTR("File"), (request->getFile())));
+        fileParams.push_back(make_pair(_XPLATSTR("FileContent"), (request->getFileContent())));
     }
     if (request->getStorageName())
     {

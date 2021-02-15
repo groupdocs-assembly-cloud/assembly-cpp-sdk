@@ -1,6 +1,6 @@
 /** --------------------------------------------------------------------------------------------------------------------
 * <copyright company="Aspose" file="ApiClient.h">
-*   Copyright (c) 2020 GroupDocs.Assembly for Cloud
+*   Copyright (c) 2021 GroupDocs.Assembly for Cloud
 * </copyright>
 * <summary>
 *   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -103,7 +103,7 @@ private:
     utility::string_t m_AccessToken;
     std::array<std::pair<utility::string_t, utility::string_t>, 2> defaultHeaders =
     {
-        std::make_pair<utility::string_t, utility::string_t>(_XPLATSTR("x-groupdocs-client-version"), _XPLATSTR("20.5")),
+        std::make_pair<utility::string_t, utility::string_t>(_XPLATSTR("x-groupdocs-client-version"), _XPLATSTR("21.1")),
         std::make_pair<utility::string_t, utility::string_t>(_XPLATSTR("x-groupdocs-client"), _XPLATSTR("C++ SDK"))
     };
 

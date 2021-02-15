@@ -1,6 +1,7 @@
+f
 /** --------------------------------------------------------------------------------------------------------------------
 * <copyright company="Aspose" file="UploadFileRequest.h">
-*   Copyright (c) 2020 GroupDocs.Assembly for Cloud
+*   Copyright (c) 2021 GroupDocs.Assembly for Cloud
 * </copyright>
 * <summary>
 *   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -39,13 +40,13 @@ namespace models {
 class UploadFileRequest{
     public: 
      UploadFileRequest(
-        std::shared_ptr<HttpContent> file,
+        std::shared_ptr<HttpContent> fileContent,
                 utility::string_t path,
                 boost::optional<utility::string_t> storageName
         );
 
-        std::shared_ptr<HttpContent> getFile() const;
-        void setFile(std::shared_ptr<HttpContent> file);
+        std::shared_ptr<HttpContent> getFileContent() const;
+        void setFileContent(std::shared_ptr<HttpContent> fileContent);
 
         utility::string_t getPath() const;
         void setPath(utility::string_t path);
@@ -53,7 +54,7 @@ class UploadFileRequest{
         boost::optional<utility::string_t> getStorageName() const;
         void setStorageName(boost::optional<utility::string_t> storageName);
     private:
-        std::shared_ptr<HttpContent> m_file;
+        std::shared_ptr<HttpContent> m_fileContent;
         utility::string_t m_path;
         boost::optional<utility::string_t> m_storageName;
 };
@@ -63,4 +64,5 @@ class UploadFileRequest{
 }
 }
 }
+
 #endif

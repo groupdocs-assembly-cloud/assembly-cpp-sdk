@@ -1,6 +1,6 @@
 /** --------------------------------------------------------------------------------------------------------------------
 * <copyright company="Aspose" file="AssemblyApi.h">
-*   Copyright (c) 2020 GroupDocs.Assembly for Cloud
+*   Copyright (c) 2021 GroupDocs.Assembly for Cloud
 * </copyright>
 * <summary>
 *   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -72,7 +72,7 @@ public:
     ///<remarks>
     ///
     ///</remarks>
-    /// <param name="assembleOptions">Assemble Options. It should be JSON with TemplateName, SaveFormat, ReportData and etc.             </param>
+    /// <param name="assembleOptions">Assemble Options. It should be JSON or XML with TemplateFileInfo, SaveFormat, ReportData and etc.             </param>
     	pplx::task<HttpContent> assembleDocument(
 		std::shared_ptr<AssembleDocumentRequest> request
 	);
@@ -203,7 +203,7 @@ public:
     ///<remarks>
     ///
     ///</remarks>
-    /// <param name="file">File to upload</param>
+    /// <param name="fileContent">File to upload</param>
         /// <param name="path">Path where to upload including filename and extension e.g. /file.ext or /Folder 1/file.ext              If the content is multipart and path does not contains the file name it tries to get them from filename parameter              from Content-Disposition header.</param>
         /// <param name="storageName">Storage name (optional)</param>
     	pplx::task<GroupDocsResponse<FilesUploadResult>> uploadFile(

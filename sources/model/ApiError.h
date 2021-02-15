@@ -1,7 +1,7 @@
 
 /** --------------------------------------------------------------------------------------------------------------------
 * <copyright company="Aspose" file="ApiError.h">
-*   Copyright (c) 2020 GroupDocs.Assembly for Cloud
+*   Copyright (c) 2021 GroupDocs.Assembly for Cloud
 * </copyright>
 * <summary>
 *   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -94,10 +94,10 @@ public:
     /// <summary>
     /// Gets or sets inner error.
     /// </summary>
-    std::shared_ptr<ApiError> getInnerApiError() const;
-    bool innerApiErrorIsSet() const;
-    void unsetInnerApiError();
-    void setInnerApiError(std::shared_ptr<ApiError> value);
+    std::shared_ptr<ApiError> getInnerError() const;
+    bool innerErrorIsSet() const;
+    void unsetInnerError();
+    void setInnerError(std::shared_ptr<ApiError> value);
 
 protected:
     utility::string_t m_Code;
@@ -108,8 +108,8 @@ protected:
     bool m_DescriptionIsSet;
     utility::datetime m_DateTime;
     bool m_DateTimeIsSet;
-    std::shared_ptr<ApiError> m_InnerApiError;
-    bool m_InnerApiErrorIsSet;
+    std::shared_ptr<ApiError> m_InnerError;
+    bool m_InnerErrorIsSet;
 };
 
 }

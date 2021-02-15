@@ -1,6 +1,6 @@
 /** --------------------------------------------------------------------------------------------------------------------
 * <copyright company="Aspose" file="ApiError.cpp">
-*   Copyright (c) 2020 GroupDocs.Assembly for Cloud
+*   Copyright (c) 2021 GroupDocs.Assembly for Cloud
 * </copyright>
 * <summary>
 *   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -42,7 +42,7 @@ ApiError::ApiError()
     m_DescriptionIsSet = false;
     m_DateTime = utility::datetime();
     m_DateTimeIsSet = false;
-    m_InnerApiErrorIsSet = false;
+    m_InnerErrorIsSet = false;
 }
 
 ApiError::~ApiError()
@@ -74,9 +74,9 @@ web::json::value ApiError::toJson() const
     {
         val[_XPLATSTR("DateTime")] = ModelBase::toJson(m_DateTime);
     }
-    if(m_InnerApiErrorIsSet)
+    if(m_InnerErrorIsSet)
     {
-        val[_XPLATSTR("InnerApiError")] = ModelBase::toJson(m_InnerApiError);
+        val[_XPLATSTR("InnerError")] = ModelBase::toJson(m_InnerError);
     }
 
     return val;
@@ -116,14 +116,14 @@ void ApiError::fromJson(web::json::value& val)
             setDateTime(ModelBase::dateFromJson(fieldValue));
         }
     }
-    if(val.has_field(_XPLATSTR("InnerApiError")))
+    if(val.has_field(_XPLATSTR("InnerError")))
     {
-        web::json::value& fieldValue = val[_XPLATSTR("InnerApiError")];
+        web::json::value& fieldValue = val[_XPLATSTR("InnerError")];
         if(!fieldValue.is_null())
         {
             std::shared_ptr<ApiError> newItem(new ApiError());
             newItem->fromJson(fieldValue);
-            setInnerApiError( newItem );
+            setInnerError( newItem );
         }
     }
 }
@@ -152,11 +152,11 @@ void ApiError::toMultipart(const std::shared_ptr<MultipartFormData>& multipart, 
         multipart->add(ModelBase::toHttpContent(namePrefix + _XPLATSTR("DateTime"), m_DateTime));
         
     }
-    if(m_InnerApiErrorIsSet)
+    if(m_InnerErrorIsSet)
     {
-        if (m_InnerApiError.get())
+        if (m_InnerError.get())
         {
-            m_InnerApiError->toMultipart(multipart, _XPLATSTR("InnerApiError."));
+            m_InnerError->toMultipart(multipart, _XPLATSTR("InnerError."));
         }
         
     }
@@ -180,13 +180,13 @@ void ApiError::fromMultiPart(const std::shared_ptr<MultipartFormData>& multipart
     {
         setDateTime(ModelBase::dateFromHttpContent(multipart->getContent(_XPLATSTR("DateTime"))));
     }
-    if(multipart->hasContent(_XPLATSTR("InnerApiError")))
+    if(multipart->hasContent(_XPLATSTR("InnerError")))
     {
-        if(multipart->hasContent(_XPLATSTR("InnerApiError")))
+        if(multipart->hasContent(_XPLATSTR("InnerError")))
         {
             std::shared_ptr<ApiError> newItem(new ApiError());
-            newItem->fromMultiPart(multipart, _XPLATSTR("InnerApiError."));
-            setInnerApiError( newItem );
+            newItem->fromMultiPart(multipart, _XPLATSTR("InnerError."));
+            setInnerError( newItem );
         }
     }
 }
@@ -275,25 +275,25 @@ void ApiError::unsetDateTime()
     m_DateTimeIsSet = false;
 }
 
-std::shared_ptr<ApiError> ApiError::getInnerApiError() const
+std::shared_ptr<ApiError> ApiError::getInnerError() const
 {
-    return m_InnerApiError;
+    return m_InnerError;
 }
 
 
-void ApiError::setInnerApiError(std::shared_ptr<ApiError> value)
+void ApiError::setInnerError(std::shared_ptr<ApiError> value)
 {
-    m_InnerApiError = value;
-    m_InnerApiErrorIsSet = true;
+    m_InnerError = value;
+    m_InnerErrorIsSet = true;
 }
-bool ApiError::innerApiErrorIsSet() const
+bool ApiError::innerErrorIsSet() const
 {
-    return m_InnerApiErrorIsSet;
+    return m_InnerErrorIsSet;
 }
 
-void ApiError::unsetInnerApiError()
+void ApiError::unsetInnerError()
 {
-    m_InnerApiErrorIsSet = false;
+    m_InnerErrorIsSet = false;
 }
 
 }
