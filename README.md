@@ -1,48 +1,19 @@
-# groupdocs-assembly-cloud-cpp
+# GroupDocs.Assembly Cloud SDK for C++
 This repository contains GroupDocs.Assembly Cloud SDK for C++ source code. This SDK allows you to work with GroupDocs.Assembly Cloud REST APIs in your C++ applications quickly and easily, with zero initial cost.
 
-See [API Reference](https://apireference.groupdocs.cloud/) for full API specification.
+See [API Reference](https://apireference.groupdocs.cloud/assembly) for full API specification.
+
+# Key Features
+* API to Define Templates, Fetch Data Source, Insert Data in Template & Generate on the fly Reports.
 
 ## How to use the SDK?
-The complete source code is available in this repository folder. You can either directly use it in your project via source code or get [nuget distribution](https://www.nuget.org/packages/GroupDocs.Assembly-Cloud/) (recommended)
+The complete source code is available in this repository folder.
 
 ### Prerequisites
 
-To use GroupDocs.Assembly for Cloud C++ SDK you need to register an account with [GroupDocs Cloud](https://www.groupdocs.cloud/) and lookup/create App Key and SID at [Cloud Dashboard](https://dashboard.groupdocs.cloud/#/apps). There is free quota available. For more details, see [GroupDocs Cloud Pricing](https://purchase.groupdocs.cloud/pricing).
+To use GroupDocs.Assembly for Cloud C++ SDK you need to register an account with [GroupDocs Cloud](https://www.groupdocs.cloud/) and lookup/create App Key and SID at [Cloud Dashboard](https://dashboard.groupdocs.cloud/applications). There is free quota available. For more details, see [GroupDocs Cloud Pricing](https://purchase.groupdocs.cloud/pricing).
 
-### Installation
-
-
-### Sample usage
-
-The examples below show how your application have to assemble document using GroupDocs.Assembly-Cloud library:
-``` C++
-std::shared_ptr<Configuration> config = std::make_shared<Configuration>();
-config->setAppKey(_XPLATSTR("APPKEY"));
-config->setBaseUrl(_XPLATSTR("BASEURL"));
-config->setAppSid(_XPLATSTR("APPSID"));
-
-std::shared_ptr<ApiClient> client = std::make_shared<ApiClient>();
-client->setConfiguration(config);
-
-std::shared_ptr<AssemblyApi> assemblyApi = std::make_shared<AssemblyApi>(client)
-
-std::shared_ptr<LoadSaveOptionsData> saveOptions = std::make_shared<LoadSaveOptionsData>();
-saveOptions->setSaveFormat(_XPLATSTR("docx"));
-
-std::shared_ptr<PostAssembleDocumentRequest> request = 
-    std::make_shared<PostAssembleDocumentRequest>(
-        fileName, 
-        "TestData/Data.json",
-        saveOptions, 
-        boost::none,
-        boost::none
-        );
-HttpContent result = assemblyApi->postAssembleDocument(request).get();
-
-```
-
-
+## Installation
 ## How to build on Windows
 
 1. Build [Microsoft/cpprestsd](https://github.com/Microsoft/cpprestsdk)
@@ -106,3 +77,33 @@ runinDocker.linux
 ```
 
 Reports are saved in out directory.
+
+### Sample usage
+
+The examples below show how your application have to assemble document using GroupDocs.Assembly-Cloud library:
+``` C++
+std::shared_ptr<Configuration> config = std::make_shared<Configuration>();
+config->setAppKey(_XPLATSTR("APPKEY"));
+config->setBaseUrl(_XPLATSTR("BASEURL"));
+config->setAppSid(_XPLATSTR("APPSID"));
+
+std::shared_ptr<ApiClient> client = std::make_shared<ApiClient>();
+client->setConfiguration(config);
+
+std::shared_ptr<AssemblyApi> assemblyApi = std::make_shared<AssemblyApi>(client)
+
+std::shared_ptr<LoadSaveOptionsData> saveOptions = std::make_shared<LoadSaveOptionsData>();
+saveOptions->setSaveFormat(_XPLATSTR("docx"));
+
+std::shared_ptr<PostAssembleDocumentRequest> request = 
+    std::make_shared<PostAssembleDocumentRequest>(
+        fileName, 
+        "TestData/Data.json",
+        saveOptions, 
+        boost::none,
+        boost::none
+        );
+HttpContent result = assemblyApi->postAssembleDocument(request).get();
+
+```
+[Product Page](https://products.groupdocs.cloud/assembly/cpp) | [Documentation](https://docs.groupdocs.cloud/display/assemblycloud/Home) | [API Reference](https://apireference.groupdocs.cloud/assembly/) | [Code Samples](https://github.com/groupdocs-assembly-cloud/groupdocs-assembly-cloud-cpp) | [Blog](https://blog.groupdocs.cloud/category/assembly/) | [Free Support](https://forum.groupdocs.cloud/c/assembly) | [Free Trial](https://dashboard.groupdocs.cloud/applications)
