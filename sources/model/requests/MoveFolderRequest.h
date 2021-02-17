@@ -1,4 +1,3 @@
-f
 /** --------------------------------------------------------------------------------------------------------------------
 * <copyright company="Aspose" file="MoveFolderRequest.h">
 *   Copyright (c) 2021 GroupDocs.Assembly for Cloud
@@ -69,4 +68,4 @@ class MoveFolderRequest{
 }
 }
 
-#endi
+#endif

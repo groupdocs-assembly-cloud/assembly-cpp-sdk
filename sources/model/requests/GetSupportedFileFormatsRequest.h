@@ -1,4 +1,3 @@
-f
 /** --------------------------------------------------------------------------------------------------------------------
 * <copyright company="Aspose" file="GetSupportedFileFormatsRequest.h">
 *   Copyright (c) 2021 GroupDocs.Assembly for Cloud
@@ -49,4 +48,4 @@ class GetSupportedFileFormatsRequest{
 }
 }
 
-#endi
+#endif

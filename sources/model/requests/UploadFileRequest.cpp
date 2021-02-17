@@ -1,5 +1,3 @@
-
-
 /** --------------------------------------------------------------------------------------------------------------------
 * <copyright company="Aspose" file="UploadFileRequest.cpp">
 *   Copyright (c) 2021 GroupDocs.Assembly for Cloud
@@ -69,5 +67,3 @@ UploadFileRequest::UploadFileRequest(
 }
 }
 }
-
-

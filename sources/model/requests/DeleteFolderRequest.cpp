@@ -1,5 +1,3 @@
-
-
 /** --------------------------------------------------------------------------------------------------------------------
 * <copyright company="Aspose" file="DeleteFolderRequest.cpp">
 *   Copyright (c) 2021 GroupDocs.Assembly for Cloud

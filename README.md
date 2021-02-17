@@ -84,26 +84,29 @@ The examples below show how your application have to assemble document using Gro
 ``` C++
 std::shared_ptr<Configuration> config = std::make_shared<Configuration>();
 config->setAppKey(_XPLATSTR("APPKEY"));
-config->setBaseUrl(_XPLATSTR("BASEURL"));
 config->setAppSid(_XPLATSTR("APPSID"));
+const utility::string_t name = "template.docx";
+const utility::string_t remoteName = "Template.docx";
 
 std::shared_ptr<ApiClient> client = std::make_shared<ApiClient>();
 client->setConfiguration(config);
 
-std::shared_ptr<AssemblyApi> assemblyApi = std::make_shared<AssemblyApi>(client)
+std::shared_ptr<AssemblyApi> assemblyApi = std::make_shared<AssemblyApi>(client);
 
-std::shared_ptr<LoadSaveOptionsData> saveOptions = std::make_shared<LoadSaveOptionsData>();
-saveOptions->setSaveFormat(_XPLATSTR("docx"));
+std::shared_ptr<UploadFileRequest> request = std::make_shared<UploadFileRequest>(generate_http_content_from_file(name), remoteName, boost::none);
+std::shared_ptr<AssemblyApi> api = get_api();
+auto result = api->uploadFile(request).get();
 
-std::shared_ptr<PostAssembleDocumentRequest> request = 
-    std::make_shared<PostAssembleDocumentRequest>(
-        fileName, 
-        "TestData/Data.json",
-        saveOptions, 
-        boost::none,
-        boost::none
-        );
-HttpContent result = assemblyApi->postAssembleDocument(request).get();
+std::shared_ptr<AssembleOptions> assembleOptions = std::make_shared<AssembleOptions>();
+std::shared_ptr<TemplateFileInfo> fileInfo = std::make_shared<TemplateFileInfo>();
+fileInfo->setFilePath(fileName);
+assembleOptions->setSaveFormat(_XPLATSTR("docx"));
+assembleOptions->setTemplateFileInfo(fileInfo);
+assembleOptions->setReportData(get_file_text_as_string(_XPLATSTR("data.json")));
+std::shared_ptr<AssembleDocumentRequest> request = 
+	std::make_shared<AssembleDocumentRequest>(assembleOptions);
+    
+HttpContent result = get_api()->assembleDocument(request).get();
 
 ```
 [Product Page](https://products.groupdocs.cloud/assembly/cpp) | [Documentation](https://docs.groupdocs.cloud/display/assemblycloud/Home) | [API Reference](https://apireference.groupdocs.cloud/assembly/) | [Code Samples](https://github.com/groupdocs-assembly-cloud/groupdocs-assembly-cloud-cpp) | [Blog](https://blog.groupdocs.cloud/category/assembly/) | [Free Support](https://forum.groupdocs.cloud/c/assembly) | [Free Trial](https://dashboard.groupdocs.cloud/applications)

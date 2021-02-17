@@ -1,5 +1,3 @@
-
-
 /** --------------------------------------------------------------------------------------------------------------------
 * <copyright company="Aspose" file="CreateFolderRequest.cpp">
 *   Copyright (c) 2021 GroupDocs.Assembly for Cloud

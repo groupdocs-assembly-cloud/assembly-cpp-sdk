@@ -1,5 +1,3 @@
-
-
 /** --------------------------------------------------------------------------------------------------------------------
 * <copyright company="Aspose" file="AssembleDocumentRequest.h">
 *   Copyright (c) 2021 GroupDocs.Assembly for Cloud
@@ -56,4 +54,4 @@ class AssembleDocumentRequest{
 }
 }
 
-#endi
+#endif

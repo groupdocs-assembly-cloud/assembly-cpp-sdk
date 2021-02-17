@@ -1,4 +1,3 @@
-f
 /** --------------------------------------------------------------------------------------------------------------------
 * <copyright company="Aspose" file="DeleteFolderRequest.h">
 *   Copyright (c) 2021 GroupDocs.Assembly for Cloud
@@ -64,4 +63,4 @@ class DeleteFolderRequest{
 }
 }
 
-#endi
+#endif
